@@ -63,6 +63,12 @@ Ivermectin has genuine single-agent bladder activity — G1 arrest and JNK-media
 
 ---
 
+## Sub-project: reverse-engineering the disease
+
+**[reverse-engineering/](reverse-engineering/)** — a skeptical audit that works backwards from why bladder cancer actually fails treatment: the mechanism stack (field effect → TERT/FGFR3 → TP53/RB1 → stem cells → autophagy/EMT → immune interface), a skeptic-graded evidence scorecard (**be warned: it challenges several claims made in this repo, including our own**), and nine unconventional candidates ranked — concluding that artesunate and intravesical delivery are stronger bets than most oral repurposing.
+
+---
+
 ## Live interactive simulator
 
 **[ivermectin-combo-sim.vercel.app](https://ivermectin-combo-sim.vercel.app)** — interactive virtual-patient website (source in [`web/index.html`](web/index.html)): live Monte Carlo with adjustable efficacy/heterogeneity sliders, composite weights, patient-biology subgroups, sortable results, robustness chart, and an NMIBC scenario tab.
