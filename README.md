@@ -63,6 +63,12 @@ Ivermectin has genuine single-agent bladder activity — G1 arrest and JNK-media
 
 ---
 
+## Live interactive simulator
+
+**[ivermectin-combo-sim.vercel.app](https://ivermectin-combo-sim.vercel.app)** — interactive virtual-patient website (source in [`web/index.html`](web/index.html)): live Monte Carlo with adjustable efficacy/heterogeneity sliders, composite weights, patient-biology subgroups, sortable results, robustness chart, and an NMIBC scenario tab.
+
+---
+
 ## Holistic combination simulation (Monte Carlo, Oct 2026)
 
 15 regimens × 20,000 virtual patients, 24-week horizon. Full model and code in [`simulation/holistic_sim.py`](simulation/holistic_sim.py) — every number can be re-run and challenged. **Illustrative model, not clinical evidence.**

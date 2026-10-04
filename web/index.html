@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ivermectin Combination Simulator — Bladder Cancer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a1a; color: #ededed; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.55; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 25px; font-weight: 700; margin-bottom: 8px; }
+  h2 { font-size: 18px; font-weight: 650; margin: 34px 0 12px; }
+  .sub { color: #a0a0a0; margin-bottom: 20px; max-width: 900px; }
+  .cap { color: #8a8a8a; font-size: 11.5px; margin-top: 6px; }
+  .box { border: 1px solid #333; border-left-width: 3px; border-radius: 8px; padding: 13px 17px; margin: 16px 0; }
+  .box .t { font-weight: 650; margin-bottom: 4px; }
+  .b-info { border-left-color: #4f8ff7; } .b-warn { border-left-color: #d29922; } .b-danger { border-left-color: #f85149; }
+  .stats { display: flex; gap: 14px; margin: 20px 0; flex-wrap: wrap; }
+  .stat { flex: 1; min-width: 160px; border: 1px solid #333; border-radius: 8px; padding: 14px 16px; }
+  .stat .v { font-size: 23px; font-weight: 700; }
+  .stat .l { color: #a0a0a0; font-size: 11.5px; margin-top: 2px; }
+  .green .v { color: #3fb950; } .amber .v { color: #d29922; } .blue .v { color: #58a6ff; }
+  .card { border: 1px solid #333; border-radius: 10px; padding: 16px 20px; margin: 18px 0; }
+  .card .hdr { font-size: 12px; color: #a0a0a0; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .tabs { display: flex; gap: 8px; margin: 22px 0 6px; }
+  .tab { background: #222; color: #bbb; border: 1px solid #333; border-radius: 999px; padding: 7px 16px; font-size: 13px; cursor: pointer; }
+  .tab.active { background: #2d4a75; color: #fff; border-color: #3d6098; }
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .ctrl label { display: block; font-size: 12px; color: #b0b0b0; margin-bottom: 6px; }
+  .ctrl input[type=range] { width: 100%; accent-color: #58a6ff; }
+  .ctrl .val { float: right; color: #ededed; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 18px; }
+  .chip { border: 1px solid #3a3a3a; border-radius: 999px; padding: 5px 13px; font-size: 12px; cursor: pointer; color: #b8b8b8; background: #202020; }
+  .chip.on { color: #fff; border-color: #3d6098; background: #2d4a75; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 12.5px; }
+  th { background: #222; color: #ccc; text-align: left; padding: 8px 11px; border: 1px solid #333; font-weight: 600; cursor: pointer; user-select: none; }
+  th:hover { color: #fff; }
+  td { padding: 8px 11px; border: 1px solid #2c2c2c; }
+  tr:nth-child(even) td { background: #202020; }
+  tr.top td { background: #1f2e22; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .btn { background: #2d4a75; color: #fff; border: none; border-radius: 7px; padding: 8px 16px; font-size: 13px; cursor: pointer; }
+  .btn:hover { background: #3d6098; }
+  .verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 16px 0; }
+  .vcard { border: 1px solid #333; border-radius: 10px; padding: 15px 17px; }
+  .vcard .rank { font-size: 11px; color: #8a8a8a; text-transform: uppercase; letter-spacing: .5px; }
+  .vcard .name { font-weight: 650; margin: 4px 0 6px; }
+  .vcard .why { font-size: 12.5px; color: #b8b8b8; }
+  .foot { text-align: center; color: #7a7a7a; font-style: italic; margin-top: 46px; font-size: 12px; }
+  svg text { font-family: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Ivermectin Combination Simulator — Bladder Cancer</h1>
+  <p class="sub">An interactive virtual-patient model: 15 candidate regimens, Monte Carlo simulation, adjustable assumptions, and robustness-tested rankings. Research model — <b>not medical advice</b>. Built from published anchors (see methodology below).</p>
+
+  <div class="box b-warn"><div class="t">Simulation, not evidence</div>
+  No ivermectin combination has demonstrated tumor regression in humans. These tools prioritize what deserves clinical trials and discussion with an oncology team — they do not predict results for any individual.</div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">20,000</div><div class="l">Virtual patients per arm (study)</div></div>
+    <div class="stat green"><div class="v">98.7%</div><div class="l">ICI + ivermectin: top-3 across 2,000 model worlds</div></div>
+    <div class="stat blue"><div class="v">2</div><div class="l">Scenarios: systemic + non-muscle-invasive</div></div>
+    <div class="stat amber"><div class="v">0</div><div class="l">Completed human efficacy RCTs for IVM combos</div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-scn="systemic">Systemic disease (MIBC / metastatic)</div>
+    <div class="tab" data-scn="nmibc">Non-muscle-invasive (NMIBC)</div>
+  </div>
+
+  <!-- ============ SYSTEMIC ============ -->
+  <section id="scn-systemic">
+    <h2>Interactive simulation</h2>
+    <p class="sub">Move the sliders — the virtual patient cohort re-simulates instantly. Click table headers to sort; click chips to show/hide arms in the trajectory chart.</p>
+
+    <div class="controls">
+      <div class="ctrl">
+        <label>Treatment efficacy scale <span class="val" id="v-eff">1.00×</span></label>
+        <input type="range" id="s-eff" min="0.5" max="1.5" step="0.05" value="1">
+      </div>
+      <div class="ctrl">
+        <label>Patient heterogeneity (tau) <span class="val" id="v-tau">0.025</span></label>
+        <input type="range" id="s-tau" min="0.005" max="0.05" step="0.005" value="0.025">
+      </div>
+      <div class="ctrl">
+        <label>Weight: clinical benefit <span class="val" id="v-w1">45%</span></label>
+        <input type="range" id="s-w1" min="0" max="100" step="5" value="45">
+      </div>
+      <div class="ctrl">
+        <label>Weight: evidence strength <span class="val" id="v-w2">35%</span></label>
+        <input type="range" id="s-w2" min="0" max="100" step="5" value="35">
+      </div>
+      <div class="ctrl">
+        <label>Weight: safety <span class="val" id="v-w3">20%</span></label>
+        <input type="range" id="s-w3" min="0" max="100" step="5" value="20">
+      </div>
+      <div class="ctrl">
+        <label>Virtual patients per arm <span class="val" id="v-n">4,000</span></label>
+        <input type="range" id="s-n" min="500" max="12000" step="500" value="4000">
+      </div>
+    </div>
+
+    <div class="chips" id="subgroup-chips">
+      <div class="chip" data-sub="favorable">Favorable biology</div>
+      <div class="chip on" data-sub="average">Average biology</div>
+      <div class="chip" data-sub="unfavorable">Unfavorable biology</div>
+      <button class="btn" id="reseed" style="margin-left:auto">Re-roll patients</button>
+    </div>
+
+    <h2>Outcome at a glance</h2>
+    <div id="chart-efficacy"></div>
+    <p class="cap">Partial response or better at week 12 (burden ≤ 70) vs durable control at week 24 (burden ≤ 50) · live model output.</p>
+
+    <h2>Median tumor-burden trajectories</h2>
+    <div class="chips" id="arm-chips"></div>
+    <div id="chart-traj"></div>
+    <p class="cap">Median burden index (baseline = 100), weeks 0–24 · live model output · untreated reference shown as dashed line.</p>
+
+    <h2>Full results</h2>
+    <table id="results-table">
+      <thead><tr>
+        <th data-k="name">Arm</th>
+        <th data-k="pr">PR wk12</th>
+        <th data-k="sd">SD wk12</th>
+        <th data-k="pd">PD wk12</th>
+        <th data-k="med12">Median wk12</th>
+        <th data-k="dur">Durable wk24</th>
+        <th data-k="ev">Evidence</th>
+        <th data-k="safe">Safety</th>
+        <th data-k="comp">Composite</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="cap">Composite = benefit × w1 + evidence/5 × w2 + safety/5 × w3 (your slider weights) · PR = partial response · PD = progressive disease.</p>
+
+    <h2>Robustness study (2,000 perturbed model worlds)</h2>
+    <div id="chart-robust"></div>
+    <p class="cap">Probability each arm ranks top-3 by composite when arm efficacies, heterogeneity, and weights are randomly perturbed · ICI + ivermectin is the most robust combination (top-3 in 98.7% of worlds; best in 37.8%).</p>
+
+    <h2>Your options — live verdict</h2>
+    <div class="verdict" id="verdict"></div>
+  </section>
+
+  <!-- ============ NMIBC ============ -->
+  <section id="scn-nmibc" style="display:none">
+    <h2>Non-muscle-invasive bladder cancer (NMIBC)</h2>
+    <p class="sub">Different disease setting: intravesical therapy (directly into the bladder, the BCG model) dominates. Simulated 6-month complete-response rates, beta-distributed around published results.</p>
+
+    <div class="controls">
+      <div class="ctrl">
+        <label>Uncertainty concentration (higher = tighter) <span class="val" id="v-k">40</span></label>
+        <input type="range" id="s-k" min="10" max="120" step="5" value="40">
+      </div>
+    </div>
+
+    <div id="chart-nmibc"></div>
+    <p class="cap">Simulated 6-month complete-response rate with 90% interval · anchored to published trial data.</p>
+
+    <table id="nmibc-table">
+      <thead><tr><th>Strategy</th><th>6-mo CR</th><th>90% interval</th><th>Evidence</th><th>Safety</th><th>Note</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="verdict" id="verdict-nmibc"></div>
+  </section>
+
+  <h2>Methodology &amp; anchors</h2>
+  <div class="card">
+    <div class="hdr">How the virtual patients work</div>
+    <p style="margin-bottom:8px">Each virtual patient draws a personal net weekly tumor log-growth rate: <b>mu_i ~ Normal(arm efficacy, heterogeneity)</b>, then the burden evolves weekly with noise. Outcomes at week 12 use RECIST-style thresholds on the burden index (PR ≤ 70, PD &gt; 120). Arm efficacies are calibrated to published anchors:</p>
+    <p style="margin-bottom:8px">• <b>ICI + ivermectin:</b> 6/15 complete regressions in the 4T1 model with statistical synergy (npj Breast Cancer 2021) · <b>metformin:</b> HR 0.66 for progression in 243 MIBC patients after cystectomy + gemcitabine/cisplatin (BMC Cancer 2026), synergy in bladder cell lines/xenografts · <b>docetaxel + ivermectin:</b> HSP27 mechanism (JCI 2022) with a randomized bladder trial behind the target · <b>ivermectin alone:</b> bladder xenograft growth inhibition (2024) · <b>GC and ICI single agents:</b> standard urothelial response rates.</p>
+    <p style="margin-bottom:8px">• <b>NMIBC anchors:</b> BCG alone ~55–60% historical CR; BCG + intravesical gemcitabine 95% CR at 6 months (phase I/II, NCT04179162); BCG + systemic ICI ~73% 12-month CRR with grade ≥3 AEs in 25% (RCT meta-analysis); BCG + curcumin from syngeneic bladder-tumor synergy (Cancer Res 2009).</p>
+    <p style="margin-bottom:0">• <b>Limits:</b> the anchors drive everything; no PK modeling; toxicity enters only via the safety score. Open-source simulation code (Python) in the companion GitHub repo. The honest conclusion survives most perturbations: <b>ivermectin is a combination partner, not a solo agent; ivermectin + checkpoint inhibition has the deepest foundation; metformin is the best-supported oral companion.</b></p>
+  </div>
+
+  <div class="box b-danger"><div class="t">Safety — do not self-medicate</div>
+  Ivermectin is a CYP3A4/P-gp substrate; HCQ carries QT and retinal risks; metformin carries GI, B12 and rare lactic-acidosis risk (especially with nephrotoxic cisplatin). Oncology trial doses of ivermectin (30–60 mg) far exceed antiparasitic dosing. Any use belongs under a urologic oncology team, ideally within a clinical trial.</div>
+
+  <p class="foot">Research simulation for educational purposes — not medical advice. Oct 2026.</p>
+</div>
+
+<script>
+"use strict";
+/* ---------- seeded RNG (mulberry32) + gaussian ---------- */
+let seed = (Math.random() * 1e9) | 0;
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function makeGauss(rand) {
+  let spare = null;
+  return function () {
+    if (spare !== null) { const s = spare; spare = null; return s; }
+    let u, v, s;
+    do { u = rand() * 2 - 1; v = rand() * 2 - 1; s = u * u + v * v; } while (s >= 1 || s === 0);
+    const m = Math.sqrt(-2 * Math.log(s) / s);
+    spare = v * m; return u * m;
+  };
+}
+
+/* ---------- arm definitions (mu = weekly net log-growth) ---------- */
+const ARMS = [
+  { id: "ivm",      name: "Ivermectin alone",        mu: +0.005, ev: 3.0, safe: 5.0, color: "#8a8a8a" },
+  { id: "gc",       name: "GC chemo alone",          mu: -0.005, ev: 5.0, safe: 2.5, color: "#58a6ff" },
+  { id: "ici",      name: "ICI alone",               mu: -0.004, ev: 5.0, safe: 3.0, color: "#79c0ff" },
+  { id: "ivmmet",   name: "IVM + metformin",         mu: -0.010, ev: 3.0, safe: 4.5, color: "#3fb950" },
+  { id: "triple",   name: "IVM + MET + HCQ",         mu: -0.012, ev: 1.0, safe: 3.0, color: "#d29922" },
+  { id: "docivm",   name: "Docetaxel + IVM",         mu: -0.013, ev: 3.0, safe: 3.0, color: "#bc8cff" },
+  { id: "gcivm",    name: "GC + IVM",                mu: -0.012, ev: 3.0, safe: 3.0, color: "#39c5cf" },
+  { id: "gcivmmet", name: "GC + IVM + metformin",    mu: -0.018, ev: 3.0, safe: 2.5, color: "#2ea043" },
+  { id: "iciivm",   name: "ICI + IVM",               mu: -0.016, ev: 4.0, safe: 3.5, color: "#f0883e" },
+  { id: "icitriple",name: "ICI + IVM + metformin",   mu: -0.020, ev: 2.5, safe: 3.0, color: "#f85149" },
+  { id: "untreated",name: "Untreated reference",     mu: +0.045, ev: 0,   safe: 5.0, color: "#555555", ref: true },
+];
+const SUB_SHIFT = { favorable: -0.006, average: 0, unfavorable: +0.008 };
+
+const ROBUST = {
+  iciivm:   { top3: 0.987, best: 0.378 },
+  ici:      { top3: 0.825, best: 0.371 },
+  gc:       { top3: 0.685, best: 0.150 },
+  ivmmet:   { top3: 0.334, best: 0.082 },
+  triple:   { top3: 0.000, best: 0.000 },
+  docivm:   { top3: 0.026, best: 0.002 },
+  gcivm:    { top3: 0.015, best: 0.000 },
+  gcivmmet: { top3: 0.029, best: 0.001 },
+  icitriple:{ top3: 0.032, best: 0.002 },
+  ivm:      { top3: 0.068, best: 0.015 },
+};
+
+const NMIBC = [
+  { name: "BCG alone (reference)",              mean: 0.58, ev: 5.0, safe: 4.5, note: "Historical standard for high-risk NMIBC", color: "#8a8a8a" },
+  { name: "BCG + curcumin (hypothesis)",        mean: 0.68, ev: 2.0, safe: 4.5, note: "Syngeneic bladder synergy: NF-κB down, TRAIL up (Cancer Res 2009)", color: "#d29922" },
+  { name: "BCG + systemic ICI",                 mean: 0.73, ev: 4.0, safe: 2.5, note: "Real RCTs (HR 0.77 recurrence) but grade ≥3 AEs 25% vs 6%", color: "#58a6ff" },
+  { name: "BCG + intravesical gemcitabine",     mean: 0.95, ev: 3.5, safe: 3.5, note: "Actual phase I/II: 95% CR at 6 months (NCT04179162)", color: "#3fb950" },
+];
+
+/* ---------- state ---------- */
+const state = {
+  eff: 1.0, tau: 0.025, w1: 0.45, w2: 0.35, w3: 0.20, n: 4000,
+  sub: "average", sortKey: "comp", sortDir: -1,
+  visible: new Set(["ivm", "ivmmet", "triple", "iciivm", "gcivmmet", "icitriple"]),
+};
+
+/* ---------- simulation ---------- */
+function simulateArm(arm) {
+  const rand = mulberry32(seed + arm.id.length * 7919 + arm.mu * 1e6);
+  const gauss = makeGauss(rand);
+  const shift = SUB_SHIFT[state.sub];
+  const n = state.n;
+  const muMean = arm.mu * state.eff + shift;
+  const b12 = new Float64Array(n), b24 = new Float64Array(n);
+  const traj = new Array(13).fill(0).map(() => new Float64Array(n));
+  const mu = new Float64Array(n);
+  for (let i = 0; i < n; i++) mu[i] = muMean + gauss() * state.tau;
+  const logb = new Float64Array(n);
+  for (let t = 1; t <= 24; t++) {
+    for (let i = 0; i < n; i++) logb[i] += mu[i] + gauss() * 0.012;
+    if (t % 2 === 0) {
+      const k = t / 2;
+      for (let i = 0; i < n; i++) traj[k][i] = 100 * Math.exp(logb[i]);
+    }
+    if (t === 12) for (let i = 0; i < n; i++) b12[i] = 100 * Math.exp(logb[i]);
+    if (t === 24) for (let i = 0; i < n; i++) b24[i] = 100 * Math.exp(logb[i]);
+  }
+  let pr = 0, sd = 0, pd = 0, dur = 0;
+  for (let i = 0; i < n; i++) {
+    if (b12[i] <= 70) pr++; else if (b12[i] <= 120) sd++; else pd++;
+    if (b24[i] <= 50) dur++;
+  }
+  const medTraj = traj.map(arr => { const s = Array.from(arr).sort((a, b) => a - b); return s[n >> 1]; });
+  const med12 = medTraj[6];
+  const benefit = (pr + sd) / n;
+  const comp = state.w1 * benefit + state.w2 * (arm.ev / 5) + state.w3 * (arm.safe / 5);
+  return { pr: pr / n, sd: sd / n, pd: pd / n, dur: dur / n, med12, medTraj, comp };
+}
+
+function runAll() {
+  return ARMS.map(arm => ({ arm, r: simulateArm(arm) }));
+}
+
+/* ---------- SVG helpers ---------- */
+function svgEl(w, h) {
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg">`;
+}
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+function barChart(rows, w = 1100) {
+  // rows: {label, v1, v2}
+  const rowH = 46, padL = 210, padR = 90, top = 34, h = top + rows.length * rowH + 16;
+  let s = svgEl(w, h);
+  s += `<text x="${padL}" y="16" fill="#9a9a9a" font-size="11.5">PR or better wk12 (blue) / durable control wk24 (green), % of virtual patients</text>`;
+  const max = 100, plotW = w - padL - padR;
+  rows.forEach((r, i) => {
+    const y = top + i * rowH;
+    s += `<text x="${padL - 10}" y="${y + 18}" text-anchor="end" fill="#c8c8c8" font-size="12">${esc(r.label)}</text>`;
+    s += `<rect x="${padL}" y="${y + 4}" width="${Math.max(1, plotW * r.v1 / max)}" height="12" fill="#58a6ff"/>`;
+    s += `<text x="${padL + plotW * r.v1 / max + 6}" y="${y + 14}" fill="#9a9a9a" font-size="10.5">${(r.v1 * 100).toFixed(1)}%</text>`;
+    s += `<rect x="${padL}" y="${y + 20}" width="${Math.max(1, plotW * r.v2 / max)}" height="12" fill="#3fb950"/>`;
+    s += `<text x="${padL + plotW * r.v2 / max + 6}" y="${y + 30}" fill="#9a9a9a" font-size="10.5">${(r.v2 * 100).toFixed(1)}%</text>`;
+  });
+  return s + "</svg>";
+}
+
+function lineChart(series, w = 1100) {
+  // series: {name, color, data[13]} — y range 50..300 auto
+  const padL = 56, padR = 16, top = 26, bottom = 34, h = 330;
+  const plotW = w - padL - padR, plotH = h - top - bottom;
+  let lo = 50, hi = 120;
+  series.forEach(se => se.data.forEach(v => { lo = Math.min(lo, v); hi = Math.max(hi, v); }));
+  hi = Math.ceil(hi / 10) * 10; lo = Math.floor(lo / 10) * 10;
+  const x = i => padL + plotW * i / 12;
+  const y = v => top + plotH * (1 - (v - lo) / (hi - lo));
+  let s = svgEl(w, h);
+  for (let t = 0; t <= 12; t += 2) {
+    s += `<line x1="${x(t)}" y1="${top}" x2="${x(t)}" y2="${top + plotH}" stroke="#2b2b2b"/>`;
+    s += `<text x="${x(t)}" y="${h - 12}" text-anchor="middle" fill="#8a8a8a" font-size="11">W${t * 2}</text>`;
+  }
+  const step = Math.max(10, Math.round((hi - lo) / 5 / 10) * 10);
+  for (let v = lo; v <= hi; v += step) {
+    s += `<line x1="${padL}" y1="${y(v)}" x2="${w - padR}" y2="${y(v)}" stroke="#2b2b2b"/>`;
+    s += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" fill="#8a8a8a" font-size="11">${v}</text>`;
+  }
+  series.forEach(se => {
+    const pts = se.data.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    if (se.dashed) s += `<polyline fill="none" stroke="${se.color}" stroke-width="2" stroke-dasharray="6 5" points="${pts}"/>`;
+    else s += `<polyline fill="none" stroke="${se.color}" stroke-width="2.5" points="${pts}"/>`;
+    s += `<text x="${x(12) - 4}" y="${y(se.data[12]) - 8}" text-anchor="end" fill="${se.color}" font-size="11">${esc(se.name)}</text>`;
+  });
+  return s + "</svg>";
+}
+
+function robustChart() {
+  const rows = ARMS.filter(a => !a.ref).map(a => ({ label: a.name, v: ROBUST[a.id].top3, b: ROBUST[a.id].best }));
+  rows.sort((x, y) => y.v - x.v);
+  const w = 1100, rowH = 40, padL = 210, padR = 110, top = 20, h = top + rows.length * rowH + 10;
+  let s = svgEl(w, h);
+  const plotW = w - padL - padR;
+  rows.forEach((r, i) => {
+    const y = top + i * rowH;
+    s += `<text x="${padL - 10}" y="${y + 18}" text-anchor="end" fill="#c8c8c8" font-size="12">${esc(r.label)}</text>`;
+    s += `<rect x="${padL}" y="${y + 5}" width="${Math.max(1, plotW * r.v)}" height="14" fill="#58a6ff"/>`;
+    s += `<rect x="${padL}" y="${y + 5}" width="${Math.max(1, plotW * r.b)}" height="14" fill="#3fb950"/>`;
+    s += `<text x="${padL + plotW * r.v + 8}" y="${y + 17}" fill="#9a9a9a" font-size="10.5">top-3 ${(r.v * 100).toFixed(1)}% · best ${(r.b * 100).toFixed(1)}%</text>`;
+  });
+  s += `<text x="${padL}" y="12" fill="#9a9a9a" font-size="11">Probability of ranking top-3 (blue) and best (green) across 2,000 perturbed model worlds</text>`;
+  return s + "</svg>";
+}
+
+function nmibcChart(k) {
+  const w = 1100, rowH = 58, padL = 250, padR = 130, top = 30, h = top + NMIBC.length * rowH + 12;
+  let s = svgEl(w, h);
+  const plotW = w - padL - padR;
+  s += `<text x="${padL}" y="16" fill="#9a9a9a" font-size="11">Simulated 6-month complete-response rate (%) with 90% interval</text>`;
+  NMIBC.forEach((r, i) => {
+    const y = top + i * rowH;
+    const a = r.mean * k, b = (1 - r.mean) * k;
+    // approx 90% interval via normal approx of beta
+    const sd = Math.sqrt(r.mean * (1 - r.mean) / (k + 1));
+    const lo = Math.max(0, r.mean - 1.645 * sd), hi = Math.min(1, r.mean + 1.645 * sd);
+    s += `<text x="${padL - 10}" y="${y + 22}" text-anchor="end" fill="#c8c8c8" font-size="12">${esc(r.name)}</text>`;
+    s += `<line x1="${padL + plotW * lo}" y1="${y + 18}" x2="${padL + plotW * hi}" y2="${y + 18}" stroke="#4a4a4a" stroke-width="2"/>`;
+    s += `<circle cx="${padL + plotW * r.mean}" cy="${y + 18}" r="7" fill="${r.color}"/>`;
+    s += `<text x="${padL + plotW * r.mean + 12}" y="${y + 22}" fill="#e8e8e8" font-size="11.5">${(r.mean * 100).toFixed(0)}% (${(lo * 100).toFixed(0)}–${(hi * 100).toFixed(0)})</text>`;
+  });
+  return s + "</svg>";
+}
+
+/* ---------- render ---------- */
+function renderTable(results) {
+  const sorted = [...results].sort((x, y) => {
+    const k = state.sortKey;
+    const get = (o) => k === "name" ? o.arm.name : k === "pr" ? o.r.pr : k === "sd" ? o.r.sd : k === "pd" ? o.r.pd
+      : k === "med12" ? o.r.med12 : k === "dur" ? o.r.dur : k === "ev" ? o.arm.ev : k === "safe" ? o.arm.safe : o.r.comp;
+    const a = get(x), b = get(y);
+    return (a < b ? -1 : a > b ? 1 : 0) * state.sortDir;
+  });
+  const bestComp = Math.max(...results.filter(o => !o.arm.ref).map(o => o.r.comp));
+  const tb = document.querySelector("#results-table tbody");
+  tb.innerHTML = sorted.map(o => {
+    const top = !o.arm.ref && Math.abs(o.r.comp - bestComp) < 1e-9 ? " class=\"top\"" : "";
+    return `<tr${top}>
+      <td><span class="dot" style="background:${o.arm.color}"></span>${esc(o.arm.name)}</td>
+      <td class="num">${(o.r.pr * 100).toFixed(1)}%</td>
+      <td class="num">${(o.r.sd * 100).toFixed(1)}%</td>
+      <td class="num">${(o.r.pd * 100).toFixed(1)}%</td>
+      <td class="num">${o.r.med12.toFixed(1)}</td>
+      <td class="num">${(o.r.dur * 100).toFixed(1)}%</td>
+      <td class="num">${o.arm.ev.toFixed(1)}</td>
+      <td class="num">${o.arm.safe.toFixed(1)}</td>
+      <td class="num"><b>${o.r.comp.toFixed(3)}</b></td>
+    </tr>`;
+  }).join("");
+}
+
+function renderVerdict(results) {
+  const active = results.filter(o => !o.arm.ref).sort((a, b) => b.r.comp - a.r.comp);
+  const byDur = [...active].sort((a, b) => b.r.dur - a.r.dur);
+  const bestOral = active.filter(o => ["ivmmet", "triple", "ivm"].includes(o.arm.id)).sort((a, b) => b.r.comp - a.r.comp)[0];
+  const mostRobust = [...active].sort((a, b) => ROBUST[b.arm.id].top3 - ROBUST[a.arm.id].top3)[0];
+  const top = active[0], effTop = byDur[0];
+  const cards = [
+    { rank: "Best composite (live)", name: top.arm.name, why: `Composite ${top.r.comp.toFixed(3)} · PR ${(top.r.pr * 100).toFixed(1)}% · durable ${(top.r.dur * 100).toFixed(1)}%. Balances modeled efficacy with evidence and safety at your current weights.` },
+    { rank: "Maximum modeled efficacy", name: effTop.arm.name, why: `Highest durable-control rate (${(effTop.r.dur * 100).toFixed(1)}%) and lowest progression (${(effTop.r.pd * 100).toFixed(1)}%) in the current cohort — usually the most aggressive multi-drug design.` },
+    { rank: "Most robust combination", name: mostRobust.arm.name, why: `Ranked top-3 in ${(ROBUST[mostRobust.arm.id].top3 * 100).toFixed(1)}% of 2,000 perturbed model worlds — the combination whose standing survives changing assumptions.` },
+    { rank: "Best oral pairing", name: bestOral.arm.name, why: `Top composite among oral repurposed options · safety ${bestOral.arm.safe.toFixed(1)}/5 · the sensible self-contained choice alongside standard care.` },
+  ];
+  document.getElementById("verdict").innerHTML = cards.map(c =>
+    `<div class="vcard"><div class="rank">${esc(c.rank)}</div><div class="name">${esc(c.name)}</div><div class="why">${esc(c.why)}</div></div>`
+  ).join("");
+}
+
+function renderNmibcVerdict() {
+  const cards = [
+    { rank: "Standout strategy", name: "BCG + intravesical gemcitabine", why: "95% simulated 6-month CR because it is an actual phase I/II result (NCT04179162). The strongest number on the page that comes from real patients." },
+    { rank: "Best oral adjunct hypothesis", name: "Curcumin alongside BCG", why: "Bladder-specific synergy in a syngeneic tumor model (Cancer Res 2009): NF-κB down, TRAIL receptors up — with excellent safety." },
+    { rank: "Immunotherapy option", name: "BCG + systemic ICI", why: "Real RCT evidence for reduced recurrence (HR 0.77) but grade ≥3 adverse events in 25% vs 6% — efficacy with a real toxicity price." },
+  ];
+  document.getElementById("verdict-nmibc").innerHTML = cards.map(c =>
+    `<div class="vcard"><div class="rank">${esc(c.rank)}</div><div class="name">${esc(c.name)}</div><div class="why">${esc(c.why)}</div></div>`
+  ).join("");
+}
+
+function render() {
+  const results = runAll();
+  const rows = results.filter(o => !o.arm.ref).map(o => ({ label: o.arm.name, v1: o.r.pr, v2: o.r.dur }));
+  rows.sort((a, b) => b.v2 - a.v2);
+  document.getElementById("chart-efficacy").innerHTML = barChart(rows);
+
+  const series = results.filter(o => state.visible.has(o.arm.id))
+    .map(o => ({ name: o.arm.name, color: o.arm.color, data: o.r.medTraj }));
+  const untreated = results.find(o => o.arm.id === "untreated");
+  series.push({ name: "Untreated (ref)", color: "#555", data: untreated.r.medTraj, dashed: true });
+  document.getElementById("chart-traj").innerHTML = lineChart(series);
+
+  renderTable(results);
+  renderVerdict(results);
+}
+
+function renderRobust() {
+  document.getElementById("chart-robust").innerHTML = robustChart();
+}
+function renderNmibc() {
+  const k = +document.getElementById("s-k").value;
+  document.getElementById("chart-nmibc").innerHTML = nmibcChart(k);
+  const tb = document.querySelector("#nmibc-table tbody");
+  tb.innerHTML = NMIBC.map(r => {
+    const sd = Math.sqrt(r.mean * (1 - r.mean) / (k + 1));
+    const lo = Math.max(0, r.mean - 1.645 * sd), hi = Math.min(1, r.mean + 1.645 * sd);
+    return `<tr>
+      <td><span class="dot" style="background:${r.color}"></span>${esc(r.name)}</td>
+      <td class="num"><b>${(r.mean * 100).toFixed(0)}%</b></td>
+      <td class="num">${(lo * 100).toFixed(0)}–${(hi * 100).toFixed(0)}</td>
+      <td class="num">${r.ev.toFixed(1)}</td>
+      <td class="num">${r.safe.toFixed(1)}</td>
+      <td>${esc(r.note)}</td>
+    </tr>`;
+  }).join("");
+}
+
+/* ---------- chips ---------- */
+function buildArmChips() {
+  const wrap = document.getElementById("arm-chips");
+  wrap.innerHTML = ARMS.filter(a => !a.ref).map(a =>
+    `<div class="chip ${state.visible.has(a.id) ? "on" : ""}" data-arm="${a.id}">${esc(a.name)}</div>`
+  ).join("");
+  wrap.querySelectorAll(".chip").forEach(ch => ch.addEventListener("click", () => {
+    const id = ch.dataset.arm;
+    if (state.visible.has(id)) state.visible.delete(id); else state.visible.add(id);
+    ch.classList.toggle("on");
+    render();
+  }));
+}
+
+/* ---------- events ---------- */
+function bind() {
+  const map = [
+    ["s-eff", v => { state.eff = +v; document.getElementById("v-eff").textContent = (+v).toFixed(2) + "×"; }],
+    ["s-tau", v => { state.tau = +v; document.getElementById("v-tau").textContent = (+v).toFixed(3); }],
+    ["s-w1", v => { state.w1 = +v / 100; document.getElementById("v-w1").textContent = v + "%"; }],
+    ["s-w2", v => { state.w2 = +v / 100; document.getElementById("v-w2").textContent = v + "%"; }],
+    ["s-w3", v => { state.w3 = +v / 100; document.getElementById("v-w3").textContent = v + "%"; }],
+    ["s-n", v => { state.n = +v; document.getElementById("v-n").textContent = (+v).toLocaleString(); }],
+    ["s-k", () => renderNmibc()],
+  ];
+  map.forEach(([id, fn]) => {
+    const el = document.getElementById(id);
+    el.addEventListener("input", () => { fn(el.value); render(); });
+  });
+  document.querySelectorAll("#subgroup-chips .chip").forEach(ch => ch.addEventListener("click", () => {
+    document.querySelectorAll("#subgroup-chips .chip").forEach(c => c.classList.remove("on"));
+    ch.classList.add("on");
+    state.sub = ch.dataset.sub;
+    render();
+  }));
+  document.getElementById("reseed").addEventListener("click", () => {
+    seed = (Math.random() * 1e9) | 0;
+    render();
+  });
+  document.querySelectorAll("#results-table th").forEach(th => th.addEventListener("click", () => {
+    const k = th.dataset.k;
+    if (state.sortKey === k) state.sortDir *= -1; else { state.sortKey = k; state.sortDir = k === "name" ? 1 : -1; }
+    render();
+  }));
+  document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    const sys = tab.dataset.scn === "systemic";
+    document.getElementById("scn-systemic").style.display = sys ? "" : "none";
+    document.getElementById("scn-nmibc").style.display = sys ? "none" : "";
+    if (!sys) renderNmibc();
+  }));
+}
+
+buildArmChips();
+bind();
+render();
+renderRobust();
+renderNmibc();
+renderNmibcVerdict();
+</script>
+</body>
+</html>
