@@ -4,6 +4,8 @@
 
 This document takes the opposite approach to our earlier work: instead of asking "which combination looks best?", it asks **"what is actually true, what is probably exaggerated, and what is everyone missing?"** Every claim gets a skeptic grade. Disagreement with our own earlier conclusions is marked in bold.
 
+> **Companion hypothesis:** [The Weed-Killer Hypothesis](weedkiller-hypothesis.md) — repurposing "weed/lawn/pond shelf" chemistry (copper algaecides, iron moss killers, baking soda, grass coumarins) against bladder cancer's plant-like vulnerabilities, with the disulfiram–copper flagship and explicit rejection of the dangerous candidates.
+
 ---
 
 ## Part 1 — The disease, reverse-engineered (the mechanism stack)
