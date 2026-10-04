@@ -81,7 +81,7 @@ function WeekByWeekTable() {
           ],
           [
             "Weeks 3–4",
-            "Metabolic + oxidative damage; proliferation slowing (MCF-7 viability loss at 24h in vitro)",
+            "Metabolic + oxidative damage; proliferation slowing — in bladder cohorts, metformin users after cystectomy + GC had 37% lower progression risk (HR 0.66)",
             "Undegraded autophagic material accumulates; cytostatic pressure builds",
             "Hypothesis: deepest pressure of any oral arm — earliest plausible ctDNA dip",
             "ctDNA / tumor-marker trend; glucose improves regardless — not a tumor response signal",
@@ -185,17 +185,20 @@ function AssumptionsCard() {
           </Text>
           <Text size="small">
             <Text weight="semibold" as="span">Evidence weights: </Text>
-            the metformin arm leans on two 2025–26 studies (overlapping
-            research groups); the HCQ arm on one 2026 hamster study (6 animals
-            per arm); the triple arm on no direct data at all. None has human
-            efficacy data — this is a thought experiment, not a clinical
-            expectation.
+            the metformin arm leans on two 2025–26 lab studies plus bladder
+            human data (243-patient MIBC cohort, HR 0.66; meta-analysis RFS
+            HR 0.56); the HCQ arm on one 2026 hamster study (6 animals per
+            arm) with no bladder data at all; the triple arm on no direct
+            data. None has human efficacy data for ivermectin in bladder
+            cancer — this is a thought experiment, not a clinical expectation.
           </Text>
           <Text size="small">
             <Text weight="semibold" as="span">Not modeled: </Text>
-            tumor type differences (data strongest in breast cancer),
-            patient-specific biology, drug interactions, toxicity-driven
-            discontinuation, and standard-of-care treatments running alongside.
+            standard bladder regimens running alongside (gemcitabine/cisplatin,
+            BCG, checkpoint inhibitors), intravesical delivery of ivermectin
+            (a bladder-specific route worth modeling separately),
+            patient-specific biology, drug interactions, and
+            toxicity-driven discontinuation.
           </Text>
         </Stack>
       </CardBody>
@@ -208,14 +211,18 @@ export default function WeekByWeekHypothesis() {
     <Stack gap={20}>
       <Stack gap={8}>
         <H1>
-          Week-by-week hypothesis: ivermectin + metformin vs + HCQ vs all
-          combined
+          Bladder cancer — week-by-week hypothesis: ivermectin + metformin vs
+          + HCQ vs all combined
         </H1>
         <Text tone="secondary">
           A structured hypothesis of what improvement could look like over 12
-          weeks on the oral pairings with ivermectin and the full three-drug
-          stack, with ivermectin alone as a reference. Illustrative — not
-          medical advice or a prediction of results for any person.
+          weeks in bladder (urothelial) cancer on the oral pairings with
+          ivermectin and the full three-drug stack, with ivermectin alone as a
+          reference. Anchored to bladder-specific data where it exists
+          (ivermectin urothelial-cell and xenograft studies 2022/2024;
+          metformin outcomes in 243 MIBC patients after cystectomy +
+          gemcitabine/cisplatin). Illustrative — not medical advice or a
+          prediction of results for any person.
         </Text>
       </Stack>
 
@@ -275,12 +282,14 @@ export default function WeekByWeekHypothesis() {
         a falling marker followed by stable or shrinking scans supports
         continuing; clear progression at week 12 argues for stopping and
         returning to standard options. The more drugs in the stack, the more
-        the safety monitoring matters: renal function and B12 (metformin), ECG
+        the safety monitoring matters: renal function and B12 (metformin —
+        especially relevant with cisplatin, which is itself nephrotoxic), ECG
         and ophthalmology (HCQ), neuro/GI effects and CYP3A4/P-gp interaction
         review (ivermectin). All of this should run through the treating
-        oncologist. And to keep the ranking honest: ivermectin + anti-PD-1
-        immunotherapy remains the best-evidenced combination overall — it is
-        simply not an oral self-administered option.
+        oncologist. For bladder cancer specifically, the best-evidenced
+        combination is ivermectin + checkpoint blockade (a real bladder
+        standard of care), and intravesical delivery is a research route worth
+        discussing with the urology team.
       </Callout>
     </Stack>
   );
