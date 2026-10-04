@@ -62,6 +62,25 @@
   .readout .v { font-size: 19px; font-weight: 700; }
   .readout .l { font-size: 11px; color: #a0a0a0; }
   .organ-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 10.5px; color: #9a9a9a; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 14px; margin: 16px 0; }
+  .grade { display: inline-block; border-radius: 6px; padding: 2px 9px; font-size: 11px; font-weight: 700; margin-left: 8px; }
+  .g-b { background: #1f3a26; color: #56d364; } .g-c { background: #3a3016; color: #e3b341; } .g-d { background: #3d1c1c; color: #ff7b72; }
+  .wk-card { border: 1px solid #333; border-radius: 10px; padding: 15px 17px; }
+  .wk-card .title { font-weight: 650; margin-bottom: 6px; }
+  .wk-card .line { font-size: 12px; color: #b8b8b8; margin: 4px 0; }
+  .wk-card .line b { color: #ededed; font-weight: 600; }
+  .layer-row { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 8px; padding: 10px 13px; margin: 8px 0; cursor: pointer; }
+  .layer-row.on { border-color: #3d6098; background: #1f2b3d; }
+  .layer-row.locked { cursor: default; opacity: .95; }
+  .layer-row .nm { flex: 1; font-size: 13px; }
+  .layer-row .meta { font-size: 11px; color: #9a9a9a; }
+  .layer-chip { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid #4a4a4a; flex: none; }
+  .layer-row.on .layer-chip { background: #58a6ff; border-color: #58a6ff; }
+  .gauge { display: flex; gap: 12px; flex-wrap: wrap; margin: 14px 0; }
+  .spark { animation: sparky 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes sparky { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+  .beam { stroke-dasharray: 7 7; animation: beamm 1.1s linear infinite; }
+  @keyframes beamm { to { stroke-dashoffset: -28; } }
   @keyframes heartbeat { 0%, 100% { transform: scale(1); } 22% { transform: scale(1.14); } 38% { transform: scale(1); } 58% { transform: scale(1.09); } 72% { transform: scale(1); } }
   #organ-heart { transform-box: fill-box; transform-origin: center; animation: heartbeat 1.4s ease-in-out infinite; }
   @keyframes spinring { to { transform: rotate(360deg); } }
@@ -91,6 +110,7 @@
   <div class="tabs">
     <div class="tab active" data-scn="systemic">Systemic disease (MIBC / metastatic)</div>
     <div class="tab" data-scn="nmibc">Non-muscle-invasive (NMIBC)</div>
+    <div class="tab" data-scn="weedkiller">Weed-Killer Hypothesis</div>
   </div>
 
   <!-- ============ SYSTEMIC ============ -->
@@ -322,6 +342,150 @@
     </table>
 
     <div class="verdict" id="verdict-nmibc"></div>
+  </section>
+
+  <!-- ============ WEED-KILLER HYPOTHESIS ============ -->
+  <section id="scn-weedkiller" style="display:none">
+    <h2>The weed-killer hypothesis — plant chemistry vs a "weed" in the body</h2>
+    <p class="sub">Herbicides kill weeds through <b>differential metabolism</b> — targets plants have that humans lack, or chemistry fast-growing tissue amplifies. Cancer is a weed with <b>plant-like vulnerabilities: iron-hungry, acid-loving, fast-dividing, thin antioxidant margins</b>. This tab audits which "weed / lawn / pond shelf" chemistries map onto human cancer targets — with skeptic grades — and lets you build a holistic attack stack against bladder cancer.</p>
+
+    <div class="box b-info"><div class="t">Oncology has done this before — repeatedly</div>
+    Nitrogen mustards (chemical warfare) became the first chemotherapy · arsenic (rat poison) cures acute promyelocytic leukemia · warfarin (rodenticide from moldy clover grass) became a cardiac standard · colchicine and combretastatin (plant toxins) became tubulin drugs · Taxol (yew bark) and vincristine (periwinkle) became core chemotherapy · salicylate (plants' own defense hormone) became aspirin with colorectal RCT prevention evidence. The "poison shelf" is an unpurified drug library.</p></div>
+
+    <h2>Interactive attack stack — build the regimen</h2>
+    <p class="sub">Toggle the layers and watch the holistic picture change: tumor control, evidence strength, safety cost, and the bladder battlefield. Illustrative model — the numbers are hypothesis weights, not trial results.</p>
+
+    <div class="holistic">
+      <div class="bodybox">
+        <svg id="wk-svg" viewBox="0 0 340 320" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- beams -->
+          <g id="beam-dsfcu" opacity="0"><path class="beam" d="M62,52 C100,90 130,120 158,150" fill="none" stroke="#3fb950" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g id="beam-iron" opacity="0"><path class="beam" d="M278,52 C240,90 212,120 184,150" fill="none" stroke="#58a6ff" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g id="beam-ph" opacity="0"><path class="beam" d="M32,178 C60,178 92,182 118,188" fill="none" stroke="#bc8cff" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g id="beam-coumarin" opacity="0"><path class="beam" d="M308,178 C280,178 248,182 222,188" fill="none" stroke="#f0883e" stroke-width="3.5" stroke-linecap="round"/></g>
+          <text id="lbl-dsfcu" x="40" y="38" fill="#3fb950" font-size="11" opacity="0">Disulfiram + Cu</text>
+          <text id="lbl-iron" x="242" y="38" fill="#58a6ff" font-size="11" opacity="0">Iron + GPX4 block</text>
+          <text id="lbl-ph" x="14" y="200" fill="#bc8cff" font-size="11" opacity="0">pH vehicle</text>
+          <text id="lbl-coumarin" x="252" y="200" fill="#f0883e" font-size="11" opacity="0">Coumarin</text>
+
+          <!-- bladder -->
+          <path d="M92,148 C92,124 118,108 170,108 C222,108 248,124 248,148 C248,196 214,236 170,236 C126,236 92,196 92,148 Z" fill="#272727" stroke="#414141" stroke-width="2"/>
+          <ellipse id="wk-bladder" cx="170" cy="168" rx="66" ry="48" fill="#3fb950" opacity="0.16"/>
+
+          <!-- tumor cluster -->
+          <g id="wk-tumor">
+            <circle id="wk-t1" cx="170" cy="170" r="30" fill="#f85149"/>
+            <circle id="wk-t2" cx="146" cy="184" r="17" fill="#c93c33"/>
+            <circle id="wk-t3" cx="194" cy="182" r="14" fill="#c93c33"/>
+          </g>
+
+          <!-- ferroptosis sparks -->
+          <g id="wk-sparks" opacity="0">
+            <circle class="spark" cx="140" cy="150" r="4" fill="#ffd35c" style="animation-delay:0s"/>
+            <circle class="spark" cx="200" cy="152" r="4" fill="#ffd35c" style="animation-delay:.4s"/>
+            <circle class="spark" cx="158" cy="200" r="4" fill="#ffd35c" style="animation-delay:.8s"/>
+            <circle class="spark" cx="186" cy="204" r="4" fill="#ffd35c" style="animation-delay:1.2s"/>
+            <circle class="spark" cx="170" cy="136" r="4" fill="#ffd35c" style="animation-delay:.2s"/>
+          </g>
+
+          <!-- pH meter -->
+          <g id="wk-ph-meter" opacity="0">
+            <rect x="292" y="238" width="14" height="58" rx="7" fill="#222" stroke="#414141"/>
+            <rect id="wk-ph-fill" x="295" y="266" width="8" height="27" rx="4" fill="#bc8cff"/>
+            <text x="299" y="312" fill="#8a8a8a" font-size="9.5" text-anchor="middle">pH</text>
+          </g>
+
+          <!-- immune cells -->
+          <g id="wk-immune" opacity="0.3">
+            <circle class="immune-cell" cx="112" cy="128" r="4.5" fill="#58a6ff" style="animation-delay:.2s"/>
+            <circle class="immune-cell" cx="228" cy="128" r="4.5" fill="#58a6ff" style="animation-delay:1.2s"/>
+            <circle class="immune-cell" cx="120" cy="212" r="4.5" fill="#58a6ff" style="animation-delay:2.2s"/>
+            <circle class="immune-cell" cx="222" cy="212" r="4.5" fill="#58a6ff" style="animation-delay:3.2s"/>
+          </g>
+
+          <text x="170" y="292" text-anchor="middle" fill="#7a7a7a" font-size="10.5">Bladder battlefield · yellow sparks = ferroptosis · blue dots = immune cells</text>
+        </svg>
+      </div>
+
+      <div>
+        <div id="wk-layers"></div>
+        <div class="gauge">
+          <div class="readout"><div class="v" id="wk-control">—</div><div class="l">Modeled tumor control</div></div>
+          <div class="readout"><div class="v" id="wk-evidence">—</div><div class="l">Evidence score (0–5)</div></div>
+          <div class="readout"><div class="v" id="wk-safety">—</div><div class="l">Safety cost (0–10)</div></div>
+          <div class="readout"><div class="v" id="wk-index">—</div><div class="l">Holistic stack index</div></div>
+        </div>
+        <p class="cap">Illustrative hypothesis model · control = base + layer gains (diminishing returns applied) · safety cost accumulates with every added layer · no human efficacy data exists for any stack.</p>
+      </div>
+    </div>
+
+    <h2>The five surviving candidates</h2>
+    <div class="cards">
+      <div class="wk-card">
+        <div class="title">H1 · Disulfiram + copper <span class="grade g-b">B−</span></div>
+        <div class="line"><b>Weed connection:</b> copper sulfate — the oldest pond algaecide and Bordeaux-mixture fungicide.</div>
+        <div class="line"><b>Cancer mapping:</b> disulfiram (daily alcohol-aversion pill) chelates copper into an ionophore → ROS burst, autophagy flux, ferroptosis — and kills ALDH1+ cancer stem cells, the recurrence-driving population.</div>
+        <div class="line"><b>Evidence:</b> in a BBN-induced invasive bladder-cancer mouse model, DSF + copper added to gemcitabine/cisplatin cut tumor burden (p&lt;0.0001), dropped ALDH1 expression, and raised lipid peroxidation (Curr Cancer Drug Targets).</div>
+        <div class="line"><b>Skeptic's read:</b> one mouse chemo-potentiation study; ALDH1A3 upregulation hints at an escape route; human DSF-cancer trials small and mixed. Still the best-evidenced idea on this tab.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">H2 · Iron + GPX4 blockade, intravesically <span class="grade g-c">C+</span></div>
+        <div class="line"><b>Weed connection:</b> iron sulfate / FeHEDTA — standard moss and lawn killers.</div>
+        <div class="line"><b>Cancer mapping:</b> tumors hoard iron and are acidic; free Fe²⁺ drives Fenton lipid peroxidation; block GPX4 and the cell cannot extinguish the fire → ferroptosis.</div>
+        <div class="line"><b>Evidence:</b> intravesical Fe-EGCG@RSL3 nanomedicine + anti-PD1 controlled orthotopic bladder tumors with no urothelial damage (2025); iron nanozymes show 90%+ inhibition in mice.</div>
+        <div class="line"><b>Skeptic's read:</b> only nanomedicine forms tested; simple pharmaceutical iron salts + GPX4 inhibitor intravesically never tried. Oral iron may feed tumors — this lives or dies on the bladder route.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">H3 · Bicarbonate pH warfare <span class="grade g-c">C+</span></div>
+        <div class="line"><b>Weed connection:</b> sodium bicarbonate — the most banal path-weed killer on Earth (baking soda).</div>
+        <div class="line"><b>Cancer mapping:</b> tumors are acidic (pHe 6.5–6.9); acidity fuels invasion, immune evasion, and ion-trapping of weak-base chemo. Alkalinization improved anti-PD-1 responses in mice, and urinary pH correlated with immunotherapy outcome — directly measurable in bladder patients.</div>
+        <div class="line"><b>Evidence:</b> oral bicarbonate + anti-PD-1 in melanoma mice; liposomal bicarbonate boosted doxorubicin uptake 21-fold; small human pilot in liver TACE.</div>
+        <div class="line"><b>Skeptic's read:</b> oral dosing poorly raises tumor pH (nanoparticles needed); systemic use risks alkalosis. Best framed as a pH-engineered intravesical vehicle, not a drug.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">H4 · Grass coumarins (UM-15) <span class="grade g-c">C+</span></div>
+        <div class="line"><b>Weed connection:</b> coumarins are grass/clover defense chemicals — the warfarin rodenticide lineage starts in moldy sweet clover.</div>
+        <div class="line"><b>Cancer mapping:</b> UM-15 (from Ferula sinkiangensis) kills bladder cancer cells and suppresses CSC self-renewal; albumin/chitosan nanoparticles give transepithelial tumor-targeted intravesical delivery.</div>
+        <div class="line"><b>Evidence:</b> orthotopic + patient-derived xenograft models (RSC Mater Adv 2024).</div>
+        <div class="line"><b>Skeptic's read:</b> single research group, nanoformulation-dependent; free compound has kidney/spleen toxicity that the bladder route solves.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">H5 · Plant-defense hormones (salicylate) <span class="grade g-c">C−</span></div>
+        <div class="line"><b>Weed connection:</b> salicylic acid is plants' own defense hormone — the molecule willows use to signal infection.</div>
+        <div class="line"><b>Cancer mapping:</b> COX/NF-κB suppression; aspirin has real RCT prevention evidence in colorectal cancer.</div>
+        <div class="line"><b>Skeptic's read:</b> weak bladder-specific data; belongs in the prevention tier, not the treatment stack.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">The rule that generated this list</div>
+        <div class="line"><b>A weed killer only qualifies when its killing mechanism has a human target that cancer over-relies on</b> — not merely because it is a poison. Plant-only targets (EPSPS, photosystems) are useless against cancer; general tissue destroyers are just harm.</div>
+        <div class="line"><b>Historical filter:</b> every oncology classic (mustard gas, arsenic, warfarin, Taxol) passed because differential biology existed — the weed-killer shelf just widens the search.</div>
+      </div>
+    </div>
+
+    <h2>Selectivity ledger — how the candidates score</h2>
+    <div id="chart-ledger"></div>
+    <p class="cap">Analyst-assigned scores (0–5): mechanism fit = does the weed-killing chemistry hit a cancer-overused human target?; bladder evidence = direct bladder data; feasibility = cost/speed to test; safety = therapeutic-window quality · Oct 2026.</p>
+
+    <h2>Explicitly rejected — the "just spray the weed killer" fallacy</h2>
+    <table>
+      <thead><tr><th>Candidate</th><th>Why rejected</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#f85149"></span>Glyphosate</td><td>Its target (EPSPS) exists only in plants — it cannot "target" cancer at all; epidemiology suggests it may cause lymphoma. A poison without differential biology is just poisoning.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Paraquat / diquat</td><td>The ROS logic sounds like ferroptosis, but the therapeutic index is zero — they destroy human lungs ("weed sprayer's lung"). Mechanism resemblance is not selectivity.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>2,4-D / synthetic auxins</td><td>Hormone mimics with no relevant human target; carcinogen classifications.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Any formulated herbicide product</td><td>Commercial products contain surfactants and adjuvants engineered to damage biological tissue. Only pharmaceutical-grade pure compounds belong in a laboratory.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The stacked program &amp; how to test it</h2>
+    <div class="card">
+      <div class="hdr">From hypothesis to experiment in three arms</div>
+      <p style="margin-bottom:8px"><b>1.</b> Disulfiram + copper ± cisplatin in T24/RT4 vs SV-HUC-1 (the ALDH1+ stem-cell question). <b>2.</b> Ferrous salt + GPX4 inhibitor (RSL3-class) under intravesical-mimetic conditions, ± pH 6.5 culture. <b>3.</b> pH-shift experiment (6.5 vs 7.4 × gemcitabine uptake). All three slot directly into the in-vitro protocol already in this repo (docs/) — same cell lines, same synergy statistics.</p>
+      <p style="margin-bottom:0"><b>The one-sentence version:</b> cancer is a weed with plant-like vulnerabilities — iron, acid, and copper chemistry — and bladder cancer is uniquely exposed to those chemistries because we can pour them directly onto it.</p>
+    </div>
+
+    <div class="box b-danger"><div class="t">Safety — the hard line</div>
+    These are research hypotheses for qualified laboratories and clinical trials only. <b>Never ingest herbicide, algaecide, lawn-care, or pond products</b> — commercial formulations contain tissue-damaging adjuvants, and compounds like paraquat are lethal. Pharmaceutical-grade materials, institutional oversight, and oncology supervision are non-negotiable. This tab is not medical advice.</div>
   </section>
 
   <h2>Methodology &amp; anchors</h2>
@@ -667,10 +831,12 @@ function bind() {
   document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
-    const sys = tab.dataset.scn === "systemic";
-    document.getElementById("scn-systemic").style.display = sys ? "" : "none";
-    document.getElementById("scn-nmibc").style.display = sys ? "none" : "";
-    if (!sys) renderNmibc();
+    ["systemic", "nmibc", "weedkiller"].forEach(s => {
+      document.getElementById("scn-" + s).style.display = tab.dataset.scn === s ? "" : "none";
+    });
+    if (tab.dataset.scn === "nmibc") renderNmibc();
+    if (tab.dataset.scn === "weedkiller") renderWk();
+    history.replaceState(null, "", "#" + tab.dataset.scn);
   }));
 }
 
@@ -832,6 +998,122 @@ function initHolistic() {
   });
 }
 
+/* ---------- weed-killer hypothesis: attack stack ---------- */
+const WK_LAYERS = [
+  { id: "base", name: "Standard care — BCG ± intravesical gemcitabine", grade: "B", ev: 4.0, gain: 58, safety: 3.0, locked: true,
+    meta: "the only human-randomized layer (95% CR signal, RCT meta-analyses)" },
+  { id: "dsfcu", name: "Disulfiram + copper — algaecide axis", grade: "B−", ev: 3.5, gain: 12, safety: 2.0,
+    meta: "ferroptosis + ALDH1+ stem-cell kill · bladder mouse model p<0.0001" },
+  { id: "iron", name: "Iron + GPX4 blockade — moss-killer axis", grade: "C+", ev: 2.5, gain: 10, safety: 2.5,
+    meta: "Fenton ferroptosis · intravesical platform proven in nanomedicine form" },
+  { id: "ph", name: "pH-engineered vehicle — baking-soda axis", grade: "C+", ev: 2.5, gain: 6, safety: 1.5,
+    meta: "un-traps weak-base chemo · urinary pH tracks immunotherapy response" },
+  { id: "coumarin", name: "Coumarin nanoformulation — grass-toxin axis", grade: "C+", ev: 2.5, gain: 5, safety: 2.0,
+    meta: "CSC stemness suppression · orthotopic + PDX models" },
+];
+const WK_ENABLED = new Set(["base", "dsfcu"]);
+
+function renderWkLayers() {
+  const el = document.getElementById("wk-layers");
+  el.innerHTML = WK_LAYERS.map(l => {
+    const on = WK_ENABLED.has(l.id);
+    return `<div class="layer-row ${on ? "on" : ""} ${l.locked ? "locked" : ""}" data-id="${l.id}">
+      <div class="layer-chip"></div>
+      <div class="nm">${esc(l.name)}<div class="meta">${esc(l.meta)}</div></div>
+      <div class="meta">+${l.gain} control · ${l.grade}</div>
+    </div>`;
+  }).join("");
+  el.querySelectorAll(".layer-row").forEach(row => row.addEventListener("click", () => {
+    const id = row.dataset.id;
+    const layer = WK_LAYERS.find(l => l.id === id);
+    if (layer.locked) return;
+    if (WK_ENABLED.has(id)) WK_ENABLED.delete(id); else WK_ENABLED.add(id);
+    renderWk();
+  }));
+}
+
+function renderWk() {
+  renderWkLayers();
+  const active = WK_LAYERS.filter(l => WK_ENABLED.has(l.id));
+  // diminishing returns on control gains
+  let control = 0;
+  active.forEach((l, i) => { control += i === 0 ? l.gain : l.gain * Math.pow(0.85, i - 1); });
+  control = Math.min(95, control);
+  const safety = active.reduce((s, l) => s + l.safety, 0);
+  const ev = active.reduce((s, l) => s + l.ev, 0) / active.length;
+  const idx = 0.5 * (control / 100) + 0.3 * (ev / 5) + 0.2 * ((10 - safety) / 10);
+
+  document.getElementById("wk-control").textContent = control.toFixed(0) + "%";
+  document.getElementById("wk-control").style.color = control >= 70 ? "#3fb950" : control >= 55 ? "#d29922" : "#f85149";
+  document.getElementById("wk-evidence").textContent = ev.toFixed(1);
+  document.getElementById("wk-evidence").style.color = healthColor(ev * 20);
+  document.getElementById("wk-safety").textContent = safety.toFixed(1);
+  document.getElementById("wk-safety").style.color = safety <= 5 ? "#3fb950" : safety <= 7 ? "#d29922" : "#f85149";
+  document.getElementById("wk-index").textContent = (idx * 100).toFixed(0);
+  document.getElementById("wk-index").style.color = healthColor(idx * 100);
+
+  // battlefield svg
+  const show = (id, on) => {
+    document.getElementById("beam-" + id).setAttribute("opacity", on ? "1" : "0");
+    document.getElementById("lbl-" + id).setAttribute("opacity", on ? "1" : "0");
+  };
+  show("dsfcu", WK_ENABLED.has("dsfcu"));
+  show("iron", WK_ENABLED.has("iron"));
+  show("ph", WK_ENABLED.has("ph"));
+  show("coumarin", WK_ENABLED.has("coumarin"));
+  document.getElementById("wk-sparks").setAttribute("opacity", (WK_ENABLED.has("dsfcu") || WK_ENABLED.has("iron")) ? "1" : "0");
+  document.getElementById("wk-ph-meter").setAttribute("opacity", WK_ENABLED.has("ph") ? "1" : "0");
+  if (WK_ENABLED.has("ph")) {
+    const y = 266 - (control - 55) * 0.5; // rises as stack neutralizes acid
+    const fill = document.getElementById("wk-ph-fill");
+    fill.setAttribute("y", clamp(240, 266, y).toFixed(0));
+  }
+  document.getElementById("wk-immune").setAttribute("opacity", (0.25 + (WK_ENABLED.has("ph") ? 0.35 : 0) + (WK_ENABLED.has("base") ? 0.15 : 0)).toFixed(2));
+
+  const scale = Math.sqrt(control / 58); // tumor shrinks as control rises
+  const setR = (id, base) => document.getElementById(id).setAttribute("r", Math.max(6, base * scale).toFixed(1));
+  setR("wk-t1", 30); setR("wk-t2", 17); setR("wk-t3", 14);
+  const col = control >= 75 ? "#3fb950" : control >= 65 ? "#d29922" : "#f85149";
+  document.getElementById("wk-t1").setAttribute("fill", col);
+  document.getElementById("wk-bladder").setAttribute("fill", col);
+
+  document.getElementById("chart-ledger").innerHTML = ledgerChart();
+}
+
+function ledgerChart() {
+  const rows = [
+    { name: "H1 Disulfiram + copper", mech: 4.5, evid: 3.5, feas: 4.5, safe: 3.5, color: "#3fb950" },
+    { name: "H2 Iron + GPX4 (intravesical)", mech: 4.5, evid: 2.5, feas: 3.5, safe: 3.0, color: "#58a6ff" },
+    { name: "H3 Bicarbonate pH vehicle", mech: 3.5, evid: 2.5, feas: 5.0, safe: 3.5, color: "#bc8cff" },
+    { name: "H4 Coumarin UM-15", mech: 3.5, evid: 2.5, feas: 2.5, safe: 3.0, color: "#f0883e" },
+    { name: "H5 Salicylate (prevention)", mech: 3.0, evid: 2.0, feas: 4.5, safe: 4.0, color: "#8a8a8a" },
+  ];
+  const w = 1100, rowH = 78, padL = 240, padR = 60, top = 30, h = top + rows.length * rowH + 14;
+  const plotW = w - padL - padR;
+  let s = svgEl(w, h);
+  s += `<text x="${padL}" y="16" fill="#9a9a9a" font-size="11">Mechanism fit (solid) · bladder evidence (dark) · feasibility (light) · safety (outline), score 0–5</text>`;
+  rows.forEach((r, i) => {
+    const y = top + i * rowH;
+    s += `<text x="${padL - 12}" y="${y + 26}" text-anchor="end" fill="#c8c8c8" font-size="12">${esc(r.name)}</text>`;
+    const bars = [
+      { v: r.mech, fill: r.color },
+      { v: r.evid, fill: r.color, dark: true },
+      { v: r.feas, fill: r.color, light: true },
+      { v: r.safe, fill: "#2a2a2a", stroke: r.color },
+    ];
+    bars.forEach((b, j) => {
+      const by = y + 4 + j * 13;
+      const wpx = plotW * b.v / 5;
+      const fill = b.dark ? shade(b.fill) : b.light ? tint(b.fill) : b.fill;
+      s += `<rect x="${padL}" y="${by}" width="${wpx.toFixed(1)}" height="10" fill="${fill}" ${b.stroke ? `stroke="${b.stroke}" stroke-width="1.2"` : ""} rx="3"/>`;
+      s += `<text x="${padL + wpx + 6}" y="${by + 9}" fill="#8a8a8a" font-size="9.5">${b.v.toFixed(1)}</text>`;
+    });
+  });
+  return s + "</svg>";
+}
+function shade(hex) { return hex === "#8a8a8a" ? "#5c5c5c" : "#2f6e3f"; }
+function tint(hex) { return hex === "#8a8a8a" ? "#a8a8a8" : "#7ab8e8"; }
+
 buildArmChips();
 bind();
 initHolistic();
@@ -839,6 +1121,11 @@ render();
 renderRobust();
 renderNmibc();
 renderNmibcVerdict();
+const initialScn = location.hash.replace("#", "");
+if (["nmibc", "weedkiller"].includes(initialScn)) {
+  const t = document.querySelector(`.tab[data-scn="${initialScn}"]`);
+  if (t) t.click();
+}
 </script>
 </body>
 </html>
