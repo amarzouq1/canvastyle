@@ -2,6 +2,10 @@
 
 <p><em>Which partner drug gets the best results with ivermectin? Evidence ranking and week-by-week hypothesis as of Oct 2026. Reproduced from the Cursor canvases in <code>canvases/</code>.</em></p>
 
+<p align="center">
+  <img src="images/canvas-full.png" alt="Ivermectin combination research — full canvas: evidence ranking and week-by-week hypothesis" width="100%">
+</p>
+
 > [!NOTE]
 > **Bottom line** — The best-evidenced partner is **immune checkpoint inhibitors (anti-PD-1)**, the only pairing with complete regressions in animals and an active human trial. **Ivermectin + metformin** is the best oral/practical pairing. **Ivermectin + HCQ** is mechanistically sound but mid-tier. **Ivermectin + sulforaphane** should be avoided.
 
