@@ -62,6 +62,14 @@
   .readout .v { font-size: 19px; font-weight: 700; }
   .readout .l { font-size: 11px; color: #a0a0a0; }
   .organ-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 10.5px; color: #9a9a9a; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 22% { transform: scale(1.14); } 38% { transform: scale(1); } 58% { transform: scale(1.09); } 72% { transform: scale(1); } }
+  #organ-heart { transform-box: fill-box; transform-origin: center; animation: heartbeat 1.4s ease-in-out infinite; }
+  @keyframes spinring { to { transform: rotate(360deg); } }
+  #tumor-ring { transform-box: fill-box; transform-origin: center; animation: spinring 10s linear infinite; }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .immune-cell { transform-box: fill-box; transform-origin: center; animation: floaty 5.5s ease-in-out infinite; }
+  @keyframes brainerve { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+  .nerve { animation: brainerve 3s ease-in-out infinite; }
 </style>
 </head>
 <body>
@@ -138,31 +146,100 @@
 
     <div class="holistic">
       <div class="bodybox">
-        <svg id="body-svg" viewBox="0 0 260 520" width="100%" xmlns="http://www.w3.org/2000/svg">
-          <!-- silhouette -->
-          <circle cx="130" cy="42" r="28" fill="#262626" stroke="#3a3a3a"/>
-          <rect x="122" y="66" width="16" height="16" fill="#262626" stroke="#3a3a3a"/>
-          <path d="M95,80 C80,86 72,102 70,128 L76,222 C78,250 92,264 130,264 C168,264 182,250 184,222 L190,128 C188,102 180,86 165,80 Z" fill="#262626" stroke="#3a3a3a"/>
-          <path d="M72,100 C56,112 48,150 44,196 C42,216 56,224 63,212 L78,152 Z" fill="#262626" stroke="#3a3a3a"/>
-          <path d="M188,100 C204,112 212,150 216,196 C218,216 204,224 197,212 L182,152 Z" fill="#262626" stroke="#3a3a3a"/>
-          <rect x="97" y="262" width="28" height="190" rx="14" fill="#262626" stroke="#3a3a3a"/>
-          <rect x="135" y="262" width="28" height="190" rx="14" fill="#262626" stroke="#3a3a3a"/>
-          <!-- organs -->
-          <circle id="organ-brain" cx="130" cy="38" r="14" fill="#3fb950"/>
-          <path id="organ-heart" d="M114,112 c-6,-8 -18,-3 -18,7 c0,9 12,15 18,21 c6,-6 18,-12 18,-21 c0,-10 -12,-15 -18,-7 z" fill="#3fb950"/>
-          <ellipse id="organ-liver" cx="146" cy="152" rx="22" ry="13" fill="#3fb950"/>
-          <ellipse id="organ-gut" cx="118" cy="182" rx="20" ry="15" fill="#3fb950"/>
-          <ellipse id="organ-kidneyL" cx="102" cy="152" rx="9" ry="15" fill="#3fb950"/>
-          <ellipse id="organ-kidneyR" cx="158" cy="152" rx="9" ry="15" fill="#3fb950"/>
-          <ellipse id="organ-bladder" cx="130" cy="228" rx="21" ry="16" fill="#3fb950"/>
-          <ellipse id="tumor-mass" cx="130" cy="228" rx="10" ry="8" fill="#f85149"/>
-          <g id="immune-dots" opacity="0.25">
-            <circle cx="95" cy="115" r="4" fill="#58a6ff"/><circle cx="165" cy="115" r="4" fill="#58a6ff"/>
-            <circle cx="88" cy="185" r="4" fill="#58a6ff"/><circle cx="172" cy="185" r="4" fill="#58a6ff"/>
-            <circle cx="130" cy="150" r="4" fill="#58a6ff"/><circle cx="112" cy="205" r="4" fill="#58a6ff"/>
-            <circle cx="148" cy="205" r="4" fill="#58a6ff"/><circle cx="130" cy="115" r="4" fill="#58a6ff"/>
+        <svg id="body-svg" viewBox="0 0 300 560" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="torso-clip">
+              <path d="M110,126 C110,112 124,104 150,104 C176,104 190,112 190,126 C195,152 198,180 196,208 C194,236 190,256 194,284 C196,300 194,314 186,326 C170,334 130,334 114,326 C106,314 104,300 106,284 C110,256 106,236 104,208 C102,180 105,152 110,126 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- ===== body silhouette (outlined stroke technique) ===== -->
+          <!-- arms: outline layer -->
+          <path d="M113,130 C101,140 93,162 88,190 C84,214 81,240 80,262" fill="none" stroke="#414141" stroke-width="26" stroke-linecap="round"/>
+          <path d="M187,130 C199,140 207,162 212,190 C216,214 219,240 220,262" fill="none" stroke="#414141" stroke-width="26" stroke-linecap="round"/>
+          <!-- legs: outline layer -->
+          <path d="M133,322 C129,370 125,430 124,498" fill="none" stroke="#414141" stroke-width="34" stroke-linecap="round"/>
+          <path d="M167,322 C171,370 175,430 176,498" fill="none" stroke="#414141" stroke-width="34" stroke-linecap="round"/>
+          <!-- arms + legs: fill layer -->
+          <path d="M113,130 C101,140 93,162 88,190 C84,214 81,240 80,262" fill="none" stroke="#272727" stroke-width="23" stroke-linecap="round"/>
+          <path d="M187,130 C199,140 207,162 212,190 C216,214 219,240 220,262" fill="none" stroke="#272727" stroke-width="23" stroke-linecap="round"/>
+          <path d="M133,322 C129,370 125,430 124,498" fill="none" stroke="#272727" stroke-width="31" stroke-linecap="round"/>
+          <path d="M167,322 C171,370 175,430 176,498" fill="none" stroke="#272727" stroke-width="31" stroke-linecap="round"/>
+          <!-- feet -->
+          <path d="M108,502 C108,496 140,496 140,502 C140,511 108,511 108,502 Z" fill="#272727" stroke="#414141" stroke-width="1.5"/>
+          <path d="M160,502 C160,496 192,496 192,502 C192,511 160,511 160,502 Z" fill="#272727" stroke="#414141" stroke-width="1.5"/>
+          <!-- neck -->
+          <path d="M136,82 L136,108 C142,113 158,113 164,108 L164,82 Z" fill="#272727" stroke="#414141" stroke-width="1.5"/>
+          <!-- torso -->
+          <path d="M110,126 C110,112 124,104 150,104 C176,104 190,112 190,126 C195,152 198,180 196,208 C194,236 190,256 194,284 C196,300 194,314 186,326 C170,334 130,334 114,326 C106,314 104,300 106,284 C110,256 106,236 104,208 C102,180 105,152 110,126 Z" fill="#272727" stroke="#414141" stroke-width="1.5"/>
+          <!-- head -->
+          <ellipse cx="150" cy="56" rx="27" ry="33" fill="#272727" stroke="#414141" stroke-width="1.5"/>
+
+          <!-- ===== brain ===== -->
+          <g>
+            <ellipse id="organ-brain" cx="150" cy="52" rx="19" ry="23" fill="#3fb950"/>
+            <g class="nerve" stroke="#1c6b2e" stroke-width="1.6" fill="none" opacity="0.75">
+              <path d="M138,42 C142,46 140,52 144,56"/>
+              <path d="M150,38 C152,44 149,50 152,58"/>
+              <path d="M161,42 C158,48 161,54 157,60"/>
+            </g>
+            <title>Brain — nervous-system health (ivermectin neuro axis)</title>
           </g>
-          <text x="130" y="478" text-anchor="middle" fill="#7a7a7a" font-size="10.5">Median virtual patient · organ colors: green ≥ 85 · amber 70–85 · red &lt; 70</text>
+
+          <!-- ===== liver ===== -->
+          <g>
+            <path id="organ-liver" d="M148,182 C158,175 178,175 186,183 C192,190 189,202 178,206 C165,211 151,207 147,198 Z" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <title>Liver — hepatic function</title>
+          </g>
+
+          <!-- ===== stomach (gut) ===== -->
+          <g>
+            <path id="organ-gut" d="M127,186 C118,191 115,204 122,212 C129,220 143,221 148,213 C151,208 148,201 142,202 C135,203 133,196 136,189 Z" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <title>Stomach — GI tolerance</title>
+          </g>
+
+          <!-- ===== intestines (gut) ===== -->
+          <g>
+            <path id="organ-gut2" d="M128,238 C150,230 174,235 173,250 C172,265 133,262 133,277 C133,289 160,291 172,282" fill="none" stroke="#3fb950" stroke-width="9" stroke-linecap="round"/>
+            <title>Intestines — GI tolerance</title>
+          </g>
+
+          <!-- ===== kidneys ===== -->
+          <g>
+            <path id="organ-kidneyL" d="M112,192 C101,192 95,202 95,213 C95,225 103,233 111,229 C117,226 119,218 117,211 C115,203 118,192 112,192 Z" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <path id="organ-kidneyR" d="M188,192 C199,192 205,202 205,213 C205,225 197,233 189,229 C183,226 181,218 183,211 C185,203 182,192 188,192 Z" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <title>Kidneys — eGFR / renal axis (cisplatin, metformin)</title>
+          </g>
+
+          <!-- ===== heart ===== -->
+          <g>
+            <path id="organ-heart" d="M141,158 C128,149 124,136 132,129 C138,124 143,128 144,133 C146,127 152,123 158,128 C166,135 162,149 148,160 Z" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <title>Heart — cardiac / QT axis (HCQ, cisplatin)</title>
+          </g>
+
+          <!-- ===== bladder + tumor ===== -->
+          <g>
+            <ellipse id="organ-bladder" cx="150" cy="298" rx="23" ry="17" fill="#3fb950" stroke="#414141" stroke-width="1.2"/>
+            <circle id="tumor-ring" cx="157" cy="296" r="18" fill="none" stroke="#f85149" stroke-width="1.8" stroke-dasharray="6 6"/>
+            <ellipse id="tumor-mass" cx="157" cy="296" rx="11" ry="9" fill="#f85149" stroke="#7a1f1a" stroke-width="1"/>
+            <title>Bladder — tumor burden (live: shrinks and grows with the simulation)</title>
+          </g>
+
+          <!-- ===== immune cells ===== -->
+          <g id="immune-dots" opacity="0.25">
+            <circle class="immune-cell" cx="118" cy="150" r="4.5" fill="#58a6ff" style="animation-delay:0s"/>
+            <circle class="immune-cell" cx="182" cy="150" r="4.5" fill="#58a6ff" style="animation-delay:.7s"/>
+            <circle class="immune-cell" cx="112" cy="185" r="4.5" fill="#58a6ff" style="animation-delay:1.4s"/>
+            <circle class="immune-cell" cx="188" cy="185" r="4.5" fill="#58a6ff" style="animation-delay:2.1s"/>
+            <circle class="immune-cell" cx="150" cy="118" r="4.5" fill="#58a6ff" style="animation-delay:2.8s"/>
+            <circle class="immune-cell" cx="124" cy="222" r="4.5" fill="#58a6ff" style="animation-delay:3.5s"/>
+            <circle class="immune-cell" cx="176" cy="222" r="4.5" fill="#58a6ff" style="animation-delay:4.2s"/>
+            <circle class="immune-cell" cx="150" cy="252" r="4.5" fill="#58a6ff" style="animation-delay:4.9s"/>
+            <circle class="immune-cell" cx="120" cy="266" r="4.5" fill="#58a6ff" style="animation-delay:1.9s"/>
+            <circle class="immune-cell" cx="180" cy="266" r="4.5" fill="#58a6ff" style="animation-delay:3.1s"/>
+          </g>
+
+          <text x="150" y="545" text-anchor="middle" fill="#7a7a7a" font-size="10.5">Median virtual patient · organs: green ≥ 85 · amber 70–85 · red &lt; 70 · ring = tumor margin</text>
         </svg>
         <div class="organ-legend">
           <span><span class="dot" style="background:#3fb950"></span>Healthy</span>
@@ -716,14 +793,17 @@ function renderHolistic(results) {
   set("organ-heart", h.org.cardiac[week]);
   set("organ-liver", h.org.hepatic[week]);
   set("organ-gut", h.org.gi[week]);
+  document.getElementById("organ-gut2").setAttribute("stroke", healthColor(h.org.gi[week]));
   set("organ-kidneyL", h.org.renal[week]);
   set("organ-kidneyR", h.org.renal[week]);
   const bl = document.getElementById("organ-bladder");
   bl.setAttribute("fill", burdenColor(b));
   const tumor = document.getElementById("tumor-mass");
-  const rx = clamp(3, 24, 10 * Math.sqrt(b / 100));
+  const rx = clamp(3.5, 22, 11 * Math.sqrt(b / 100));
   tumor.setAttribute("rx", rx); tumor.setAttribute("ry", rx * 0.8);
   tumor.setAttribute("fill", burdenColor(b));
+  document.getElementById("tumor-ring").setAttribute("r", (rx + 8).toFixed(1));
+  document.getElementById("tumor-ring").setAttribute("stroke", burdenColor(b));
   document.getElementById("immune-dots").setAttribute("opacity", (0.12 + h.immune[week] / 130).toFixed(2));
 
   document.getElementById("chart-holistic").innerHTML = holisticChart(h, week);
