@@ -111,6 +111,7 @@
     <div class="tab active" data-scn="systemic">Systemic disease (MIBC / metastatic)</div>
     <div class="tab" data-scn="nmibc">Non-muscle-invasive (NMIBC)</div>
     <div class="tab" data-scn="weedkiller">Weed-Killer Hypothesis</div>
+    <div class="tab" data-scn="stage4">Stage 4 Plan</div>
   </div>
 
   <!-- ============ SYSTEMIC ============ -->
@@ -488,6 +489,74 @@
     These are research hypotheses for qualified laboratories and clinical trials only. <b>Never ingest herbicide, algaecide, lawn-care, or pond products</b> — commercial formulations contain tissue-damaging adjuvants, and compounds like paraquat are lethal. Pharmaceutical-grade materials, institutional oversight, and oncology supervision are non-negotiable. This tab is not medical advice.</div>
   </section>
 
+  <!-- ============ STAGE 4 PLAN ============ -->
+  <section id="scn-stage4" style="display:none">
+    <h2>Stage 4 plan — the genuine long game</h2>
+    <p class="sub">Metastatic (stage 4) urothelial carcinoma. This plan is built under one rule: <b>no study is used because it is popular, paid for, or inspiring — only because its design can survive scrutiny.</b> Every item carries its evidence level, and the filter below lets you delete everything weaker than you are willing to believe.</p>
+
+    <div class="box b-info"><div class="t">The honest "breakthrough" — convergence, not a miracle molecule</div>
+    Stage 4 cancers <i>have</i> been cured in medicine — testicular cancer, some leukemias, melanoma on immunotherapy, oligometastatic disease. In every case the cure came from attacking <b>four fronts at once</b>: systemic disease (best drugs), sanctuary sites (where cells hide), the terrain (the body's capacity to fight and endure), and time (evolution of resistance). Nothing sold online does all four. This plan does — and it starts from the treatments with randomized survival data, because <b>everything else is an addition to them, never a replacement.</b></div>
+
+    <div class="stats">
+      <div class="stat green"><div class="v">33.8 mo</div><div class="l">Median OS: enfortumab vedotin + pembrolizumab vs 15.9 mo chemo (EV-302, n=886, randomized)</div></div>
+      <div class="stat blue"><div class="v">30.4%</div><div class="l">Confirmed complete responses on EV+P; median response duration 23.3 months</div></div>
+      <div class="stat"><div class="v">41 vs 28 mo</div><div class="l">Oligometastatic SABR vs standard care (SABR-COMET, randomized)</div></div>
+      <div class="stat amber"><div class="v">0</div><div class="l">Paid "cure" protocols anywhere with randomized survival evidence</div></div>
+    </div>
+
+    <h2>The plan, filtered by evidence quality</h2>
+    <p class="sub">Move the filter to enforce how strict you want to be. At level 4, only interventions with randomized <i>survival</i> data remain — the honest core. Items hide as you raise the bar; the counter shows what survives.</p>
+
+    <div class="controls" style="grid-template-columns: 1fr 1fr;">
+      <div class="ctrl">
+        <label>Minimum evidence level <span class="val" id="v-s4lvl">Level 2 — human data</span></label>
+        <input type="range" id="s-s4lvl" min="1" max="4" step="1" value="2">
+      </div>
+      <div class="ctrl">
+        <label>Items surviving your filter <span class="val" id="v-s4count">—</span></label>
+        <div class="cap" style="margin-top:8px">Level 4 = randomized survival endpoint · Level 3 = randomized or guideline standard · Level 2 = human observational · Level 1 = preclinical</div>
+      </div>
+    </div>
+
+    <div id="s4-items"></div>
+
+    <h2>The 24-week battle rhythm</h2>
+    <div class="card">
+      <div class="hdr">Treatment + terrain + measurement, on one clock</div>
+      <div id="s4-rhythm"></div>
+      <p class="cap" style="margin-top:10px">Illustrative schedule skeleton — always run through the treating oncology team. Scans typically every 6–9 weeks on systemic therapy; exercise and nutrition start in week 1, not "later".</p>
+    </div>
+
+    <h2>The plan in six sentences</h2>
+    <div class="card">
+      <div class="hdr">Simple and straight</div>
+      <p style="margin-bottom:8px"><b>1.</b> Get on the proven backbone — enfortumab vedotin + pembrolizumab (or gemcitabine/carboplatin → avelumab if EV is unsuitable): it is the only thing on this page that doubles survival in a randomized trial.</p>
+      <p style="margin-bottom:8px"><b>2.</b> Profile the tumor (NGS, FGFR3, PD-L1, MSI) and use every actionable switch — erdafitinib for FGFR3, trials for everything rarer.</p>
+      <p style="margin-bottom:8px"><b>3.</b> If metastases are few — ask about stereotactic radiotherapy or surgery of those sites; randomized data exists and most patients never hear about it.</p>
+      <p style="margin-bottom:8px"><b>4.</b> Engineer the terrain from week 1: lift weights, eat protein, fix vitamin D/iron deficits, protect the microbiome, sleep, prevent blood clots. This is not "wellness" — it determines whether you can stay on treatment.</p>
+      <p style="margin-bottom:8px"><b>5.</b> Measure evolution: ctDNA trends and regular scans; adapt the strategy at every progression instead of accumulating drugs.</p>
+      <p style="margin-bottom:0"><b>6.</b> Delete everything sold with testimonials. If someone profits from a "cure" claim, the claim is the product.</p>
+    </div>
+
+    <h2>The reject list — market-paid, not medicine</h2>
+    <table>
+      <thead><tr><th>Sold as</th><th>Why it fails the filter</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#f85149"></span>GcMAF / "immune activation" injectables</td><td>Fraudulent origin (misappropriated research), FDA warning letters, no valid trials.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>MMS / chlorine dioxide / "miracle mineral"</td><td>Industrial bleach. Documented harm, zero anticancer evidence.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Laetrile / amygdalin / "vitamin B17"</td><td>Decades of negative evidence; cyanide-release toxicity; classic case of testimonial-driven commerce.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>IV vitamin C as a "cure"</td><td>May help wellbeing in some studies; no randomized survival benefit. Deficiency correction: yes. Cure claims: no.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Black salve / escharotics</td><td>Tissue destruction sold as "drawing out cancer"; disfiguring injuries documented.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Cannabis "cures cancer"</td><td>Good for symptoms (RCT-supported for nausea/pain); tumor-cure claims are preclinical only.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Any protocol sold with before/after testimonials</td><td>Testimonials are the marketing equivalent of noise: no control group, no blinding, survivorship bias by design.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Ivermectin or any repurposed drug as solo "cure"</td><td>Our entire repository documents why — promising combination research exists; zero human regression data. Partner research, not self-treatment.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box b-danger"><div class="t">Please read</div>
+    This is a research and education artifact, not a treatment plan for any individual. Stage 4 cancer management belongs with a urologic oncology team at a center that runs clinical trials. Bring this page to them as a discussion document — the backbone data, the oligometastatic question, and the terrain checklist are exactly the conversations good oncologists want to have.</div>
+  </section>
+
   <h2>Methodology &amp; anchors</h2>
   <div class="card">
     <div class="hdr">How the virtual patients work</div>
@@ -836,6 +905,7 @@ function bind() {
     });
     if (tab.dataset.scn === "nmibc") renderNmibc();
     if (tab.dataset.scn === "weedkiller") renderWk();
+    if (tab.dataset.scn === "stage4") renderS4();
     history.replaceState(null, "", "#" + tab.dataset.scn);
   }));
 }
@@ -1114,6 +1184,99 @@ function ledgerChart() {
 function shade(hex) { return hex === "#8a8a8a" ? "#5c5c5c" : "#2f6e3f"; }
 function tint(hex) { return hex === "#8a8a8a" ? "#a8a8a8" : "#7ab8e8"; }
 
+/* ---------- stage 4 plan: evidence-filtered items ---------- */
+const S4_ITEMS = [
+  { pillar: "A · The backbone — non-negotiable", name: "Enfortumab vedotin + pembrolizumab, first line", level: 4,
+    effect: "Median overall survival 33.8 vs 15.9 months (HR 0.51, EV-302, n=886, randomized). 30.4% confirmed complete responses; median response duration 23.3 months.",
+    note: "Industry-sponsored — but randomized, blinded independent review, benefit replicated across cisplatin-eligibility and liver-metastasis subgroups. This is what real evidence looks like; nothing sold online beats it." },
+  { pillar: "A · The backbone — non-negotiable", name: "Gem/carboplatin → avelumab maintenance (if EV unsuitable)", level: 4,
+    effect: "JAVELIN Bladder 100: median OS 21.4 vs 14.3 months with maintenance avelumab after chemo response.",
+    note: "The fallback backbone when EV is contraindicated (neuropathy, skin toxicity). Same principle: immunotherapy has randomized survival data; supplements do not." },
+  { pillar: "A · The backbone — non-negotiable", name: "Erdafitinib for FGFR3-altered tumors", level: 4,
+    effect: "THOR trial: median OS 12.1 vs 7.8 months vs chemo in FGFR3-mutated disease after platinum.",
+    note: "Only works if you actually tested the tumor. Molecular profiling is not optional — it is how you unlock this tier." },
+  { pillar: "A · The backbone — non-negotiable", name: "Full molecular profiling at diagnosis and progression (NGS, FGFR3, PD-L1, MSI)", level: 3,
+    effect: "Guideline standard; determines eligibility for erdafitinib, HER2/NTRK rare options, MSI-H immunotherapy, and clinical trials.",
+    note: "The cheapest highest-yield step in the entire plan. Ask for the report in writing." },
+  { pillar: "A · The backbone — non-negotiable", name: "Later-line options (sacituzumab govitecan, tisotumab vedotin)", level: 3,
+    effect: "Randomized response-level data; tisotumab vedotin has FDA approval in pretreated disease.",
+    note: "Honest flag: the sacituzumab phase 3 (TROPiCS-04) missed its primary endpoint in the full population — useful for some, not a new backbone." },
+  { pillar: "B · Sanctuary attack — the underused lever", name: "Stereotactic radiotherapy (SABR) to oligometastatic sites", level: 3,
+    effect: "SABR-COMET (randomized): median OS 41 vs 28 months in oligometastatic patients; standard arm included cancer types like urothelial.",
+    note: "Most stage-4 patients are never offered this conversation. If metastases are few (typically ≤3–5 sites), ask a radiation oncologist. Randomized survival benefit — rare for any 'add-on'." },
+  { pillar: "B · Sanctuary attack — the underused lever", name: "Metastasectomy / local surgery in select patients", level: 2,
+    effect: "Long-term survivors exist in surgical series (renal, lung, nodal metastases from urothelial cancer).",
+    note: "Selection bias is enormous here (fitter patients, slower biology) — the honest read is 'ask the surgeon, expect no guarantees'." },
+  { pillar: "B · Sanctuary attack — the underused lever", name: "Local control of the primary tumor when symptomatic", level: 3,
+    effect: "Guideline-standard symptom and complication control; may reduce seeding burden (hypothesis).",
+    note: "Palliation is proven; the 'debulking helps survival' idea remains a hypothesis — do it for quality of life and bleeding control." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Resistance exercise 2–3×/week + protein 1.2–1.6 g/kg/day", level: 3,
+    effect: "RCTs in cancer patients: less fatigue, better physical function, higher chemotherapy completion rates; survival signals in colon cancer trials (INTERVAL, ColonChemo) are supportive but observational for survival itself.",
+    note: "The strongest free intervention in medicine. Start week 1 with a cancer-experienced physiotherapist — not 'when you feel better'." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Muscle preservation / anti-cachexia (dietitian + training)", level: 3,
+    effect: "Sarcopenia independently predicts chemotherapy toxicity and survival across cancers; guideline-level supportive care.",
+    note: "Weight loss in stage 4 is a medical emergency, not a cosmetic issue. Ask for an oncology dietitian at diagnosis." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Correct vitamin D and iron/B12 deficits (test, don't megadose)", level: 2,
+    effect: "Bladder-cancer cohorts link higher 25(OH)D with better outcomes; deficiency correction improves fatigue and bone health on therapy.",
+    note: "Repletion of a proven deficiency is medicine; 50,000-IU internet protocols are not. Test first." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Microbiome care: high-fiber/fermented foods, avoid unnecessary antibiotics", level: 2,
+    effect: "Antibiotic exposure linked to worse checkpoint-inhibitor outcomes in meta-analyses; dietary fiber associated with better ICI responses; small FMT trials rescued ICI in melanoma.",
+    note: "Observational and early-phase — but zero cost, zero downside, and bladder cancer patients on ICI have every reason to protect the axis." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "VTE prevention as prescribed (bladder cancer is high-clot-risk)", level: 4,
+    effect: "Venous thromboembolism is a leading cause of death in advanced cancer; anticoagulation in high-risk patients is guideline-standard.",
+    note: "Evidence level 4 for the indication — clot prevention. Any survival-boosting 'anticoagulant therapy' claim beyond the indication is unproven." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Sleep 7–9 hours + circadian regularity", level: 2,
+    effect: "Shift-work patterns associate with worse cancer outcomes; sleep disruption predicts immune dysfunction; insomnia treatment improves quality of life (RCTs).",
+    note: "Cheap, real for wellbeing and immune function; direct survival effect unproven." },
+  { pillar: "C · Terrain engineering — decide whether you can stay on treatment", name: "Psycho-oncology support / mindfulness", level: 2,
+    effect: "RCT-supported benefits for anxiety, depression, sleep, and quality of life in cancer patients.",
+    note: "Survival effect unproven and oversold by some programs. Use it because suffering matters — that is reason enough." },
+  { pillar: "D · Evolution-aware monitoring — the modern lever", name: "ctDNA (circulating tumor DNA) trend monitoring", level: 2,
+    effect: "IMvigor010 biomarker analysis: adjuvant immunotherapy benefit concentrated in ctDNA-positive patients; falling ctDNA associates with response across studies.",
+    note: "A genuinely new instrument — but not yet a proven decision tool everywhere. Ask for it where available; treat trends as guidance, not gospel." },
+  { pillar: "D · Evolution-aware monitoring — the modern lever", name: "Re-biopsy / re-profile at every progression", level: 3,
+    effect: "Tumors evolve: FGFR3, NTRK, MSI, HER2 changes can appear or disappear; trial eligibility changes with them.",
+    note: "Standard practice in trial centers, often skipped elsewhere. Push for it." },
+  { pillar: "D · Evolution-aware monitoring — the modern lever", name: "Adaptive scheduling / clinical-trial participation at every line", level: 1,
+    effect: "Evolutionary therapy principles (treat → assess → adapt rather than maximum dose forever) are mathematical and preclinical; bladder's urine/ctDNA measurability makes it unusually testable.",
+    note: "Preclinical and conceptual — do this only inside trials or explicit oncology protocols. Trials are also where tomorrow's backbone is found." },
+];
+const S4_LVL_LABEL = { 4: "Level 4 · randomized survival", 3: "Level 3 · randomized / standard", 2: "Level 2 · human observational", 1: "Level 1 · preclinical" };
+const S4_LVL_STYLE = { 4: "background:#1f3a26;color:#56d364", 3: "background:#1c2c44;color:#79c0ff", 2: "background:#3a3016;color:#e3b341", 1: "background:#2e2e2e;color:#9a9a9a" };
+
+function renderS4() {
+  const minLvl = +(document.getElementById("s-s4lvl").value || 2);
+  document.getElementById("v-s4lvl").textContent = S4_LVL_LABEL[minLvl];
+  const visible = S4_ITEMS.filter(i => i.level >= minLvl);
+  document.getElementById("v-s4count").textContent = visible.length + " of " + S4_ITEMS.length;
+
+  const pillars = [...new Set(visible.map(i => i.pillar))];
+  document.getElementById("s4-items").innerHTML = pillars.map(p => {
+    const items = visible.filter(i => i.pillar === p);
+    return `<h3 style="margin:22px 0 8px">${esc(p)}</h3><div class="cards">` + items.map(i => `
+      <div class="wk-card">
+        <div class="title">${esc(i.name)}</div>
+        <div><span class="grade" style="${S4_LVL_STYLE[i.level]}">${esc(S4_LVL_LABEL[i.level])}</span></div>
+        <div class="line"><b>Effect:</b> ${esc(i.effect)}</div>
+        <div class="line"><b>Skeptic's read:</b> ${esc(i.note)}</div>
+      </div>`).join("") + `</div>`;
+  }).join("") || `<div class="box b-warn"><div class="t">Nothing survives this filter</div>At strictest settings only the backbone remains — which is the honest truth of the field.</div>`;
+
+  document.getElementById("s4-rhythm").innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      ${[
+        ["W1–2 · Prepare", "#79c0ff", "Molecular profiling + baseline scans · dietitian + exercise plan · vitamin D/iron labs · VTE risk assessment · clinical-trial search"],
+        ["W3–12 · Fight", "#3fb950", "EV + pembrolizumab q3w (or fallback backbone) · resistance training 2–3×/wk · protein target daily · sleep protocol · antibiotic stewardship"],
+        ["W6 & W12 · Measure gates", "#d29922", "First response scan (RECIST) · ctDNA trend if available · toxicity and weight check · decision gate with oncologist"],
+        ["W13–24 · Adapt", "#bc8cff", "Continue/respond-adapt · oligometastatic SABR consult if few sites · re-profile at progression · trial matching at every line"],
+      ].map(([t, c, d]) => `
+        <div style="flex:1;min-width:230px;border:1px solid #333;border-top:3px solid ${c};border-radius:8px;padding:12px 14px">
+          <div style="font-weight:650;font-size:13px;color:${c}">${t}</div>
+          <div style="font-size:12px;color:#b8b8b8;margin-top:6px">${d}</div>
+        </div>`).join("")}
+    </div>`;
+}
+
 buildArmChips();
 bind();
 initHolistic();
@@ -1122,10 +1285,12 @@ renderRobust();
 renderNmibc();
 renderNmibcVerdict();
 const initialScn = location.hash.replace("#", "");
-if (["nmibc", "weedkiller"].includes(initialScn)) {
+if (["nmibc", "weedkiller", "stage4"].includes(initialScn)) {
   const t = document.querySelector(`.tab[data-scn="${initialScn}"]`);
   if (t) t.click();
 }
+document.getElementById("s-s4lvl").addEventListener("input", renderS4);
+renderS4();
 </script>
 </body>
 </html>
