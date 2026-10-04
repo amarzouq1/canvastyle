@@ -49,6 +49,19 @@
   .vcard .why { font-size: 12.5px; color: #b8b8b8; }
   .foot { text-align: center; color: #7a7a7a; font-style: italic; margin-top: 46px; font-size: 12px; }
   svg text { font-family: inherit; }
+  .holistic { display: grid; grid-template-columns: 330px 1fr; gap: 22px; margin: 18px 0; }
+  @media (max-width: 900px) { .holistic { grid-template-columns: 1fr; } }
+  .bodybox { border: 1px solid #333; border-radius: 12px; padding: 12px; background: #1d1d1d; }
+  .organbar { margin: 8px 0; }
+  .organbar .lbl { display: flex; justify-content: space-between; font-size: 12px; color: #b8b8b8; margin-bottom: 3px; }
+  .organbar .track { height: 9px; border-radius: 5px; background: #2a2a2a; overflow: hidden; }
+  .organbar .fill { height: 100%; border-radius: 5px; transition: width .25s, background .25s; }
+  select { width: 100%; background: #222; color: #ededed; border: 1px solid #3a3a3a; border-radius: 7px; padding: 7px 9px; font-size: 13px; }
+  .readouts { display: flex; gap: 12px; flex-wrap: wrap; margin: 4px 0 16px; }
+  .readout { flex: 1; min-width: 125px; border: 1px solid #333; border-radius: 8px; padding: 10px 13px; }
+  .readout .v { font-size: 19px; font-weight: 700; }
+  .readout .l { font-size: 11px; color: #a0a0a0; }
+  .organ-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 10.5px; color: #9a9a9a; }
 </style>
 </head>
 <body>
@@ -119,6 +132,72 @@
     <div class="chips" id="arm-chips"></div>
     <div id="chart-traj"></div>
     <p class="cap">Median burden index (baseline = 100), weeks 0–24 · live model output · untreated reference shown as dashed line.</p>
+
+    <h2>Holistic virtual patient — body, bladder &amp; improvement over time</h2>
+    <p class="sub">A whole-body view of the median virtual patient: pick a regimen and press play to watch the bladder tumor, organ health (kidneys, heart, liver, gut, nervous system), immune activation, and quality-of-life proxy evolve across 24 weeks. Driven by the same live simulation as the sliders above.</p>
+
+    <div class="holistic">
+      <div class="bodybox">
+        <svg id="body-svg" viewBox="0 0 260 520" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- silhouette -->
+          <circle cx="130" cy="42" r="28" fill="#262626" stroke="#3a3a3a"/>
+          <rect x="122" y="66" width="16" height="16" fill="#262626" stroke="#3a3a3a"/>
+          <path d="M95,80 C80,86 72,102 70,128 L76,222 C78,250 92,264 130,264 C168,264 182,250 184,222 L190,128 C188,102 180,86 165,80 Z" fill="#262626" stroke="#3a3a3a"/>
+          <path d="M72,100 C56,112 48,150 44,196 C42,216 56,224 63,212 L78,152 Z" fill="#262626" stroke="#3a3a3a"/>
+          <path d="M188,100 C204,112 212,150 216,196 C218,216 204,224 197,212 L182,152 Z" fill="#262626" stroke="#3a3a3a"/>
+          <rect x="97" y="262" width="28" height="190" rx="14" fill="#262626" stroke="#3a3a3a"/>
+          <rect x="135" y="262" width="28" height="190" rx="14" fill="#262626" stroke="#3a3a3a"/>
+          <!-- organs -->
+          <circle id="organ-brain" cx="130" cy="38" r="14" fill="#3fb950"/>
+          <path id="organ-heart" d="M114,112 c-6,-8 -18,-3 -18,7 c0,9 12,15 18,21 c6,-6 18,-12 18,-21 c0,-10 -12,-15 -18,-7 z" fill="#3fb950"/>
+          <ellipse id="organ-liver" cx="146" cy="152" rx="22" ry="13" fill="#3fb950"/>
+          <ellipse id="organ-gut" cx="118" cy="182" rx="20" ry="15" fill="#3fb950"/>
+          <ellipse id="organ-kidneyL" cx="102" cy="152" rx="9" ry="15" fill="#3fb950"/>
+          <ellipse id="organ-kidneyR" cx="158" cy="152" rx="9" ry="15" fill="#3fb950"/>
+          <ellipse id="organ-bladder" cx="130" cy="228" rx="21" ry="16" fill="#3fb950"/>
+          <ellipse id="tumor-mass" cx="130" cy="228" rx="10" ry="8" fill="#f85149"/>
+          <g id="immune-dots" opacity="0.25">
+            <circle cx="95" cy="115" r="4" fill="#58a6ff"/><circle cx="165" cy="115" r="4" fill="#58a6ff"/>
+            <circle cx="88" cy="185" r="4" fill="#58a6ff"/><circle cx="172" cy="185" r="4" fill="#58a6ff"/>
+            <circle cx="130" cy="150" r="4" fill="#58a6ff"/><circle cx="112" cy="205" r="4" fill="#58a6ff"/>
+            <circle cx="148" cy="205" r="4" fill="#58a6ff"/><circle cx="130" cy="115" r="4" fill="#58a6ff"/>
+          </g>
+          <text x="130" y="478" text-anchor="middle" fill="#7a7a7a" font-size="10.5">Median virtual patient · organ colors: green ≥ 85 · amber 70–85 · red &lt; 70</text>
+        </svg>
+        <div class="organ-legend">
+          <span><span class="dot" style="background:#3fb950"></span>Healthy</span>
+          <span><span class="dot" style="background:#d29922"></span>Strained</span>
+          <span><span class="dot" style="background:#f85149"></span>Impaired</span>
+          <span><span class="dot" style="background:#58a6ff"></span>Immune cells (activation)</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="controls" style="grid-template-columns: 1fr 1fr; margin-top: 0">
+          <div class="ctrl">
+            <label>Regimen</label>
+            <select id="holistic-arm"></select>
+          </div>
+          <div class="ctrl">
+            <label>Timeline — week <span class="val" id="v-week">0</span></label>
+            <input type="range" id="s-week" min="0" max="24" step="1" value="0">
+            <button class="btn" id="play-btn" style="margin-top:8px">Play 24 weeks</button>
+          </div>
+        </div>
+
+        <div class="readouts">
+          <div class="readout"><div class="v" id="r-tumor">0%</div><div class="l">Tumor change vs baseline</div></div>
+          <div class="readout"><div class="v" id="r-ctdna">100</div><div class="l">ctDNA index (proxy)</div></div>
+          <div class="readout"><div class="v" id="r-qol">100</div><div class="l">Quality-of-life proxy</div></div>
+          <div class="readout"><div class="v" id="r-holistic">—</div><div class="l">Holistic patient index</div></div>
+        </div>
+
+        <div id="organ-bars"></div>
+      </div>
+    </div>
+
+    <div id="chart-holistic"></div>
+    <p class="cap">Improvement over time — tumor control score, organ health, quality-of-life proxy, and immune activation (all 0–100) for the selected regimen · red marker = current week · model output, not observed patient data.</p>
 
     <h2>Full results</h2>
     <table id="results-table">
@@ -257,16 +336,13 @@ function simulateArm(arm) {
   const n = state.n;
   const muMean = arm.mu * state.eff + shift;
   const b12 = new Float64Array(n), b24 = new Float64Array(n);
-  const traj = new Array(13).fill(0).map(() => new Float64Array(n));
+  const traj = new Array(25).fill(0).map(() => new Float64Array(n).fill(100));
   const mu = new Float64Array(n);
   for (let i = 0; i < n; i++) mu[i] = muMean + gauss() * state.tau;
   const logb = new Float64Array(n);
   for (let t = 1; t <= 24; t++) {
     for (let i = 0; i < n; i++) logb[i] += mu[i] + gauss() * 0.012;
-    if (t % 2 === 0) {
-      const k = t / 2;
-      for (let i = 0; i < n; i++) traj[k][i] = 100 * Math.exp(logb[i]);
-    }
+    for (let i = 0; i < n; i++) traj[t][i] = 100 * Math.exp(logb[i]);
     if (t === 12) for (let i = 0; i < n; i++) b12[i] = 100 * Math.exp(logb[i]);
     if (t === 24) for (let i = 0; i < n; i++) b24[i] = 100 * Math.exp(logb[i]);
   }
@@ -276,7 +352,7 @@ function simulateArm(arm) {
     if (b24[i] <= 50) dur++;
   }
   const medTraj = traj.map(arr => { const s = Array.from(arr).sort((a, b) => a - b); return s[n >> 1]; });
-  const med12 = medTraj[6];
+  const med12 = medTraj[12];
   const benefit = (pr + sd) / n;
   const comp = state.w1 * benefit + state.w2 * (arm.ev / 5) + state.w3 * (arm.safe / 5);
   return { pr: pr / n, sd: sd / n, pd: pd / n, dur: dur / n, med12, medTraj, comp };
@@ -430,18 +506,20 @@ function renderNmibcVerdict() {
 
 function render() {
   const results = runAll();
+  lastResults = results;
   const rows = results.filter(o => !o.arm.ref).map(o => ({ label: o.arm.name, v1: o.r.pr, v2: o.r.dur }));
   rows.sort((a, b) => b.v2 - a.v2);
   document.getElementById("chart-efficacy").innerHTML = barChart(rows);
 
   const series = results.filter(o => state.visible.has(o.arm.id))
-    .map(o => ({ name: o.arm.name, color: o.arm.color, data: o.r.medTraj }));
+    .map(o => ({ name: o.arm.name, color: o.arm.color, data: o.r.medTraj.filter((_, i) => i % 2 === 0) }));
   const untreated = results.find(o => o.arm.id === "untreated");
-  series.push({ name: "Untreated (ref)", color: "#555", data: untreated.r.medTraj, dashed: true });
+  series.push({ name: "Untreated (ref)", color: "#555", data: untreated.r.medTraj.filter((_, i) => i % 2 === 0), dashed: true });
   document.getElementById("chart-traj").innerHTML = lineChart(series);
 
   renderTable(results);
   renderVerdict(results);
+  renderHolistic(results);
 }
 
 function renderRobust() {
@@ -519,8 +597,164 @@ function bind() {
   }));
 }
 
+/* ---------- holistic virtual patient (body, organs, improvement over time) ---------- */
+const TOX = {
+  ivm:       { renal: 0.02, cardiac: 0.01, gi: 0.10, hepatic: 0.03, neuro: 0.12, immune: 0.10 },
+  gc:        { renal: 0.85, cardiac: 0.05, gi: 0.45, hepatic: 0.15, neuro: 0.30, immune: 0.05 },
+  ici:       { renal: 0.03, cardiac: 0.10, gi: 0.18, hepatic: 0.25, neuro: 0.03, immune: 0.75 },
+  ivmmet:    { renal: 0.10, cardiac: 0.01, gi: 0.22, hepatic: 0.04, neuro: 0.10, immune: 0.22 },
+  triple:    { renal: 0.14, cardiac: 0.28, gi: 0.28, hepatic: 0.08, neuro: 0.16, immune: 0.22 },
+  docivm:    { renal: 0.10, cardiac: 0.06, gi: 0.30, hepatic: 0.12, neuro: 0.35, immune: 0.15 },
+  gcivm:     { renal: 0.88, cardiac: 0.06, gi: 0.50, hepatic: 0.16, neuro: 0.38, immune: 0.12 },
+  gcivmmet:  { renal: 0.95, cardiac: 0.06, gi: 0.55, hepatic: 0.18, neuro: 0.38, immune: 0.28 },
+  iciivm:    { renal: 0.05, cardiac: 0.10, gi: 0.24, hepatic: 0.26, neuro: 0.12, immune: 0.95 },
+  icitriple: { renal: 0.14, cardiac: 0.10, gi: 0.32, hepatic: 0.28, neuro: 0.16, immune: 1.05 },
+  untreated: { renal: 0.00, cardiac: 0.00, gi: 0.00, hepatic: 0.00, neuro: 0.00, immune: 0.00 },
+};
+const ORGANS = [
+  { key: "renal", label: "Kidneys (eGFR proxy)" },
+  { key: "cardiac", label: "Heart (QT proxy)" },
+  { key: "hepatic", label: "Liver function" },
+  { key: "gi", label: "Gut / GI tolerance" },
+  { key: "neuro", label: "Nervous system" },
+];
+let lastResults = null;
+let playTimer = null;
+
+function healthColor(v) { return v >= 85 ? "#3fb950" : v >= 70 ? "#d29922" : "#f85149"; }
+function burdenColor(b) { return b <= 80 ? "#3fb950" : b <= 110 ? "#d29922" : "#f85149"; }
+const clamp = (lo, hi, v) => Math.max(lo, Math.min(hi, v));
+
+function holisticSeries(arm, medTraj) {
+  const tox = TOX[arm.id];
+  const org = {};
+  ORGANS.forEach(o => org[o.key] = [100]);
+  const immune = [arm.ref ? 5 : 10];
+  const burden = medTraj.slice();
+  for (let t = 1; t <= 24; t++) {
+    ORGANS.forEach(o => {
+      const prev = org[o.key][t - 1];
+      org[o.key].push(clamp(35, 100, prev - tox[o.key] + (100 - prev) * 0.015));
+    });
+    immune.push(clamp(0, 100, immune[t - 1] + (tox.immune * 100 - immune[t - 1]) * 0.15));
+  }
+  const qol = [], tScore = [], orgAvg = [], holistic = [];
+  for (let t = 0; t <= 24; t++) {
+    const avg = ORGANS.reduce((s, o) => s + org[o.key][t], 0) / ORGANS.length;
+    const toxNow = 100 - avg;
+    const q = clamp(0, 100, 100 - 0.35 * toxNow - 0.25 * Math.max(0, burden[t] - 100) + 0.10 * Math.max(0, 100 - burden[t]));
+    const ts = clamp(0, 100, 100 - (burden[t] - 70) * 1.1);
+    orgAvg.push(avg); qol.push(q); tScore.push(ts);
+    holistic.push(0.5 * ts + 0.3 * avg + 0.2 * q);
+  }
+  return { burden, org, immune, qol, tScore, orgAvg, holistic };
+}
+
+function holisticChart(h, marker) {
+  const w = 1100, padL = 56, padR = 170, top = 26, bottom = 34, hgt = 300;
+  const plotW = w - padL - padR, plotH = hgt - top - bottom;
+  const x = i => padL + plotW * i / 24;
+  const y = v => top + plotH * (1 - v / 100);
+  let s = svgEl(w, hgt);
+  for (let t = 0; t <= 24; t += 4) {
+    s += `<line x1="${x(t)}" y1="${top}" x2="${x(t)}" y2="${top + plotH}" stroke="#2b2b2b"/>`;
+    s += `<text x="${x(t)}" y="${hgt - 12}" text-anchor="middle" fill="#8a8a8a" font-size="11">W${t}</text>`;
+  }
+  for (let v = 0; v <= 100; v += 25) {
+    s += `<line x1="${padL}" y1="${y(v)}" x2="${w - padR}" y2="${y(v)}" stroke="#2b2b2b"/>`;
+    s += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" fill="#8a8a8a" font-size="11">${v}</text>`;
+  }
+  const lines = [
+    { name: "Tumor control", color: "#3fb950", data: h.tScore },
+    { name: "Organ health", color: "#58a6ff", data: h.orgAvg },
+    { name: "Quality of life", color: "#d29922", data: h.qol },
+    { name: "Immune activation", color: "#bc8cff", data: h.immune },
+    { name: "Holistic index", color: "#f0883e", data: h.holistic },
+  ];
+  lines.forEach(se => {
+    const pts = se.data.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    s += `<polyline fill="none" stroke="${se.color}" stroke-width="2.3" points="${pts}"/>`;
+    s += `<text x="${x(24) + 8}" y="${y(se.data[24]) + 4}" fill="${se.color}" font-size="11">${esc(se.name)} ${se.data[24].toFixed(0)}</text>`;
+  });
+  s += `<line x1="${x(marker)}" y1="${top}" x2="${x(marker)}" y2="${top + plotH}" stroke="#f85149" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+  s += `<text x="${x(marker) + 5}" y="${top + 12}" fill="#f85149" font-size="11">week ${marker}</text>`;
+  return s + "</svg>";
+}
+
+function renderHolistic(results) {
+  if (!results) return;
+  const armId = document.getElementById("holistic-arm").value || "iciivm";
+  const o = results.find(r => r.arm.id === armId);
+  const week = +document.getElementById("s-week").value;
+  document.getElementById("v-week").textContent = week;
+  const h = holisticSeries(o.arm, o.r.medTraj);
+
+  // readouts
+  const b = h.burden[week];
+  document.getElementById("r-tumor").textContent = (b >= 100 ? "+" : "") + (b - 100).toFixed(1) + "%";
+  document.getElementById("r-tumor").style.color = burdenColor(b);
+  document.getElementById("r-ctdna").textContent = b.toFixed(0);
+  document.getElementById("r-ctdna").style.color = burdenColor(b);
+  document.getElementById("r-qol").textContent = h.qol[week].toFixed(0);
+  document.getElementById("r-qol").style.color = healthColor(h.qol[week]);
+  document.getElementById("r-holistic").textContent = h.holistic[week].toFixed(0);
+  document.getElementById("r-holistic").style.color = healthColor(h.holistic[week]);
+
+  // organ bars
+  const bars = ORGANS.map(org => {
+    const v = h.org[org.key][week];
+    return `<div class="organbar"><div class="lbl"><span>${org.label}</span><span>${v.toFixed(0)}</span></div>
+      <div class="track"><div class="fill" style="width:${v}%;background:${healthColor(v)}"></div></div></div>`;
+  }).join("") +
+    `<div class="organbar"><div class="lbl"><span>Immune activation (ICI axis)</span><span>${h.immune[week].toFixed(0)}</span></div>
+      <div class="track"><div class="fill" style="width:${h.immune[week]}%;background:#58a6ff"></div></div></div>`;
+  document.getElementById("organ-bars").innerHTML = bars;
+
+  // body svg
+  const set = (id, v) => document.getElementById(id).setAttribute("fill", healthColor(v));
+  set("organ-brain", h.org.neuro[week]);
+  set("organ-heart", h.org.cardiac[week]);
+  set("organ-liver", h.org.hepatic[week]);
+  set("organ-gut", h.org.gi[week]);
+  set("organ-kidneyL", h.org.renal[week]);
+  set("organ-kidneyR", h.org.renal[week]);
+  const bl = document.getElementById("organ-bladder");
+  bl.setAttribute("fill", burdenColor(b));
+  const tumor = document.getElementById("tumor-mass");
+  const rx = clamp(3, 24, 10 * Math.sqrt(b / 100));
+  tumor.setAttribute("rx", rx); tumor.setAttribute("ry", rx * 0.8);
+  tumor.setAttribute("fill", burdenColor(b));
+  document.getElementById("immune-dots").setAttribute("opacity", (0.12 + h.immune[week] / 130).toFixed(2));
+
+  document.getElementById("chart-holistic").innerHTML = holisticChart(h, week);
+}
+
+function initHolistic() {
+  const sel = document.getElementById("holistic-arm");
+  sel.innerHTML = ARMS.filter(a => !a.ref).map(a =>
+    `<option value="${a.id}" ${a.id === "iciivm" ? "selected" : ""}>${esc(a.name)}</option>`).join("");
+  sel.addEventListener("change", () => renderHolistic(lastResults));
+  const slider = document.getElementById("s-week");
+  slider.addEventListener("input", () => renderHolistic(lastResults));
+  document.getElementById("play-btn").addEventListener("click", () => {
+    const btn = document.getElementById("play-btn");
+    if (playTimer) { clearInterval(playTimer); playTimer = null; btn.textContent = "Play 24 weeks"; return; }
+    if (+slider.value >= 24) slider.value = 0;
+    btn.textContent = "Pause";
+    playTimer = setInterval(() => {
+      slider.value = Math.min(24, +slider.value + 1);
+      renderHolistic(lastResults);
+      if (+slider.value >= 24) {
+        clearInterval(playTimer); playTimer = null;
+        btn.textContent = "Play 24 weeks";
+      }
+    }, 380);
+  });
+}
+
 buildArmChips();
 bind();
+initHolistic();
 render();
 renderRobust();
 renderNmibc();
