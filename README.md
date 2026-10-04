@@ -63,6 +63,31 @@ Ivermectin has genuine single-agent bladder activity — G1 arrest and JNK-media
 
 ---
 
+## Holistic combination simulation (Monte Carlo, Oct 2026)
+
+15 regimens × 20,000 virtual patients, 24-week horizon. Full model and code in [`simulation/holistic_sim.py`](simulation/holistic_sim.py) — every number can be re-run and challenged. **Illustrative model, not clinical evidence.**
+
+| Rank (composite) | Arm | PR wk12 | Durable wk24 | PD wk12 | Composite |
+|---|---|---|---|---|---|
+| 1 | ICI alone (standard) | 15.8% | 16.4% | 22.1% | 0.820 |
+| 2 | **ICI + ivermectin** | 28.9% | 29.9% | 11.3% | 0.819 |
+| 3 | GC chemo alone (standard) | 16.5% | 17.2% | 21.0% | 0.805 |
+| 4 | **IVM + metformin (oral)** | 21.5% | 22.4% | 15.7% | 0.770 |
+| 5 | Docetaxel + IVM (HSP27) | 25.5% | 26.4% | 13.3% | 0.720 |
+| 6 | GC + ivermectin | 23.8% | 24.8% | 14.0% | 0.717 |
+| 7 | GC + IVM + metformin | 31.0% | 32.3% | 9.7% | 0.716 |
+| 8 | **ICI + IVM + metformin** | 35.2% | 36.4% | 7.9% | 0.709 |
+| 9 | Ivermectin alone | 8.3% | 8.8% | 34.1% | 0.707 |
+| 10 | IVM + MET + HCQ (oral) | 24.3% | 25.3% | 14.1% | 0.577 |
+
+Composite = 0.45 × clinical benefit + 0.35 × evidence/5 + 0.20 × safety/5.
+
+**NMIBC scenario (6-month complete response):** BCG alone 58% · BCG + curcumin 68% (hypothesis, syngeneic bladder synergy) · BCG + systemic ICI 73% (real RCTs, but grade ≥3 AEs 25% vs 6%) · **BCG + intravesical gemcitabine 95%** (actual phase I/II, NCT04179162).
+
+**Simulation verdict:** (1) ivermectin + checkpoint inhibitor is the best-supported combination — ties standard ICI on composite while nearly doubling modeled durable control; (2) ICI + IVM + metformin has maximum modeled efficacy but thin evidence; (3) ivermectin + metformin is the best oral pair; (4) for NMIBC, BCG + intravesical gemcitabine stands out; (5) the HCQ triple and ivermectin alone are deprioritized.
+
+---
+
 <h2>Week-by-week hypothesis: ivermectin + metformin vs + HCQ vs all combined</h2>
 
 Anchored to bladder-specific data where it exists (ivermectin urothelial-cell and xenograft studies 2022/2024; metformin outcomes in 243 MIBC patients after cystectomy + gemcitabine/cisplatin). Illustrative — not a prediction of results for any person.
