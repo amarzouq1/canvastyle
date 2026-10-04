@@ -112,6 +112,7 @@
     <div class="tab" data-scn="nmibc">Non-muscle-invasive (NMIBC)</div>
     <div class="tab" data-scn="weedkiller">Weed-Killer Hypothesis</div>
     <div class="tab" data-scn="stage4">Stage 4 Plan</div>
+    <div class="tab" data-scn="fountain">Fountain of Youth</div>
   </div>
 
   <!-- ============ SYSTEMIC ============ -->
@@ -557,6 +558,111 @@
     This is a research and education artifact, not a treatment plan for any individual. Stage 4 cancer management belongs with a urologic oncology team at a center that runs clinical trials. Bring this page to them as a discussion document — the backbone data, the oligometastatic question, and the terrain checklist are exactly the conversations good oncologists want to have.</div>
   </section>
 
+  <!-- ============ FOUNTAIN OF YOUTH ============ -->
+  <section id="scn-fountain" style="display:none">
+    <h2>Fountain of Youth — swarm research synthesis</h2>
+    <p class="sub">A 10-agent research swarm (senescence · nutrient sensing · reprogramming · blood factors · exercise · metabolites · brain/sleep · immunity · frontier tech · synthesis architect) investigated reversing biological aging with the same rule as the rest of this site: <b>no claim survives unless its study design can.</b> What follows is their cross-checked consensus — including what <i>failed</i>.</p>
+
+    <div class="box b-info"><div class="t">The swarm's verdict</div>
+    There are currently <b>zero</b> interventions proven in a powered randomized trial to delay disability or death by "reversing aging." But the field is closer than it looks: senolytics clear senescent cells in humans, plasma exchange moves 15 epigenetic clocks, partial reprogramming reverses mouse clocks, and the first human reprogramming trial dosed its first patient in 2026. The breakthrough is no longer a molecule — it is <b>convergence and sequencing</b>: clear the damage first, reset the epigenome second, subtract the geronic factors third, and prove it all with resilience, not clocks.</div>
+
+    <div class="stats">
+      <div class="stat amber"><div class="v">0</div><div class="l">Powered RCTs showing anti-aging clinical benefit (as of Oct 2026)</div></div>
+      <div class="stat green"><div class="v">3</div><div class="l">Convergent breakthrough hypotheses with decisive experiments designed</div></div>
+      <div class="stat blue"><div class="v">15 clocks</div><div class="l">Epigenetic clocks moved by plasma exchange (then faded at follow-up)</div></div>
+      <div class="stat"><div class="v">100</div><div class="l">Tasks in the zero-to-hero research roadmap below</div></div>
+    </div>
+
+    <h2>Biological-age simulator — build your stack</h2>
+    <p class="sub">Toggle interventions and watch a modeled biological-age trajectory over 20 years. Illustrative model: each intervention removes a fraction of the aging rate with diminishing returns, weighted by evidence. The point is seeing how much of the answer is foundations vs frontier.</p>
+
+    <div class="controls" style="grid-template-columns: 1fr 1fr;">
+      <div class="ctrl">
+        <label>Current age <span class="val" id="v-foyage">55</span></label>
+        <input type="range" id="s-foyage" min="35" max="80" step="1" value="55">
+      </div>
+      <div class="ctrl">
+        <label>Protocol adherence <span class="val" id="v-foyadh">80%</span></label>
+        <input type="range" id="s-foyadh" min="20" max="100" step="5" value="80">
+      </div>
+    </div>
+
+    <div class="holistic">
+      <div>
+        <div id="foy-layers"></div>
+      </div>
+      <div>
+        <div id="foy-chart"></div>
+        <div class="gauge">
+          <div class="readout"><div class="v" id="foy-gap">—</div><div class="l">Bio-age gap at year 10</div></div>
+          <div class="readout"><div class="v" id="foy-years">—</div><div class="l">Years added before bio-age 75</div></div>
+          <div class="readout"><div class="v" id="foy-ev">—</div><div class="l">Weighted evidence (0–4)</div></div>
+          <div class="readout"><div class="v" id="foy-tier">—</div><div class="l">Stack character</div></div>
+        </div>
+        <p class="cap">Illustrative model, not a forecast · aging rate reduction with diminishing returns (0.85 decay per added intervention) · evidence weighting from the swarm scoreboard.</p>
+      </div>
+    </div>
+
+    <h2>The three convergent breakthrough hypotheses</h2>
+    <div class="cards">
+      <div class="wk-card">
+        <div class="title">1 · Senolytic-primed epigenetic reset <span class="grade g-b">Sequence, never combine</span></div>
+        <div class="line"><b>Protocol:</b> senolysis (dasatinib+quercetin, or untested CD47–SIRPα macrophage checkpoint release) → transient mRNA/AAV-OSK reprogramming → plasma dilution as safety valve.</div>
+        <div class="line"><b>Why it's new:</b> senescent cells resist reprogramming and their SASP ages neighboring cells; clearing first shrinks both the pro-geronic milieu and the oncogenic substrate before the reset window.</div>
+        <div class="line"><b>Decisive experiment:</b> aged-mice 2×2×2 factorial (senolysis × OSK × dilution), powered for function (wound healing, exercise tolerance), with 12-month tumor surveillance. The interaction term — not any single arm — is the answer.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">2 · Chrono-convergent repair cycling <span class="grade g-b">Timing is the missing variable</span></div>
+        <div class="line"><b>Protocol:</b> "clear-then-repair" pulses (senolytic week → urolithin-A/mitophagy week) + blood-flow-restriction training with myokine profiling — with low-dose rapamycin dosed <b>after</b> exercise so muscle mTOR pulses survive.</div>
+        <div class="line"><b>Why it's new:</b> PEARL's failure may be a timing failure: mTOR inhibition blunts anabolic adaptation when concurrent with training. Nobody has tested the schedule.</div>
+        <div class="line"><b>Decisive experiment:</b> sham-controlled crossover RCT in 60–80-year-olds: BFR training × rapamycin timing × repair cycling, 12 weeks, primary = VO₂max + muscle protein synthesis biopsy.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">3 · Geronic-factor subtraction <span class="grade g-c">Stop adding — start removing</span></div>
+        <div class="line"><b>Protocol:</b> instead of infusing "young factors", apheresis-deplete identified geronic species (carbamylated albumin, modified clusterin, ceramides) and reinfuse autologous cells.</div>
+        <div class="line"><b>Why it's new:</b> plasma exchange moved 15 epigenetic clocks but the effect faded — dilution is real but reversible. The field keeps adding young factors; subtraction may be the stronger, durable perturbation.</div>
+        <div class="line"><b>Decisive experiment:</b> double-blind sham-apheresis RCT (depletion vs TPE vs sham), endpoint = durability of functional gains at 6 months.</div>
+      </div>
+    </div>
+
+    <div class="box b-warn"><div class="t">The proof problem — how to know aging actually reversed</div>
+    Epigenetic clocks measure <i>state</i> and can be gamed by shifts in blood-cell composition. The swarm converged on one honest measurement: <b>recovery kinetics from a standardized stressor</b> — time-to-rebaseline of strength and inflammatory markers after eccentric exercise (or vaccine antibody response), benchmarked against 25-year-old norms. A 70-year-old who recovers like a 30-year-old is functionally young. Clocks may follow; resilience leads.</div>
+
+    <h2>The scoreboard — what actually survived scrutiny</h2>
+    <table>
+      <thead><tr><th>Domain</th><th>Best human evidence</th><th>The catch</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Senolytics (D+Q)</td><td>Clears senescent-cell markers in humans (Mayo, n=9); bone signal in high-burden subgroup (Nat Med 2024)</td><td>No powered RCT has beaten placebo on a clinical endpoint; fisetin is already sold ahead of evidence</td></tr>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Exercise + protein</td><td>RCT-backed healthspan gains; best sarcopenia intervention that exists</td><td>Modest and heterogeneous; "mimetics" fail — GW501516 caused multi-organ tumors, bimagrumab gave mass without function</td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Rapamycin</td><td>PEARL: 48 weeks safe; lean-mass gain in women</td><td>Missed primary endpoint; compounded drug ~1/3 bioavailability; timing unstudied</td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Plasma exchange (TPE+IVIG)</td><td>15 epigenetic clocks moved ~2.6 years vs placebo (Aging Cell 2025, n=42)</td><td>Effect faded at follow-up; E5/"young blood" clinics = founder-conflicted hype with FDA warnings</td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Reprogramming (OSK)</td><td>Mouse clock reversal (kidney/skin, duration-dependent); first human trial dosed 2026 (AAV-OSK eye)</td><td>Tumor risk real; "reprogramming in a pill" failed (2026: liver toxicity, no de-aging)</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>NMN / NAD+ boosters</td><td>Reliably raises blood NAD+</td><td>No benefit on grip, gait, HbA1c, lipids, or body composition — a biomarker sold as youth</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Taurine / spermidine</td><td>Mouse lifespan data</td><td>Taurine's deficiency premise contradicted (2025 Science: levels rise with age); spermidine RCT null</td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Thymic regeneration</td><td>Mice: FOXN1 and DLL1+FLT3L+IL-7 mRNA rebuild thymi (Nature 2025)</td><td>TRIIM headline = uncontrolled n=9 using mitogenic growth hormone</td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Gene therapy (TERT/Klotho)</td><td>AAV9-TERT +24% median lifespan in mice; Klotho +20%</td><td>Single-lab cohorts; +41% claim unreplicated; Klotho fails in oldest-old mice</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The 100-task zero-to-hero roadmap</h2>
+    <div id="foy-roadmap"></div>
+
+    <h2>The reject list — longevity marketing</h2>
+    <table>
+      <thead><tr><th>Sold as</th><th>Why it fails</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#f85149"></span>NMN/NR "reverses aging"</td><td>The only reliably reproduced endpoint is a blood NAD+ level. Biomarker ≠ benefit.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Young-blood / E5 plasma infusions</td><td>Single-lab rat data, n=8 lifespan cohorts, unidentified active component, founder financial conflicts, xenotransplantation risk. FDA warns against "anti-aging" plasma clinics.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Fisetin as a supplement</td><td>34 registered trials, ~4 with results, mostly pharmacokinetic. Sold as senolytic anyway.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>"Exercise in a pill"</td><td>GW501516: multi-organ tumors in rodents. AICAR: toxicity. The real thing is free and works.</td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Any "reversed aging" claim from a clock alone</td><td>Clocks track blood-cell composition and can move without functional change. Function is the endpoint.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box b-danger"><div class="t">Safety — the hard line</div>
+    Rapamycin, dasatinib, growth hormone, plasma exchange, and gene therapies are prescription interventions with real risks (immunosuppression, thrombocytopenia, mitogenicity, procedural risk). Nothing on this tab is a protocol to self-execute. Its purpose: to show a curious person — or their physician — what genuine evidence looks like versus what is being sold. Not medical advice.</div>
+  </section>
+
   <h2>Methodology &amp; anchors</h2>
   <div class="card">
     <div class="hdr">How the virtual patients work</div>
@@ -906,6 +1012,7 @@ function bind() {
     if (tab.dataset.scn === "nmibc") renderNmibc();
     if (tab.dataset.scn === "weedkiller") renderWk();
     if (tab.dataset.scn === "stage4") renderS4();
+    if (tab.dataset.scn === "fountain") renderFoy();
     history.replaceState(null, "", "#" + tab.dataset.scn);
   }));
 }
@@ -1277,6 +1384,120 @@ function renderS4() {
     </div>`;
 }
 
+/* ---------- fountain of youth: stack simulator + roadmap ---------- */
+const FOY_INTS = [
+  { id: "train", name: "Resistance training + protein (1.2–1.6 g/kg)", eff: 0.10, ev: 4, tier: "Foundation", meta: "RCT-backed — the strongest intervention that actually exists" },
+  { id: "sleep", name: "Sleep 7–9h + circadian regularity (+ treat apnea)", eff: 0.06, ev: 3, tier: "Foundation", meta: "Shift work ages clocks; CPAP decelerated epigenetic age (ERJ 2024)" },
+  { id: "cr", name: "Caloric moderation / time-restricted eating", eff: 0.07, ev: 3, tier: "Foundation", meta: "CALERIE: ~2–3% DunedinPACE slowing — real but small" },
+  { id: "rapa", name: "Rapamycin timed after exercise (physician-supervised)", eff: 0.06, ev: 2, tier: "Frontier", meta: "PEARL subgroup signals; the timing hypothesis is untested" },
+  { id: "seno", name: "Senolytic pulses (trial / supervised only)", eff: 0.07, ev: 2, tier: "Frontier", meta: "Clears senescent cells in humans; clinical endpoints unproven" },
+  { id: "uro", name: "Urolithin A (mitophagy support)", eff: 0.03, ev: 2, tier: "Frontier", meta: "Modest: inflammation and lipids down; function data thin" },
+  { id: "tpe", name: "Plasma dilution / geronic subtraction (trial only)", eff: 0.05, ev: 2, tier: "Frontier", meta: "15 clocks moved then faded; subtraction hypothesis untested" },
+  { id: "reprog", name: "Epigenetic reprogramming (future tech)", eff: 0.15, ev: 1, tier: "Future", meta: "Mouse clock reversal; first human trial dosed 2026; tumor risk real" },
+];
+const FOY_ON = new Set(["train", "sleep", "cr"]);
+
+function renderFoyLayers() {
+  const el = document.getElementById("foy-layers");
+  el.innerHTML = FOY_INTS.map(i => {
+    const on = FOY_ON.has(i.id);
+    return `<div class="layer-row ${on ? "on" : ""}" data-id="${i.id}">
+      <div class="layer-chip"></div>
+      <div class="nm">${esc(i.name)}<div class="meta">${esc(i.meta)}</div></div>
+      <div class="meta">−${(i.eff * 100).toFixed(0)}% rate · ev ${i.ev}</div>
+    </div>`;
+  }).join("");
+  el.querySelectorAll(".layer-row").forEach(row => row.addEventListener("click", () => {
+    const id = row.dataset.id;
+    if (FOY_ON.has(id)) FOY_ON.delete(id); else FOY_ON.add(id);
+    renderFoy();
+  }));
+}
+
+function foyChart(age, r) {
+  const w = 700, h = 320, padL = 52, padR = 90, top = 24, bottom = 36;
+  const plotW = w - padL - padR, plotH = h - top - bottom;
+  const yMax = age + 22;
+  const x = t => padL + plotW * t / 20;
+  const y = v => top + plotH * (1 - (v - age) / (yMax - age));
+  let s = svgEl(w, h);
+  for (let t = 0; t <= 20; t += 5) {
+    s += `<line x1="${x(t)}" y1="${top}" x2="${x(t)}" y2="${top + plotH}" stroke="#2b2b2b"/>`;
+    s += `<text x="${x(t)}" y="${h - 12}" text-anchor="middle" fill="#8a8a8a" font-size="11">+${t}y</text>`;
+  }
+  const step = 5;
+  for (let v = age; v <= yMax; v += step) {
+    s += `<line x1="${padL}" y1="${y(v)}" x2="${w - padR}" y2="${y(v)}" stroke="#2b2b2b"/>`;
+    s += `<text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" fill="#8a8a8a" font-size="11">${v}</text>`;
+  }
+  const line = (fn, color, dash, label) => {
+    const pts = [];
+    for (let t = 0; t <= 20; t += 1) pts.push(`${x(t).toFixed(1)},${y(fn(t)).toFixed(1)}`);
+    s += `<polyline fill="none" stroke="${color}" stroke-width="2.5" ${dash ? `stroke-dasharray="6 5"` : ""} points="${pts.join(" ")}"/>`;
+    s += `<text x="${x(20) + 6}" y="${y(fn(20)) + 4}" fill="${color}" font-size="10.5">${label}</text>`;
+  };
+  line(t => age + t, "#555", true, "calendar");
+  line(t => age + t * 1.08, "#8a8a8a", true, "do nothing");
+  line(t => age + t * r, "#3fb950", false, "your stack");
+  s += `<text x="14" y="${(top + plotH / 2)}" text-anchor="middle" fill="#8a8a8a" font-size="10.5" transform="rotate(-90 14 ${top + plotH / 2})">Biological age (years)</text>`;
+  return s + "</svg>";
+}
+
+function renderFoy() {
+  renderFoyLayers();
+  const age = +document.getElementById("s-foyage").value;
+  const adh = +document.getElementById("s-foyadh").value / 100;
+  document.getElementById("v-foyage").textContent = age;
+  document.getElementById("v-foyadh").textContent = (adh * 100).toFixed(0) + "%";
+
+  let sum = 0, evw = 0, k = 0;
+  const tiers = [];
+  FOY_INTS.forEach(i => {
+    if (!FOY_ON.has(i.id)) return;
+    const c = i.eff * Math.pow(0.85, k);
+    sum += c; evw += c * i.ev; k++; tiers.push(i.tier);
+  });
+  const r = clamp(0.35, 1.05, 1 - adh * sum);
+  const gap10 = 10 * (1 - r);
+  const yrs = (75 - age) * (1 / r - 1);
+  const ev = sum > 0 ? evw / sum : 0;
+  const tier = tiers.length === 0 ? "None" :
+    tiers.every(t => t === "Foundation") ? "Foundation-led" :
+    tiers.every(t => t === "Future") ? "Future-only" :
+    tiers.includes("Foundation") ? "Balanced" : "Frontier-heavy";
+
+  document.getElementById("foy-gap").textContent = "−" + gap10.toFixed(1) + " yr";
+  document.getElementById("foy-gap").style.color = gap10 >= 4 ? "#3fb950" : gap10 >= 2 ? "#d29922" : "#9a9a9a";
+  document.getElementById("foy-years").textContent = yrs > 0 ? "+" + yrs.toFixed(1) + " yr" : "0 yr";
+  document.getElementById("foy-years").style.color = yrs >= 5 ? "#3fb950" : yrs >= 2 ? "#d29922" : "#9a9a9a";
+  document.getElementById("foy-ev").textContent = ev.toFixed(1);
+  document.getElementById("foy-ev").style.color = healthColor(ev * 25);
+  document.getElementById("foy-tier").textContent = tier;
+
+  document.getElementById("foy-chart").innerHTML = foyChart(age, r);
+}
+
+const FOY_PHASES = [
+  ["Phase 1 · Measure (tasks 1–10)", ["Epigenetic clock panel", "Immune age (CD31+ naive T)", "SASP panel (IL-6, TNF-α, GDF15)", "Senescence burden (p16)", "Body composition (DXA)", "VO₂max + grip + gait", "Metabolic/inflammatory labs", "Kidney & liver function", "Vaccine-response immune probe", "Recovery-kinetics baseline"]],
+  ["Phase 2 · Foundations (11–20)", ["Resistance training 2–3×/wk", "Progressive overload tracking", "Protein 1.2–1.6 g/kg/day", "Sleep 7–9h, regular rhythm", "Treat sleep apnea if present", "Replete vitamin D/iron/B12", "Fiber + fermented foods", "Avoid needless antibiotics", "Stress practice + social ties", "Correct hearing/vision"]],
+  ["Phase 3 · Evidence tier 1 (21–30)", ["Caloric deficit 10–20%", "Time-restricted eating window", "BFR training for low days", "Vaccine schedule optimization", "Periodontal/dental care", "BP + lipid control", "VTE risk assessment", "Alcohol minimization", "Smoking cessation", "Pollution/UV exposure cut"]],
+  ["Phase 4 · Supervised pharmacology (31–40)", ["Discuss rapamycin timing", "Metformin only if indicated", "Senolytic trial eligibility", "Statin/niacin review", "GLP-1 if metabolic need", "Acarbose consideration", "Drug-interaction review", "Pre-register self-experiments", "Quarterly safety labs", "Stop-rules defined first"]],
+  ["Phase 5 · Frontier tracking (41–50)", ["AAV-OSK trial readouts", "TPE/apheresis results", "Urolithin A replications", "Taurine TauAge results", "Thymic regen translation", "mRNA reprogramming status", "Klotho therapy data", "AI-degrader senolytics", "Organ-clock validation", "Biomarker standardization"]],
+  ["Phase 6 · Self-experiment design (51–60)", ["N-of-1 protocol design", "One variable at a time", "Pre-registered endpoints", "Blinded where possible", "Function-first outcomes", "Recovery-kinetics testing", "Quarterly clock panels", "Adverse-event log", "Kill rules pre-agreed", "Publish all results"]],
+  ["Phase 7 · Citizen science (61–70)", ["Join open-aging cohorts", "Share anonymized data", "Standardize measurements", "Community replication", "Negative-result registry", "Shared method library", "Journal club", "Preprint reviews", "Data donation", "Funding pools"]],
+  ["Phase 8 · Lab collaboration (71–80)", ["Extend in-vitro protocol", "Senolytic + repair arms", "Organoid aging models", "Chromatin-age assays", "Myokine profiling", "Plasma proteomics", "Screen natural compounds", "Replication partnerships", "Open protocols", "Preprint first"]],
+  ["Phase 9 · Trials & funding (81–90)", ["Match trial registries", "TAME advocacy", "PEARL-style networks", "Senolytic trial network", "Longevity prize funding", "Grant coalitions", "Patient advocacy", "Regulatory engagement", "Ethics frameworks", "Insurance dialogues"]],
+  ["Phase 10 · Reassessment (91–100)", ["Repeat Phase-1 panel", "Compare recovery kinetics", "Benchmark vs 25-yr norms", "Tier down what fails", "Tier up what works", "Annual protocol review", "Update evidence table", "Retire dead ends", "Restate personal goals", "Share annual report"]],
+];
+
+function renderFoyRoadmap() {
+  document.getElementById("foy-roadmap").innerHTML = `<div class="cards">` + FOY_PHASES.map(([title, tasks]) => `
+    <div class="wk-card">
+      <div class="title">${esc(title)}</div>
+      ${tasks.map((t, i) => `<div class="line">· ${esc(t)}</div>`).join("")}
+    </div>`).join("") + `</div>`;
+}
+
 buildArmChips();
 bind();
 initHolistic();
@@ -1285,12 +1506,16 @@ renderRobust();
 renderNmibc();
 renderNmibcVerdict();
 const initialScn = location.hash.replace("#", "");
-if (["nmibc", "weedkiller", "stage4"].includes(initialScn)) {
+if (["nmibc", "weedkiller", "stage4", "fountain"].includes(initialScn)) {
   const t = document.querySelector(`.tab[data-scn="${initialScn}"]`);
   if (t) t.click();
 }
 document.getElementById("s-s4lvl").addEventListener("input", renderS4);
 renderS4();
+document.getElementById("s-foyage").addEventListener("input", renderFoy);
+document.getElementById("s-foyadh").addEventListener("input", renderFoy);
+renderFoyRoadmap();
+renderFoy();
 </script>
 </body>
 </html>
