@@ -125,6 +125,7 @@
     <div class="tab" data-scn="fountain">Fountain of Youth</div>
     <div class="tab" data-scn="council">Council Board</div>
     <div class="tab" data-scn="compound">Compound Lab</div>
+    <div class="tab" data-scn="prevention">Prevention</div>
   </div>
 
   <!-- ============ SYSTEMIC ============ -->
@@ -856,6 +857,80 @@
     Spiroferin-1, IverGEM-1, and TwinTrap-200 are <b>hypothetical research compounds</b> — none exists outside this page and the chemists' design briefs. They are starting points for drug-development programs run by pharmaceutical chemists, toxicologists, and clinical teams under regulatory oversight. Nothing here is synthesizable or usable by an individual. Not medical advice.</div>
   </section>
 
+  <!-- ============ PREVENTION ============ -->
+  <section id="scn-prevention" style="display:none">
+    <h2>Prevention &amp; habits — reducing bladder cancer risk</h2>
+    <p class="sub">The most powerful bladder-cancer intervention ever found is not a drug — it is <b>never starting tobacco</b>. This tab is the evidence-based prevention toolkit: an interactive risk check, a habit tracker with a live score, and a food guide with honest grades. Works in English and Arabic (toggle top corner).</p>
+
+    <div class="box b-info"><div class="t">The prevention bottom line</div>
+    About <b>half of bladder cancers are linked to tobacco smoke</b> — the single largest preventable cause. After that: workplace chemical exposure (aromatic amines in dyes, rubber, printing, painting), unsafe drinking water (arsenic), and chronic bladder irritation. Diet and habits move the needle more modestly — but they stack. None of this replaces screening or medical care; it reduces odds.</div>
+
+    <div class="stats">
+      <div class="stat green"><div class="v">~50%</div><div class="l">Of bladder cancers linked to tobacco smoking</div></div>
+      <div class="stat blue"><div class="v">2–2.5 L</div><div class="l">Daily water target — dilutes urinary carcinogens</div></div>
+      <div class="stat"><div class="v">5×</div><div class="l">Cruciferous vegetables per week (dietary sulforaphane)</div></div>
+      <div class="stat amber"><div class="v">0</div><div class="l">Supplement pills proven to prevent bladder cancer</div></div>
+    </div>
+
+    <h2>Interactive risk check</h2>
+    <p class="sub">Check what applies to you — the gauge and advice update live. This is educational self-assessment, not a diagnosis.</p>
+    <div class="holistic">
+      <div>
+        <div id="risk-factors"></div>
+      </div>
+      <div>
+        <div class="gauge">
+          <div class="readout"><div class="v" id="risk-level">—</div><div class="l">Your risk band</div></div>
+          <div class="readout"><div class="v" id="risk-score">0</div><div class="l">Weighted risk points</div></div>
+          <div class="readout"><div class="v" id="risk-checked">0</div><div class="l">Factors checked</div></div>
+        </div>
+        <div id="risk-advice"></div>
+      </div>
+    </div>
+
+    <h2>Habit tracker — build your prevention score</h2>
+    <p class="sub">Click habits as you complete them this week — the score bar fills live.</p>
+    <div class="holistic">
+      <div>
+        <div id="habit-list"></div>
+      </div>
+      <div>
+        <div class="gauge">
+          <div class="readout"><div class="v" id="habit-score">0%</div><div class="l">Weekly prevention score</div></div>
+          <div class="readout"><div class="v" id="habit-count">0/12</div><div class="l">Habits checked</div></div>
+        </div>
+        <div id="habit-bar" class="track" style="height:14px;border-radius:7px;background:#2a2a2a;overflow:hidden;margin:10px 0">
+          <div id="habit-fill" class="fill" style="height:100%;width:0%;background:#3fb950;border-radius:7px;transition:width .3s"></div>
+        </div>
+        <div class="box b-warn" id="habit-msg" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <h2>Food guide — click any card</h2>
+    <p class="sub">Evidence-graded food choices for bladder-cancer prevention. Click a card for the detail.</p>
+    <div class="chips" id="food-filter"></div>
+    <div class="cards" id="food-cards"></div>
+    <div class="box b-info" id="food-detail" style="margin-top:10px"><div class="t">Select a food</div>Click any card above to see its evidence and the honest verdict.</div>
+
+    <h2>The evidence scoreboard</h2>
+    <table>
+      <thead><tr><th>Intervention</th><th>Effect on risk</th><th>Evidence grade</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Not smoking / quitting</td><td>Roughly halves bladder-cancer risk versus continuing; the largest single lever that exists</td><td><span class="grade g-b">A — strong human data</span></td></tr>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Workplace chemical protection</td><td>Aromatic amines (dyes, rubber, printing, painting, firefighting) are established carcinogens; PPE and regulation cut exposure</td><td><span class="grade g-b">A — established cause</span></td></tr>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Arsenic-safe drinking water</td><td>Long-term arsenic in water is a recognized bladder carcinogen; filtration/alternate supply reduces it</td><td><span class="grade g-b">A — established cause</span></td></tr>
+        <tr><td><span class="dot" style="background:#58a6ff"></span>High fluid intake (2–2.5 L/day)</td><td>Dilutes urinary carcinogens and shortens bladder contact time; observational data mostly protective</td><td><span class="grade g-c">B− to C+</span></td></tr>
+        <tr><td><span class="dot" style="background:#58a6ff"></span>Cruciferous vegetables</td><td>Dietary sulforaphane linked to lower risk in cohorts; food, NOT supplements (which lack evidence)</td><td><span class="grade g-c">C+ — observational</span></td></tr>
+        <tr><td><span class="dot" style="background:#58a6ff"></span>Limit processed/red meat</td><td>Nitrosamines and heme iron implicated; guidelines advise moderation</td><td><span class="grade g-c">C+ — observational</span></td></tr>
+        <tr><td><span class="dot" style="background:#d29922"></span>Physical activity &amp; healthy weight</td><td>Modest protective association; benefits everywhere else regardless</td><td><span class="grade g-c">C</span></td></tr>
+        <tr><td><span class="dot" style="background:#f85149"></span>Supplement pills (beta-carotene, high-dose antioxidants)</td><td>Not preventive — high-dose beta-carotene INCREASED lung cancer in smokers; food, not pills</td><td><span class="grade g-d">D — possibly harmful</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="box b-danger"><div class="t">Health disclaimer</div>
+    This tab is educational self-help information, not medical advice or screening guidance. Risk factors are not destiny — most people with risk factors never get cancer, and some patients have none. Discuss personal risk, screening (especially for smokers and exposed workers), and any symptom (blood in urine, persistent irritation) with a physician promptly.</div>
+  </section>
+
   <h2>Methodology &amp; anchors</h2>
   <div class="card">
     <div class="hdr">How the virtual patients work</div>
@@ -1208,6 +1283,7 @@ function bind() {
     if (tab.dataset.scn === "fountain") renderFoy();
     if (tab.dataset.scn === "council") renderCouncil();
     if (tab.dataset.scn === "compound") renderCompound();
+    if (tab.dataset.scn === "prevention") renderPrevention();
     history.replaceState(null, "", "#" + tab.dataset.scn);
   }));
 }
@@ -2554,6 +2630,84 @@ const AR_SUB = [
   ["metformin is the best-supported oral companion", "الميتفورمين هو الرفيق الفموي الأفضل دعمًا"],
   ["the anchors drive everything", "المرتكزات تقود كل شيء"],
   ["no PK modeling", "لا نمذجة حركية"], ["toxicity enters only via the safety score", "السمية تدخل عبر درجة السلامة فقط"],
+  ["Prevention & habits — reducing bladder cancer risk", "الوقاية والعادات — تقليل خطر سرطان المثانة"],
+  ["The most powerful bladder-cancer intervention ever found is not a drug", "أقوى تدخل ضد سرطان المثانة ليس دواءً"],
+  ["never starting tobacco", "عدم التدخين أصلًا"],
+  ["This tab is the evidence-based prevention toolkit: an interactive risk check, a habit tracker with a live score, and a food guide with honest grades.", "هذا التبويب عدّة الوقاية القائمة على الأدلة: فحص مخاطر تفاعلي، متتبع عادات بدرجة مباشرة، ودليل طعام بدرجات صادقة."],
+  ["The prevention bottom line", "الخلاصة الوقائية"],
+  ["Of bladder cancers linked to tobacco smoking", "من سرطانات المثانة مرتبطة بالتدخين"],
+  ["Daily water target — dilutes urinary carcinogens", "هدف المياه اليومي — يخفف المسرطنات البولية"],
+  ["Cruciferous vegetables per week (dietary sulforaphane)", "حصص الخضروات الصليبية أسبوعيًا (سلفورافان غذائي)"],
+  ["Supplement pills proven to prevent bladder cancer", "حبوب مكملات مثبتة للوقاية من سرطان المثانة"],
+  ["Interactive risk check", "فحص المخاطر التفاعلي"],
+  ["Check what applies to you — the gauge and advice update live. This is educational self-assessment, not a diagnosis.", "حدد ما ينطبق عليك — يتحدث المؤشر والنصيحة مباشرة. هذا تقييم ذاتي تعليمي، وليس تشخيصًا."],
+  ["Your risk band", "شريحة مخاطرك"],
+  ["Weighted risk points", "نقاط المخاطر المرجحة"],
+  ["Factors checked", "العوامل المحددة"],
+  ["Your action list", "قائمة إجراءاتك"],
+  ["No factors checked — the baseline habits below still apply to everyone.", "لم تحدد عوامل — العادات الأساسية أدناه تنطبق على الجميع."],
+  ["Habit tracker — build your prevention score", "متتبع العادات — ابنِ درجة وقايتك"],
+  ["Click habits as you complete them this week — the score bar fills live.", "اضغط العادات كلما أكملتها هذا الأسبوع — يمتلئ شريط الدرجة مباشرة."],
+  ["Weekly prevention score", "درجة الوقاية الأسبوعية"],
+  ["Habits checked", "العادات المحددة"],
+  ["This week's read", "قراءة هذا الأسبوع"],
+  ["Strong week — these are exactly the habits associated with lower risk.", "أسبوع قوي — هذه هي العادات المرتبطة بمخاطر أقل تمامًا."],
+  ["Good start — pick two more to lock in this week.", "بداية جيدة — اختر اثنتين إضافيتين لتثبيتهما هذا الأسبوع."],
+  ["Start with water and tobacco — the two highest-impact habits on the list.", "ابدأ بالمياه والتبغ — العادتان الأعلى تأثيرًا في القائمة."],
+  ["Food guide — click any card", "دليل الطعام — اضغط أي بطاقة"],
+  ["Evidence-graded food choices for bladder-cancer prevention. Click a card for the detail.", "خيارات غذائية مصنفة بالأدلة للوقاية من سرطان المثانة. اضغط البطاقة للتفاصيل."],
+  ["Select a food", "اختر طعامًا"],
+  ["Click any card above to see its evidence and the honest verdict.", "اضغط أي بطاقة أعلاه لرؤية أدلتها والحكم الصادق."],
+  ["All foods", "كل الأطعمة"],
+  ["Eat more", "كثّر منها"],
+  ["Limit / avoid", "قلّل / تجنب"],
+  ["Verdict: eat more of this.", "الحكم: كثّر من هذا."],
+  ["Verdict: keep this limited.", "الحكم: أبقِ هذا محدودًا."],
+  ["The evidence scoreboard", "لوحة الأدلة"],
+  ["Intervention", "التدخل"], ["Effect on risk", "الأثر على المخاطر"], ["Evidence grade", "درجة الأدلة"],
+  ["Health disclaimer", "إخلاء مسؤولية صحية"],
+  ["Current or former tobacco smoking", "التدخين الحالي أو السابق"],
+  ["Industrial chemical exposure (dyes, rubber, printing, painting, firefighting)", "تعرض كيميائي مهني (أصباغ، مطاط، طباعة، دهان، إطفاء)"],
+  ["Age over 55", "العمر فوق 55"],
+  ["Male sex", "الجنس الذكر"],
+  ["Chronic bladder irritation (repeated UTIs, long-term catheter, bladder stones)", "تهيج مثانة مزمن (التهابات متكررة، قسطرة طويلة، حصوات)"],
+  ["Family history of bladder (or related) cancer", "تاريخ عائلي لسرطان المثانة (أو الأورام المرتبطة)"],
+  ["Prior pelvic radiation or cyclophosphamide chemotherapy", "إشعاع حوضي سابق أو علاج كيميائي بسيكلوفوسفاميد"],
+  ["Long-term arsenic-contaminated drinking water", "مياه شرب ملوثة بالزرنيخ لفترة طويلة"],
+  ["Schistosomiasis infection history (endemic areas / travel)", "تاريخ إصابة بالبلهارسيا (مناطق متوطنة / سفر)"],
+  ["Quitting is the single biggest risk reduction that exists — risk falls for years after stopping.", "الإقلاع هو تقليل المخاطر الأكبر على الإطلاق — تنخفض المخاطر لسنوات بعد التوقف."],
+  ["Occupational aromatic amines are established carcinogens: demand PPE, ventilation, and exposure tracking at work.", "الأروماتيات الأمينية المهنية مسرطنة مؤكدة: اطلب معدات الحماية والتهوية وتتبع التعرض في العمل."],
+  ["Risk rises with age — know the early symptom: blood in urine (even once) deserves a prompt check.", "ترتفع المخاطر مع العمر — اعرف العرض المبكر: الدم في البول (حتى مرة واحدة) يستحق فحصًا عاجلًا."],
+  ["Men develop bladder cancer ~4× more often — no action beyond the standard habits, just awareness.", "الرجال يصابون بسرطان المثانة أكثر بنحو 4 أضعاف — لا إجراء إضافي سوى العادات القياسية، فقط يقظة."],
+  ["Treat chronic irritation and infections promptly — persistent inflammation is a recognized risk pathway.", "عالج التهيج والالتهابات المزمنة فورًا — الالتهاب المستمر مسار خطر معروف."],
+  ["Family history raises risk modestly — mention it to your physician and be vigilant about urinary symptoms.", "التاريخ العائلي يرفع المخاطر بشكل محدود — أخبر طبيبك وكن يقظًا لأعراض المسالك."],
+  ["Both are established treatment-related causes — ensure long-term urologic follow-up is part of your survivorship plan.", "كلاهما سبب مرتبط بالعلاج مؤكد — تأكد من أن المتابعة البولية طويلة المدى جزء من خطة النجاة."],
+  ["Test the water; use certified filtration or an alternate supply — arsenic is a proven bladder carcinogen.", "افحص المياه؛ استخدم فلترة معتمدة أو مصدرًا بديلًا — الزرنيخ مسرطنت مثانة مثبت."],
+  ["Chronic infection is linked to squamous bladder cancer — seek screening in endemic exposure histories.", "الالتهاب المزمن مرتبط بسرطان المثانة الحرشفية — اطلب الفحص عند تاريخ التعرض في المناطق المتوطنة."],
+  ["Drink 2–2.5 L of water daily", "اشرب 2–2.5 لتر ماء يوميًا"],
+  ["Urinate promptly — don't routinely hold it", "تبول فورًا — لا تكبح البول بشكل روتيني"],
+  ["Cruciferous vegetables 5+ times this week", "خضروات صليبية 5 مرات أو أكثر هذا الأسبوع"],
+  ["30 minutes of exercise, 5 days", "30 دقيقة تمارين، 5 أيام"],
+  ["Zero tobacco — all forms, all week", "صفر تبغ — كل الأشكال، طوال الأسبوع"],
+  ["Keep processed/red meat moderate; skip charred", "أبقِ اللحوم المصنعة/الحمراء معتدلة؛ وتجنب المحروقة"],
+  ["Use protective equipment around workplace chemicals", "استخدم معدات الحماية حول المواد الكيميائية في العمل"],
+  ["Keep a healthy weight (this week's plan)", "أبقِ وزنًا صحيًا (خطة هذا الأسبوع)"],
+  ["Alcohol at or below 1 drink/day", "الكحول عند كوب واحد يوميًا أو أقل"],
+  ["Home water checked if in an arsenic-affected area", "فحص مياه المنزل إن كنت في منطقة مصابة بالزرنيخ"],
+  ["Vitamin D level tested; deficiency corrected", "فحص مستوى فيتامين د؛ وتصحيح النقص"],
+  ["UTIs / bladder irritation treated promptly", "علاج التهابات المسالك/تهيج المثانة فورًا"],
+  ["Cruciferous vegetables (broccoli, cauliflower, cabbage, kale)", "الخضروات الصليبية (بروكلي، قرنبيط، ملفوف، كيل)"],
+  ["Allium vegetables (garlic, onions, leeks)", "خضروات الثومية (ثوم، بصل، كراث)"],
+  ["Water — 2 to 2.5 liters daily", "الماء — 2 إلى 2.5 لتر يوميًا"],
+  ["Coffee (moderate, 1–3 cups)", "القهوة (معتدلة، 1–3 أكواب)"],
+  ["Berries & colorful fruit", "التوت والفواكه الملونة"],
+  ["Green tea", "الشاي الأخضر"],
+  ["Fish / omega-3 fats", "السمك / أوميغا 3"],
+  ["Processed meat (bacon, sausage, deli meats)", "اللحوم المصنعة (بيكون، نقانق، مفروم)"],
+  ["Red meat, especially well-done or charred", "اللحوم الحمراء، خصوصًا المطبوخة جيدًا أو المحروقة"],
+  ["Sugary drinks", "المشروبات السكرية"],
+  ["Alcohol above 1 drink/day", "الكحول أكثر من كوب يوميًا"],
+  ["High-dose antioxidant pills (beta-carotene, megadose vitamins)", "حبوب مضادات الأكسدة عالية الجرعة (بيتا كاروتين، فيتامينات جرعات ضخمة)"],
 ];
 let langMode = "en";
 try { langMode = localStorage.getItem("siteLang") || "en"; } catch (e) {}
@@ -2605,6 +2759,145 @@ function setLang(mode) {
   translateAll();
 }
 
+/* ---------- prevention tab ---------- */
+const RISK_FACTORS = [
+  { id: "smoke", w: 3, label: "Current or former tobacco smoking", advice: "Quitting is the single biggest risk reduction that exists — risk falls for years after stopping." },
+  { id: "chem", w: 2, label: "Industrial chemical exposure (dyes, rubber, printing, painting, firefighting)", advice: "Occupational aromatic amines are established carcinogens: demand PPE, ventilation, and exposure tracking at work." },
+  { id: "age", w: 1.5, label: "Age over 55", advice: "Risk rises with age — know the early symptom: blood in urine (even once) deserves a prompt check." },
+  { id: "male", w: 1, label: "Male sex", advice: "Men develop bladder cancer ~4× more often — no action beyond the standard habits, just awareness." },
+  { id: "inflam", w: 1.5, label: "Chronic bladder irritation (repeated UTIs, long-term catheter, bladder stones)", advice: "Treat chronic irritation and infections promptly — persistent inflammation is a recognized risk pathway." },
+  { id: "family", w: 1.5, label: "Family history of bladder (or related) cancer", advice: "Family history raises risk modestly — mention it to your physician and be vigilant about urinary symptoms." },
+  { id: "radiation", w: 1.5, label: "Prior pelvic radiation or cyclophosphamide chemotherapy", advice: "Both are established treatment-related causes — ensure long-term urologic follow-up is part of your survivorship plan." },
+  { id: "arsenic", w: 1.5, label: "Long-term arsenic-contaminated drinking water", advice: "Test the water; use certified filtration or an alternate supply — arsenic is a proven bladder carcinogen." },
+  { id: "schisto", w: 1.5, label: "Schistosomiasis infection history (endemic areas / travel)", advice: "Chronic infection is linked to squamous bladder cancer — seek screening in endemic exposure histories." },
+];
+const HABITS = [
+  { id: "water", label: "Drink 2–2.5 L of water daily" },
+  { id: "urinate", label: "Urinate promptly — don't routinely hold it" },
+  { id: "cruciferous", label: "Cruciferous vegetables 5+ times this week" },
+  { id: "exercise", label: "30 minutes of exercise, 5 days" },
+  { id: "tobacco", label: "Zero tobacco — all forms, all week" },
+  { id: "meat", label: "Keep processed/red meat moderate; skip charred" },
+  { id: "ppe", label: "Use protective equipment around workplace chemicals" },
+  { id: "weight", label: "Keep a healthy weight (this week's plan)" },
+  { id: "alcohol", label: "Alcohol at or below 1 drink/day" },
+  { id: "watercheck", label: "Home water checked if in an arsenic-affected area" },
+  { id: "vitd", label: "Vitamin D level tested; deficiency corrected" },
+  { id: "uti", label: "UTIs / bladder irritation treated promptly" },
+];
+const FOODS = [
+  { id: "broccoli", cat: "eat", name: "Cruciferous vegetables (broccoli, cauliflower, cabbage, kale)", grade: "C+ · observational",
+    detail: "Dietary sulforaphane is linked to lower bladder-cancer risk in cohort studies. Eat the food — sulforaphane SUPPLEMENTS have no preventive evidence (and our research found supplements can even oppose therapy). Aim 5+ servings/week." },
+  { id: "garlic", cat: "eat", name: "Allium vegetables (garlic, onions, leeks)", grade: "C · observational",
+    detail: "Associated with modest risk reduction in population studies; organosulfur compounds have plausible anti-carcinogenic mechanisms. A safe daily habit, not a cure." },
+  { id: "waterf", cat: "eat", name: "Water — 2 to 2.5 liters daily", grade: "B− · observational",
+    detail: "Higher fluid intake dilutes urinary carcinogens and reduces bladder contact time. Most studies lean protective; it is the cheapest habit on this page. Spread intake through the day." },
+  { id: "coffee", cat: "eat", name: "Coffee (moderate, 1–3 cups)", grade: "C+ · meta-analyses",
+    detail: "Several meta-analyses suggest modest risk reduction with moderate coffee consumption. Keep it moderate — heavy intake adds other risks. Not a substitute for water." },
+  { id: "berries", cat: "eat", name: "Berries & colorful fruit", grade: "C · observational",
+    detail: "Fruit-and-vegetable-rich patterns associate with lower risk; antioxidants from FOOD behave differently from pills. General healthy-pattern evidence rather than bladder-specific magic." },
+  { id: "greentea", cat: "eat", name: "Green tea", grade: "C · mixed",
+    detail: "Plausible catechin biology and some protective observational signals, mixed across populations. Reasonable habit; evidence is not strong enough to promise anything." },
+  { id: "fish", cat: "eat", name: "Fish / omega-3 fats", grade: "C · mixed",
+    detail: "Some protective associations in dietary-pattern studies; anti-inflammatory plausibility. A good protein source during any treatment as well." },
+  { id: "processed", cat: "limit", name: "Processed meat (bacon, sausage, deli meats)", grade: "C+ · observational",
+    detail: "Nitrosamines and heme iron are plausible bladder carcinogens; processed meat is a WHO-classified carcinogen for colorectal cancer and associated with bladder risk in studies. Limit, don't binge." },
+  { id: "redmeat", cat: "limit", name: "Red meat, especially well-done or charred", grade: "C · observational",
+    detail: "High-temperature cooking creates heterocyclic amines; associations with bladder risk exist but are modest. Practical rule: moderate portions, avoid charring." },
+  { id: "sugary", cat: "limit", name: "Sugary drinks", grade: "C · indirect",
+    detail: "Obesity and metabolic dysfunction are linked to cancer risk generally; sugary drinks drive both. Cutting them helps weight and metabolic health regardless." },
+  { id: "alcoholf", cat: "limit", name: "Alcohol above 1 drink/day", grade: "C · indirect",
+    detail: "Bladder-specific evidence is weak, but alcohol is a general carcinogen and adds calories. Moderate intake is the sensible ceiling." },
+  { id: "pills", cat: "limit", name: "High-dose antioxidant pills (beta-carotene, megadose vitamins)", grade: "D · possibly harmful",
+    detail: "The opposite of prevention: high-dose beta-carotene INCREASED lung cancer in smokers in randomized trials, and antioxidant pills can blunt cancer therapy. Get antioxidants from food. Skip the pills." },
+];
+const riskState = new Set();
+const habitState = new Set();
+const foodState = { filter: "all", selected: null };
+
+function renderPrevention() {
+  // risk factors
+  const rf = document.getElementById("risk-factors");
+  rf.innerHTML = RISK_FACTORS.map(f => `
+    <div class="layer-row ${riskState.has(f.id) ? "on" : ""}" data-id="${f.id}">
+      <div class="layer-chip"></div>
+      <div class="nm">${esc(f.label)}</div>
+      <div class="meta">+${f.w} pts</div>
+    </div>`).join("");
+  rf.querySelectorAll(".layer-row").forEach(row => row.addEventListener("click", () => {
+    const id = row.dataset.id;
+    if (riskState.has(id)) riskState.delete(id); else riskState.add(id);
+    renderPrevention();
+  }));
+
+  let score = 0, n = 0;
+  const advice = [];
+  RISK_FACTORS.forEach(f => {
+    if (!riskState.has(f.id)) return;
+    score += f.w; n++; advice.push(f.advice);
+  });
+  const level = score < 2 ? "Low band" : score <= 5.5 ? "Moderate band" : "High band";
+  const levelEl = document.getElementById("risk-level");
+  levelEl.textContent = level;
+  levelEl.style.color = score < 2 ? "#3fb950" : score <= 5.5 ? "#d29922" : "#f85149";
+  document.getElementById("risk-score").textContent = score.toFixed(1);
+  document.getElementById("risk-checked").textContent = n;
+  document.getElementById("risk-advice").innerHTML =
+    `<div class="box ${score < 2 ? "b-info" : "b-warn"}" style="margin-top:12px"><div class="t">Your action list</div>` +
+    (advice.length === 0
+      ? "No factors checked — the baseline habits below still apply to everyone."
+      : advice.map(a => `<div style="font-size:12px;color:#c8c8c8;margin:4px 0">· ${esc(a)}</div>`).join("")) +
+    `</div>`;
+
+  // habits
+  const hl = document.getElementById("habit-list");
+  hl.innerHTML = HABITS.map(h => `
+    <div class="layer-row ${habitState.has(h.id) ? "on" : ""}" data-id="${h.id}">
+      <div class="layer-chip"></div>
+      <div class="nm">${esc(h.label)}</div>
+    </div>`).join("");
+  hl.querySelectorAll(".layer-row").forEach(row => row.addEventListener("click", () => {
+    const id = row.dataset.id;
+    if (habitState.has(id)) habitState.delete(id); else habitState.add(id);
+    renderPrevention();
+  }));
+  const hc = habitState.size;
+  const pct = Math.round((hc / HABITS.length) * 100);
+  document.getElementById("habit-score").textContent = pct + "%";
+  document.getElementById("habit-score").style.color = pct >= 75 ? "#3fb950" : pct >= 40 ? "#d29922" : "#9a9a9a";
+  document.getElementById("habit-count").textContent = hc + "/" + HABITS.length;
+  document.getElementById("habit-fill").style.width = pct + "%";
+  document.getElementById("habit-msg").innerHTML =
+    `<div class="t">This week's read</div>` +
+    (pct >= 75 ? "Strong week — these are exactly the habits associated with lower risk."
+      : pct >= 40 ? "Good start — pick two more to lock in this week."
+      : "Start with water and tobacco — the two highest-impact habits on the list.");
+
+  // foods
+  const ff = document.getElementById("food-filter");
+  ff.innerHTML = [["all", "All foods"], ["eat", "Eat more"], ["limit", "Limit / avoid"]]
+    .map(([id, name]) => `<div class="chip ${foodState.filter === id ? "on" : ""}" data-f="${id}">${esc(name)}</div>`).join("");
+  ff.querySelectorAll(".chip").forEach(ch => ch.addEventListener("click", () => {
+    foodState.filter = ch.dataset.f;
+    renderPrevention();
+  }));
+  const foods = FOODS.filter(f => foodState.filter === "all" || f.cat === foodState.filter);
+  document.getElementById("food-cards").innerHTML = foods.map(f => `
+    <div class="wk-card" data-food="${f.id}" style="cursor:pointer">
+      <div class="title">${esc(f.name)}</div>
+      <div><span class="grade ${f.cat === "eat" ? "g-b" : f.grade.startsWith("D") ? "g-d" : "g-c"}">${esc(f.grade)}</span></div>
+      <div class="line">${f.cat === "eat" ? "Verdict: eat more of this." : "Verdict: keep this limited."}</div>
+    </div>`).join("");
+  document.querySelectorAll("[data-food]").forEach(card => card.addEventListener("click", () => {
+    foodState.selected = card.dataset.food;
+    renderPrevention();
+  }));
+  const sel = FOODS.find(f => f.id === foodState.selected);
+  document.getElementById("food-detail").innerHTML = sel
+    ? `<div class="t">${esc(sel.name)}</div><div style="font-size:12.5px;color:#c8c8c8">${esc(sel.detail)}</div>`
+    : `<div class="t">Select a food</div>Click any card above to see its evidence and the honest verdict.`;
+}
+
 buildArmChips();
 bind();
 initHolistic();
@@ -2613,7 +2906,7 @@ renderRobust();
 renderNmibc();
 renderNmibcVerdict();
 const initialScn = location.hash.replace("#", "");
-if (["nmibc", "weedkiller", "stage4", "fountain", "council", "compound"].includes(initialScn)) {
+if (["nmibc", "weedkiller", "stage4", "fountain", "council", "compound", "prevention"].includes(initialScn)) {
   const t = document.querySelector(`.tab[data-scn="${initialScn}"]`);
   if (t) t.click();
 }
@@ -2629,6 +2922,7 @@ document.getElementById("council-search").addEventListener("input", (e) => {
 });
 renderCouncil();
 renderCompound();
+renderPrevention();
 document.getElementById("lang-btn").addEventListener("click", () => setLang(langMode === "ar" ? "en" : "ar"));
 new MutationObserver(() => { if (langMode === "ar") translateAll(); })
   .observe(document.querySelector(".wrap"), { subtree: true, childList: true });
