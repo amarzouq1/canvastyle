@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ivermectin Combination Simulator — Bladder Cancer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #1a1a1a; color: #ededed; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.55; }
@@ -62,6 +64,13 @@
   .readout .v { font-size: 19px; font-weight: 700; }
   .readout .l { font-size: 11px; color: #a0a0a0; }
   .organ-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 10.5px; color: #9a9a9a; }
+  #lang-btn { position: fixed; top: 14px; left: 14px; z-index: 99; background: #2d4a75; color: #fff; border: 1px solid #3d6098; border-radius: 999px; padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  #lang-btn:hover { background: #3d6098; }
+  body.ar-mode { font-family: "Cairo", -apple-system, "Segoe UI", Tahoma, sans-serif; }
+  body.ar-mode .wrap { direction: rtl; }
+  body.ar-mode .stat .v, body.ar-mode .readout .v { direction: ltr; }
+  body.ar-mode .num { text-align: left; }
+  body.ar-mode svg text { direction: ltr; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 14px; margin: 16px 0; }
   .grade { display: inline-block; border-radius: 6px; padding: 2px 9px; font-size: 11px; font-weight: 700; margin-left: 8px; }
   .g-b { background: #1f3a26; color: #56d364; } .g-c { background: #3a3016; color: #e3b341; } .g-d { background: #3d1c1c; color: #ff7b72; }
@@ -92,6 +101,7 @@
 </style>
 </head>
 <body>
+<button id="lang-btn" title="تبديل اللغة">العربية</button>
 <div class="wrap">
 
   <h1>Ivermectin Combination Simulator — Bladder Cancer</h1>
@@ -1930,6 +1940,192 @@ function renderCompound() {
   }));
 }
 
+/* ---------- Arabic mode ---------- */
+const AR_MAP = {
+  "Ivermectin Combination Simulator — Bladder Cancer": "محاكي تركيبات الإيفرمكتين — سرطان المثانة",
+  "An interactive virtual-patient model: 15 candidate regimens, Monte Carlo simulation, adjustable assumptions, and robustness-tested rankings. Research model — not medical advice . Built from published": "نموذج تفاعلي للمرضى الافتراضيين: 15 بروتوكولًا مرشحًا، محاكاة مونتي كارلو، افتراضات قابلة للتعديل، وترتيبات مجرّبة ضد التقلب. نموذج بحثي — ليس نصيحة طبية. مبني على دراسات منشورة",
+  "Systemic disease (MIBC / metastatic)": "المرض الجهازي (عضلي الغزو / النقيلي)",
+  "Non-muscle-invasive (NMIBC)": "غير غازي لعضلة المثانة",
+  "Weed-Killer Hypothesis": "فرضية مبيد الأعشاب",
+  "Stage 4 Plan": "خطة المرحلة الرابعة",
+  "Fountain of Youth": "ينبوع الشباب",
+  "Council Board": "مجلس المستشارين",
+  "Compound Lab": "مختبر المركبات",
+  "Interactive simulation": "المحاكاة التفاعلية",
+  "Move the sliders — the virtual patient cohort re-simulates instantly. Click table headers to sort; click chips to show/hide arms in the trajectory chart.": "حرّك المؤشرات — يُعاد تصور مجموعة المرضى الافتراضيين فورًا. اضغط على عناوين الجدول للفرز؛ اضغط على البطاقات لإظهار/إخفاء المجموعات في المخطط.",
+  "Treatment efficacy scale": "مقياس فعالية العلاج",
+  "Patient heterogeneity (tau)": "تباين المرضى (تاو)",
+  "Weight: clinical benefit": "الوزن: المنفعة السريرية",
+  "Weight: evidence strength": "الوزن: قوة الأدلة",
+  "Weight: safety": "الوزن: السلامة",
+  "Virtual patients per arm": "مرضى افتراضيون لكل مجموعة",
+  "Outcome at a glance": "النتائج في لمحة",
+  "Median tumor-burden trajectories": "مسارات حجم الورم الوسيطة",
+  "Holistic virtual patient — body, bladder & improvement over time": "المريض الافتراضي الشامل — الجسم، المثانة، والتحسن عبر الزمن",
+  "Full results": "النتائج الكاملة",
+  "Robustness study (2,000 perturbed model worlds)": "دراسة التماسك (2000 عالم نموذجي مضطرب)",
+  "Your options — live verdict": "خياراتك — الحكم المباشر",
+  "Regimen": "البروتوكول",
+  "Timeline — week": "الجدول الزمني — أسبوع",
+  "Current age": "العمر الحالي",
+  "Protocol adherence": "الالتزام بالبروتوكول",
+  "Play 24 weeks": "تشغيل 24 أسبوعًا",
+  "Pause": "إيقاف مؤقت",
+  "Re-roll patients": "إعادة محاكاة المرضى",
+  "Outcome at a glance": "النتائج في لمحة",
+  "Minimum evidence level": "الحد الأدنى من مستوى الأدلة",
+  "Items surviving your filter": "البنود المتجاوزة لمرشّحك",
+  "Bottom line": "الخلاصة",
+  "Simulation, not evidence": "هذه محاكاة، وليست دليلاً",
+  "Safety — do not self-medicate": "السلامة — لا تُعالج نفسك بنفسك",
+  "Safety — the hard line": "السلامة — الخط الأحمر",
+  "Safety — the standing rule": "السلامة — القاعدة الثابتة",
+  "Please read": "يُرجى القراءة",
+  "The swarm's verdict": "حكم فريق البحث",
+  "The final discovery — signed by the council": "الاكتشاف النهائي — موقّع من المجلس",
+  "Council adjourned — call it a day": "اختُتم المجلس — انتهت المهمة",
+  "The proof problem — how to know aging actually reversed": "مشكلة الإثبات — كيف نعرف أن الشيخوخة انعكست فعلاً",
+  "The honest \"breakthrough\" — convergence, not a miracle molecule": "الاختراق الصادق — التكامل، لا جزيء معجزة",
+  "Oncology has done this before — repeatedly": "طب الأورام فعل ذلك من قبل — مرارًا",
+  "Why molecules — and why three": "لماذا جزيئات — ولماذا ثلاثة",
+  "How to challenge these numbers": "كيف تتحدى هذه الأرقام",
+  "The final holistic protocol — six pillars": "البروتوكول الشامل النهائي — ست ركائز",
+  "The daily diet prescription (council dietitian's order sheet)": "وصفة النظام الغذائي اليومية (أمر أخصائي التغذية في المجلس)",
+  "The vote record": "سجل التصويت",
+  "Testimony of the convening specialists": "شهادات المتخصصين المؤسسين",
+  "Council directory — 100 seats, click any seat": "دليل المجلس — 100 مقعد، اضغط أي مقعد",
+  "Collaboration network — who built on whom": "شبكة التعاون — من بنى على عمل من",
+  "God-mode collaboration — how the 36 agents built on each other": "تعاون شامل — كيف بنى 36 وكيلًا على عمل بعضهم",
+  "The 100-Seat Discovery Council — final deliberation": "مجلس الاكتشاف المؤلف من 100 مقعد — المداولات النهائية",
+  "Compound Lab — the molecules designed to eliminate bladder cancer": "مختبر المركبات — الجزيئات المصممة للقضاء على سرطان المثانة",
+  "Interactive compound builder — design your own": "مصمم المركبات التفاعلي — صمّم مركبك الخاص",
+  "The three master compounds": "المركبات الثلاثة الرئيسية",
+  "Validation claims — what would prove each design": "ادعاءات التحقق — ما الذي يُثبت كل تصميم",
+  "The explanation — why covalency beats cocktails": "التفسير — لماذا تتفوق الروابط التساهمية على الخلطات",
+  "The plan, filtered by evidence quality": "الخطة، مفلترة حسب جودة الأدلة",
+  "The 24-week battle rhythm": "إيقاع المعركة على 24 أسبوعًا",
+  "The plan in six sentences": "الخطة في ست جمل",
+  "The reject list — market-paid, not medicine": "قائمة المرفوض — مدفوعة تسويقيًا، وليست طبًا",
+  "The five surviving candidates": "المرشحون الخمسة الناجون",
+  "Selectivity ledger — how the candidates score": "سجل الانتقائية — كيف يُقيَّم المرشحون",
+  "Explicitly rejected — the \"just spray the weed killer\" fallacy": "مرفوض صراحة — مغالطة «رشّ المبيد فقط»",
+  "The stacked program & how to test it": "البرنامج المركّب وكيفية اختباره",
+  "Evidence maturity by partner (bladder cancer)": "نضج الأدلة حسب الشريك (سرطان المثانة)",
+  "Head-to-head results (bladder cancer)": "نتائج المواجهة المباشرة (سرطان المثانة)",
+  "Head-to-head results": "نتائج المواجهة المباشرة",
+  "Evidence maturity by partner": "نضج الأدلة حسب الشريك",
+  "Why HCQ is not the winner": "لماذا الكلوروكين ليس الفائز",
+  "Why ivermectin alone is not the answer in bladder cancer either": "لماذا الإيفرمكتين وحده ليس الحل في سرطان المثانة",
+  "Holistic combination simulation — bladder cancer: which regimen performs best?": "محاكاة التركيبات الشاملة — سرطان المثانة: أي بروتوكول يحقق أفضل نتيجة؟",
+  "Simulated efficacy at a glance": "الفعالية المحاكاة في لمحة",
+  "Simulated median tumor-burden trajectories": "مسارات حجم الورم الوسيطة المحاكاة",
+  "Full systemic results (ranked by composite)": "النتائج الجهاززيه الكاملة (مرتبة بالمُركّب)",
+  "NMIBC scenario — 6-month complete-response rate": "سيناريو NMIBC — معدل الاستجابة الكاملة خلال 6 أشهر",
+  "Best-effort verdict — what the simulation recommends": "الحكم الأمثل — ما توصي به المحاكاة",
+  "Week-by-week hypothesis for bladder cancer: ivermectin + metformin vs + HCQ vs all combined": "فرضية أسبوعًا بأسبوع لسرطان المثانة: إيفرمكتين + ميتفورمين مقابل + الكلوروكين مقابل الكل مجتمعًا",
+  "Bladder cancer — week-by-week hypothesis: ivermectin + metformin vs + HCQ vs all combined": "سرطان المثانة — فرضية أسبوعًا بأسبوع",
+  "Hypothetical tumor-burden trajectory (illustrative model)": "مسار حجم الورم الافتراضي (نموذج توضيحي)",
+  "Week-by-week hypothesis": "الفرضية أسبوعًا بأسبوع",
+  "All-oral stack: ivermectin + metformin + HCQ": "الحزمة الفموية الكاملة: إيفرمكتين + ميتفورمين + كلوروكين",
+  "Expected result profile at week 12 (hypothesis)": "ملف النتائج المتوقع في الأسبوع 12 (فرضية)",
+  "Assumptions behind this hypothesis": "الافتراضات وراء هذه الفرضية",
+  "How to use this": "كيف تستخدم هذا",
+  "Arm": "المجموعة",
+  "Partner": "الشريك",
+  "Take": "الخلاصة",
+  "Evidence": "الأدلة",
+  "Safety": "السلامة",
+  "Composite": "المُركّب",
+  "Effect:": "التأثير:",
+  "Skeptic's read:": "قراءة المتشكك:",
+  "Mandate:": "الولاية:",
+  "Seat stance:": "موقف المقعد:",
+  "Collaborates with:": "يتعاون مع:",
+  "Evidence:": "الأدلة:",
+  "Breakthrough idea:": "فكرة الاختراق:",
+  "Red flag:": "علامة تحذير:",
+  "Cross-links:": "الترابط:",
+  "Position:": "الموقف:",
+  "Recommendation:": "التوصية:",
+  "Collaboration note:": "مذكرة التعاون:",
+  "Vote:": "التصويت:",
+  "Select any seat": "اختر أي مقعد",
+  "Search roles": "ابحث في الأدوار",
+  "Seat detail": "تفاصيل المقعد",
+  "Working groups": "مجموعات العمل",
+  "Warhead + linker design rationale": "منطق تصميم الرؤوس الحربية والرابط",
+  "Mechanism cascade (4 steps)": "تسلسل الآلية (4 خطوات)",
+  "Properties & synthesis": "الخصائص والاصطناع",
+  "Honest risks": "المخاطر الصادقة",
+  "The claim:": "الادعاء:",
+  "Compound name & one-line concept": "اسم المركب والفكرة في سطر",
+  "Design rationale:": "منطق التصميم:",
+  "Mechanism cascade:": "تسلسل الآلية:",
+  "Concept:": "الفكرة:",
+  "Kill cascade:": "تسلسل القتل:",
+  "Properties:": "الخصائص:",
+  "Risks:": "المخاطر:",
+  "Why it matters:": "لماذا يهم هذا:",
+  "Recommended route": "الطريقة الموصى بها",
+  "Kill cascade of your compound": "تسلسل القتل لمركبك",
+  "Est. molecular weight": "الوزن الجزيئي التقديري",
+  "Predicted urothelial IC50": "التركيز المثبط المقدَّر للخلايا الظهارية",
+  "Tumor selectivity index": "مؤشر انتقائية الورم",
+  "Kill mechanisms engaged": "آليات القتل المُفعَّلة",
+  "Level 4 · randomized survival": "المستوى 4 — تجارب عشوائية على البقاء",
+  "Level 3 · randomized / standard": "المستوى 3 — عشوائي / قياسي",
+  "Level 2 · human observational": "المستوى 2 — دراسات بشرية رصدية",
+  "Level 1 · preclinical": "المستوى 1 — قبل سريرية",
+};
+const AR_SUB = [
+  ["Not medical advice", "ليس نصيحة طبية"],
+  ["research model", "نموذج بحثي"],
+  ["Weeks 1–2", "الأسابيع 1–2"], ["Weeks 3–4", "الأسابيع 3–4"], ["Weeks 5–8", "الأسابيع 5–8"],
+  ["Weeks 9–12", "الأسابيع 9–12"], ["Weeks 13–24", "الأسابيع 13–24"],
+  ["Week 12", "الأسبوع 12"], ["Week 2", "الأسبوع 2"], ["week 0", "الأسبوع 0"],
+  ["illustrative model", "نموذج توضيحي"], ["Illustrative model", "نموذج توضيحي"],
+  ["not medical advice", "ليس نصيحة طبية"], ["Not medical advice", "ليس نصيحة طبية"],
+  ["research hypothesis", "فرضية بحثية"], ["Evidence score", "درجة الأدلة"],
+  ["Safety cost", "تكلفة السلامة"], ["Clinical benefit", "المنفعة السريرية"],
+];
+let langMode = "en";
+try { langMode = localStorage.getItem("siteLang") || "en"; } catch (e) {}
+const arOriginals = new WeakMap();
+
+function translateTextNode(node) {
+  const en = arOriginals.get(node) !== undefined ? arOriginals.get(node) : node.nodeValue;
+  if (arOriginals.get(node) === undefined) arOriginals.set(node, node.nodeValue);
+  if (langMode === "en") {
+    if (node.nodeValue !== en) node.nodeValue = en;
+    return;
+  }
+  let out = en;
+  const trimmed = out.trim();
+  if (AR_MAP[trimmed]) out = out.replace(trimmed, AR_MAP[trimmed]);
+  else AR_SUB.forEach(([a, b]) => { out = out.split(a).join(b); });
+  if (node.nodeValue !== out) node.nodeValue = out;
+}
+
+function translateAll(root) {
+  (root || document.querySelector(".wrap")).querySelectorAll("*").forEach(el => {
+    el.childNodes.forEach(n => { if (n.nodeType === 3 && n.nodeValue.trim()) translateTextNode(n); });
+    if (el.placeholder) {
+      if (!el.dataset.phEn) el.dataset.phEn = el.placeholder;
+      el.placeholder = langMode === "en" ? el.dataset.phEn : (AR_MAP[el.dataset.phEn] || el.dataset.phEn);
+    }
+  });
+}
+
+function setLang(mode) {
+  langMode = mode;
+  try { localStorage.setItem("siteLang", mode); } catch (e) {}
+  document.body.classList.toggle("ar-mode", mode === "ar");
+  document.getElementById("lang-btn").textContent = mode === "ar" ? "English" : "العربية";
+  document.getElementById("lang-btn").style.left = mode === "ar" ? "auto" : "14px";
+  document.getElementById("lang-btn").style.right = mode === "ar" ? "14px" : "auto";
+  translateAll();
+}
+
 buildArmChips();
 bind();
 initHolistic();
@@ -1954,6 +2150,10 @@ document.getElementById("council-search").addEventListener("input", (e) => {
 });
 renderCouncil();
 renderCompound();
+document.getElementById("lang-btn").addEventListener("click", () => setLang(langMode === "ar" ? "en" : "ar"));
+new MutationObserver(() => { if (langMode === "ar") translateAll(); })
+  .observe(document.querySelector(".wrap"), { subtree: true, childList: true });
+setLang(langMode);
 </script>
 </body>
 </html>
