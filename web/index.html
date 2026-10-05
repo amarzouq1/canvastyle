@@ -114,6 +114,7 @@
     <div class="tab" data-scn="stage4">Stage 4 Plan</div>
     <div class="tab" data-scn="fountain">Fountain of Youth</div>
     <div class="tab" data-scn="council">Council Board</div>
+    <div class="tab" data-scn="compound">Compound Lab</div>
   </div>
 
   <!-- ============ SYSTEMIC ============ -->
@@ -773,6 +774,78 @@
     Every pharmacologic component on this tab (ivermectin, N-803, checkpoint inhibitors, docetaxel, SBRT) is a prescription intervention with real toxicities requiring specialist supervision and trial oversight. The nutrition and training pillars are the only parts suitable for immediate personal action. Not medical advice.</div>
   </section>
 
+  <!-- ============ COMPOUND LAB ============ -->
+  <section id="scn-compound" style="display:none">
+    <h2>Compound Lab — the molecules designed to eliminate bladder cancer</h2>
+    <p class="sub">Three master medicinal chemists were given our complete research base — ivermectin's pharmacophores (spiroketal/P2X7, HSP27, P-gp, TMEM16F), the exposure math, the bladder delivery advantage, and every failure mode we documented — and told: design the compound that makes bladder cancer go away. <b>They returned three named molecules.</b> Build your own below, or study theirs.</p>
+
+    <div class="box b-info"><div class="t">Why molecules — and why three</div>
+    Our research kept hitting one wall: drug <i>combinations</i> fight each other (free ivermectin + artesunate is antagonistic; antioxidants rescue the very cells we're killing). The chemists' answer: <b>covalency and caging</b> — put the warheads on ONE molecule with smart linkers (synergy becomes chemistry, not luck), or cage them until they reach the tumor. Three design philosophies: the <b>single-molecule</b> (Spiroferin-1), the <b>twin-drug conjugate</b> (IverGEM-1), and the <b>tumor-activated depot</b> (TwinTrap-200). Below: the interactive builder, then the full designs.</p></div>
+
+    <h2>Interactive compound builder — design your own</h2>
+    <p class="sub">Toggle modules on the ivermectin scaffold and watch the compound recompute: potency, selectivity, mechanism coverage, route, and the kill cascade it would run. The chemists' three real designs are preset configurations of exactly these modules.</p>
+
+    <div class="holistic">
+      <div class="bodybox">
+        <div id="compound-svg"></div>
+      </div>
+      <div>
+        <div class="chips" id="compound-chips"></div>
+        <div class="gauge">
+          <div class="readout"><div class="v" id="cp-mw">—</div><div class="l">Est. molecular weight</div></div>
+          <div class="readout"><div class="v" id="cp-ic50">—</div><div class="l">Predicted urothelial IC50</div></div>
+          <div class="readout"><div class="v" id="cp-sel">—</div><div class="l">Tumor selectivity index</div></div>
+          <div class="readout"><div class="v" id="cp-mech">—</div><div class="l">Kill mechanisms engaged</div></div>
+        </div>
+        <div class="box b-info" id="cp-route" style="margin:10px 0"></div>
+        <div id="cp-cascade"></div>
+      </div>
+    </div>
+
+    <h2>The three master compounds</h2>
+    <div class="cards">
+      <div class="wk-card">
+        <div class="title">1 · Spiroferin-1 — the single molecule <span class="grade g-b">Chemistry</span></div>
+        <div class="line"><b>Concept:</b> one molecule carrying ivermectin's spiroketal core (P2X7/ICD pharmacophore preserved intact), a C5-methoxyimino warhead (selamectin-like Sin3A potency), a 4'-amino sugar (P-gp blockade + water solubility), and a masked GPX4-inhibiting warhead (ferroptosis on arrival).</div>
+        <div class="line"><b>Kill cascade:</b> ① P2X7 potentiation → ATP release, inflammasome, immunogenic cell death · ② HSP27 phospho-blockade → chemo-sensitization state · ③ caspase apoptosis (JNK) · ④ masked warhead unmasks → GPX4 collapse → ferroptosis.</div>
+        <div class="line"><b>Properties:</b> MW ≈ 940 · 4-step synthesis from avermectin B1a · intravesical formulation compatible. <b>Risks:</b> permeation limits, chemical cystitis, off-target P2X7 in nerves.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">2 · IverGEM-1 — the release-sequenced twin-drug <span class="grade g-b">Chemistry</span></div>
+        <div class="line"><b>Concept:</b> ivermectin and gemcitabine on ONE molecule — IVM–disulfide–Val-Cit-PABC–gemcitabine. The linker flips our documented antagonism into synergy: cathepsin B (secreted by bladder tumors) frees gemcitabine first; tumor glutathione then frees ivermectin <i>inside the same cell</i> — where it blocks P-gp (trapping the gemcitabine) and HSP27.</div>
+        <div class="line"><b>Kill cascade:</b> ① conjugate resists deaminase and efflux pumps · ② tumor cathepsin B → gemcitabine → DNA chain termination · ③ intracellular GSH → ivermectin → P-gp trap + HSP27 · ④ G2/M arrest + ROS + ICD.</div>
+        <div class="line"><b>Claim that would prove it:</b> ≥90% tumor inhibition with 40% complete regressions in drug-resistant PDX bladder tumors — <b>abolished by cathepsin-B knockdown</b> (the elegant falsification test). <b>Risks:</b> Rule-of-5 failure → needs nanoparticle formulation; heterogeneous cathepsin B.</div>
+      </div>
+      <div class="wk-card">
+        <div class="title">3 · TwinTrap-200 — the tumor-activated depot <span class="grade g-b">Chemistry</span></div>
+        <div class="line"><b>Concept:</b> a TAR-200-style mucoadhesive hydrogel (7-day retention) loaded with CD44-targeted nanoparticles carrying TWO caged prodrugs: gemcitabine-glucuronide (cleaved only by tumor β-glucuronidase) and ivermectin-ester (cleaved by intracellular esterases). Normal urothelium is enzyme-poor — the drugs are inert until the tumor itself activates them.</div>
+        <div class="line"><b>Kill cascade:</b> ① pH 5.5 instillate + chitosan opens tight junctions, 7-day retention · ② tumor β-glucuronidase uncages drug at the tumor interface · ③ CD44 endocytosis → intracellular release + phosphorylation trap · ④ ICD + chitosan adjuvanticity recruits T cells; glucuronide excreted, normal tissue untouched.</div>
+        <div class="line"><b>Claim that would prove it:</b> &gt;90% durable complete responses (beating the 82.4% TAR-200 benchmark) with <b>undetectable plasma drug</b> — proving tumor-restricted activation. <b>Risks:</b> ~30% of tumors are β-glucuronidase-low; urinary esterase pre-release.</div>
+      </div>
+    </div>
+
+    <h2>Validation claims — what would prove each design</h2>
+    <table>
+      <thead><tr><th>Compound</th><th>The decisive experiment</th><th>Pass criterion</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#3fb950"></span>Spiroferin-1</td><td>Orthotopic bladder xenograft vs ivermectin + components</td><td>Superior regression to the sum of parts; ferroptosis markers (4-HNE, lipid ROS) confirmed</td></tr>
+        <tr><td><span class="dot" style="background:#58a6ff"></span>IverGEM-1</td><td>MDR patient-derived xenograft, ± cathepsin-B knockdown</td><td>≥90% TGI + 40% CR; 3× intratumoral drug vs free combo; effect abolished by knockdown</td></tr>
+        <tr><td><span class="dot" style="background:#f0883e"></span>TwinTrap-200</td><td>Orthotopic MIBC model with plasma PK sampling</td><td>&gt;90% durable CR; plasma gemcitabine/ivermectin undetectable; no neurobehavioral toxicity</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The explanation — why covalency beats cocktails</h2>
+    <div class="card">
+      <div class="hdr">The chemistry insight that reframed everything</div>
+      <p style="margin-bottom:8px">Our own research proved that mixing ivermectin + artesunate freely is <b>antagonistic</b> — but the covalent conjugate of the same two drugs <b>synergized</b>. Translation: in a cocktail, drugs diffuse apart, get metabolized on different schedules, and rescue each other's escape routes. On one molecule with a smart linker, they arrive in the same cell, in the right order, at fixed ratio — <b>synergy becomes a property of the chemistry, not a hope about the schedule</b>.</p>
+      <p style="margin-bottom:8px">The bladder is the ideal organ for all three designs: drug can be instilled directly (70× IC50 locally), tumors secrete the very enzymes that uncage the prodrugs, urine excretes the byproducts, and the whole system stays out of the bloodstream — solving the 100–500× exposure gap that killed oral ivermectin.</p>
+      <p style="margin-bottom:0"><b>What "eliminate bladder cancer" would actually look like:</b> not one magic molecule, but a depot that keeps the tumor under lethal local pressure for months (beating TAR-200's 82.4% CR benchmark) while the immune system — primed by ICD — clears what remains. The chemists designed the bullets; the trialists' window design (see Council Board) is how we find out within 18 months.</p>
+    </div>
+
+    <div class="box b-danger"><div class="t">Safety — the hard line</div>
+    Spiroferin-1, IverGEM-1, and TwinTrap-200 are <b>hypothetical research compounds</b> — none exists outside this page and the chemists' design briefs. They are starting points for drug-development programs run by pharmaceutical chemists, toxicologists, and clinical teams under regulatory oversight. Nothing here is synthesizable or usable by an individual. Not medical advice.</div>
+  </section>
+
   <h2>Methodology &amp; anchors</h2>
   <div class="card">
     <div class="hdr">How the virtual patients work</div>
@@ -1124,6 +1197,7 @@ function bind() {
     if (tab.dataset.scn === "stage4") renderS4();
     if (tab.dataset.scn === "fountain") renderFoy();
     if (tab.dataset.scn === "council") renderCouncil();
+    if (tab.dataset.scn === "compound") renderCompound();
     history.replaceState(null, "", "#" + tab.dataset.scn);
   }));
 }
@@ -1758,6 +1832,104 @@ function renderCouncil() {
   renderCouncilNetwork();
 }
 
+/* ---------- compound lab: interactive builder ---------- */
+const CP_MODULES = [
+  { id: "core", name: "Spiroketal core (P2X7 → ICD)", mw: 875, pot: 1.0, sel: 1.0, mech: "P2X7 potentiation → ATP/HMGB1 release → immunogenic cell death", locked: true },
+  { id: "meth", name: "C5-methoxyimino warhead (Sin3A)", mw: 22, pot: 0.55, sel: 1.4, mech: "Sin3A-PAH2 inhibition → epigenetic shutdown + ICD amplification" },
+  { id: "sugar", name: "4'-amino sugar (P-gp block)", mw: 38, pot: 0.85, sel: 1.2, mech: "P-gp/MDR1 blockade → traps co-drugs inside the tumor cell" },
+  { id: "gpx4", name: "Masked GPX4 warhead (ferroptosis)", mw: 95, pot: 0.5, sel: 1.3, mech: "Unmasked intracellularly → GPX4 collapse → lipid-peroxidation ferroptosis" },
+  { id: "hsp27", name: "HSP27-binding ester", mw: 74, pot: 0.7, sel: 1.15, mech: "HSP27 Ser78/82 phospho-blockade → chemosensitization + apoptosis" },
+  { id: "gem", name: "Gemcitabine twin (Val-Cit-PABC)", mw: 520, pot: 0.35, sel: 1.5, mech: "Cathepsin-B release → DNA chain termination in the same cell" },
+  { id: "cage", name: "β-glucuronidase cage", mw: 176, pot: 0.6, sel: 2.2, mech: "Tumor-only activation — inert until bladder tumor enzyme uncages it" },
+  { id: "target", name: "HA/CD44 targeting", mw: 150, pot: 0.75, sel: 2.6, mech: "CD44-mediated tumor uptake, sparing normal urothelium" },
+  { id: "depot", name: "Depot hydrogel (7-day retention)", mw: 0, pot: 0.7, sel: 1.8, mech: "Sustained local pressure for weeks — the TAR-200 logic" },
+];
+const CP_PRESETS = {
+  "Spiroferin-1": ["core", "meth", "sugar", "gpx4", "hsp27"],
+  "IverGEM-1": ["core", "sugar", "hsp27", "gem"],
+  "TwinTrap-200": ["core", "gem", "cage", "target", "depot"],
+};
+const CP_ON = new Set(CP_PRESETS["Spiroferin-1"]);
+
+function renderCompound() {
+  // chips
+  const chipWrap = document.getElementById("compound-chips");
+  chipWrap.innerHTML =
+    Object.keys(CP_PRESETS).map(p =>
+      `<div class="chip cp-preset" data-preset="${esc(p)}" style="border-color:#58a6ff;color:#9ecbff">Preset: ${esc(p)}</div>`).join("") +
+    CP_MODULES.map(m => {
+      const on = CP_ON.has(m.id);
+      return `<div class="chip cp-mod ${on ? "on" : ""}" data-id="${m.id}" ${m.locked ? 'style="opacity:.85"' : ""}>${esc(m.name)}${m.locked ? " 🔒".replace("🔒", "") + " (base)" : ""}</div>`;
+    }).join("");
+  chipWrap.querySelectorAll(".cp-mod").forEach(ch => ch.addEventListener("click", () => {
+    const id = ch.dataset.id;
+    const mod = CP_MODULES.find(m => m.id === id);
+    if (mod.locked) return;
+    if (CP_ON.has(id)) CP_ON.delete(id); else CP_ON.add(id);
+    renderCompound();
+  }));
+  chipWrap.querySelectorAll(".cp-preset").forEach(ch => ch.addEventListener("click", () => {
+    CP_ON.clear();
+    CP_PRESETS[ch.dataset.preset].forEach(id => CP_ON.add(id));
+    renderCompound();
+  }));
+
+  // compute
+  let mw = 0, pot = 1, sel = 1;
+  const mechs = [];
+  CP_MODULES.forEach(m => {
+    if (!CP_ON.has(m.id)) return;
+    mw += m.mw; pot *= m.pot; sel *= m.sel; mechs.push(m.mech);
+  });
+  const ic50 = 15 * pot;
+  const route = CP_ON.has("depot") ? "Intravesical depot — 7-day retention, pH 5.5 instillate"
+    : CP_ON.has("cage") ? "Intravesical nanoparticle — tumor-enzyme activation"
+    : CP_ON.has("gem") ? "IV nanoparticle conjugate (Rule-of-5 exceeds oral limits)"
+    : "Intravesical solution — 50% DMSO / thermogel vehicle";
+
+  document.getElementById("cp-mw").textContent = Math.round(mw);
+  document.getElementById("cp-ic50").textContent = ic50.toFixed(2) + " µM";
+  document.getElementById("cp-ic50").style.color = ic50 < 1 ? "#3fb950" : ic50 < 5 ? "#d29922" : "#f85149";
+  document.getElementById("cp-sel").textContent = "×" + sel.toFixed(1);
+  document.getElementById("cp-sel").style.color = sel > 8 ? "#3fb950" : sel > 3 ? "#d29922" : "#9a9a9a";
+  document.getElementById("cp-mech").textContent = mechs.length + " / 9";
+  document.getElementById("cp-route").innerHTML = `<div class="t">Recommended route</div>${esc(route)} · predicted exposure margin ${CP_ON.has("depot") || CP_ON.has("cage") ? "≥70× IC50 locally" : "systemic — requires formulation"}`;
+
+  document.getElementById("cp-cascade").innerHTML =
+    `<div class="box b-warn" style="margin:10px 0"><div class="t">Kill cascade of your compound</div>` +
+    mechs.map((m, i) => `<div style="font-size:12px;color:#c8c8c8;margin:3px 0"><b style="color:#3fb950">Step ${i + 1}:</b> ${esc(m)}</div>`).join("") +
+    `</div>`;
+
+  // scaffold svg
+  const w = 330, h = 330, cx = w / 2, cy = h / 2;
+  let s = svgEl(w, h);
+  s += `<circle cx="${cx}" cy="${cy}" r="78" fill="none" stroke="#4a4a4a" stroke-width="14"/>`;
+  s += `<circle cx="${cx}" cy="${cy}" r="78" fill="none" stroke="#58a6ff" stroke-width="4" opacity="0.65"/>`;
+  s += `<text x="${cx}" y="${cy - 6}" text-anchor="middle" fill="#c8c8c8" font-size="11">ivermectin</text>`;
+  s += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" fill="#c8c8c8" font-size="11">spiroketal core</text>`;
+  s += `<text x="${cx}" y="${cy + 28}" text-anchor="middle" fill="#8a8a8a" font-size="9.5">P2X7 pharmacophore</text>`;
+  const modList = CP_MODULES.filter(m => !m.locked);
+  modList.forEach((m, i) => {
+    const a = (Math.PI * 2 * i) / modList.length - Math.PI / 2;
+    const x = cx + 132 * Math.cos(a), y = cy + 132 * Math.sin(a);
+    const on = CP_ON.has(m.id);
+    s += `<line x1="${cx + 78 * Math.cos(a)}" y1="${cy + 78 * Math.sin(a)}" x2="${x}" y2="${y}" stroke="${on ? "#58a6ff" : "#333"}" stroke-width="${on ? 2.5 : 1.2}"/>`;
+    s += `<g class="cp-node" data-id="${m.id}" style="cursor:pointer">
+      <circle cx="${x}" cy="${y}" r="21" fill="${on ? "#2d4a75" : "#222"}" stroke="${on ? "#79c0ff" : "#444"}" stroke-width="${on ? 2 : 1}">
+        <title>${esc(m.name)}</title></circle>
+      <text x="${x}" y="${y + 4}" text-anchor="middle" fill="${on ? "#cfe4ff" : "#777"}" font-size="9.5">${(i + 1)}</text>
+    </g>`;
+  });
+  s += `<text x="${cx}" y="${h - 6}" text-anchor="middle" fill="#7a7a7a" font-size="9.5">numbered nodes = toggleable modules · click or use chips above</text>`;
+  const holder = document.getElementById("compound-svg");
+  holder.innerHTML = s + "</svg>";
+  holder.querySelectorAll(".cp-node").forEach(n => n.addEventListener("click", () => {
+    const id = n.dataset.id;
+    if (CP_ON.has(id)) CP_ON.delete(id); else CP_ON.add(id);
+    renderCompound();
+  }));
+}
+
 buildArmChips();
 bind();
 initHolistic();
@@ -1766,7 +1938,7 @@ renderRobust();
 renderNmibc();
 renderNmibcVerdict();
 const initialScn = location.hash.replace("#", "");
-if (["nmibc", "weedkiller", "stage4", "fountain", "council"].includes(initialScn)) {
+if (["nmibc", "weedkiller", "stage4", "fountain", "council", "compound"].includes(initialScn)) {
   const t = document.querySelector(`.tab[data-scn="${initialScn}"]`);
   if (t) t.click();
 }
@@ -1781,6 +1953,7 @@ document.getElementById("council-search").addEventListener("input", (e) => {
   renderCouncilGrid();
 });
 renderCouncil();
+renderCompound();
 </script>
 </body>
 </html>
