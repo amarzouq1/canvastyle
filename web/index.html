@@ -1271,21 +1271,12 @@ function bind() {
     if (state.sortKey === k) state.sortDir *= -1; else { state.sortKey = k; state.sortDir = k === "name" ? 1 : -1; }
     render();
   }));
-  document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    ["systemic", "nmibc", "weedkiller"].forEach(s => {
-      document.getElementById("scn-" + s).style.display = tab.dataset.scn === s ? "" : "none";
-    });
-    if (tab.dataset.scn === "nmibc") renderNmibc();
-    if (tab.dataset.scn === "weedkiller") renderWk();
-    if (tab.dataset.scn === "stage4") renderS4();
-    if (tab.dataset.scn === "fountain") renderFoy();
-    if (tab.dataset.scn === "council") renderCouncil();
-    if (tab.dataset.scn === "compound") renderCompound();
-    if (tab.dataset.scn === "prevention") renderPrevention();
-    history.replaceState(null, "", "#" + tab.dataset.scn);
-  }));
+  document.addEventListener("click", (ev) => {
+    const t = ev.target && ev.target.closest ? ev.target.closest(".tab") : null;
+    if (t && t.dataset && t.dataset.scn) { selectTab(t.dataset.scn); return; }
+    const lang = ev.target && ev.target.closest ? ev.target.closest("#lang-btn") : null;
+    if (lang) setLang(langMode === "ar" ? "en" : "ar");
+  });
 }
 
 /* ---------- holistic virtual patient (body, organs, improvement over time) ---------- */
@@ -2014,6 +2005,26 @@ function renderCompound() {
     if (CP_ON.has(id)) CP_ON.delete(id); else CP_ON.add(id);
     renderCompound();
   }));
+}
+
+/* ---------- tab routing (delegated, survives any DOM refresh) ---------- */
+function selectTab(scn) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.scn === scn));
+  ["systemic", "nmibc", "weedkiller", "stage4", "fountain", "council", "compound", "prevention"].forEach(s => {
+    const el = document.getElementById("scn-" + s);
+    if (el) el.style.display = s === scn ? "" : "none";
+  });
+  try {
+    if (scn === "nmibc") renderNmibc();
+    if (scn === "weedkiller") renderWk();
+    if (scn === "stage4") renderS4();
+    if (scn === "fountain") renderFoy();
+    if (scn === "council") renderCouncil();
+    if (scn === "compound") renderCompound();
+    if (scn === "prevention") renderPrevention();
+    translateAll();
+    history.replaceState(null, "", "#" + scn);
+  } catch (e) { /* keep the section visible even if a renderer fails */ }
 }
 
 /* ---------- Arabic mode ---------- */
@@ -2959,7 +2970,6 @@ document.getElementById("council-search").addEventListener("input", (e) => {
 renderCouncil();
 renderCompound();
 renderPrevention();
-document.getElementById("lang-btn").addEventListener("click", () => setLang(langMode === "ar" ? "en" : "ar"));
 new MutationObserver(() => { if (langMode === "ar") translateAll(); })
   .observe(document.querySelector(".wrap"), { subtree: true, childList: true });
 setLang(langMode);
