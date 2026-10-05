@@ -2502,10 +2502,43 @@ const AR_SUB = [
   ["clinical benefit", "منفعة سريرية"], ["evidence level", "مستوى الأدلة"],
   ["survival endpoint", "نقطة نهاية البقاء"], ["hazard ratio", "نسبة الخطورة"],
   ["side effect", "أثر جانبي"], ["weekly", "أسبوعي"],
+  ["Partial response or better at week 12", "استجابة جزئية أو أفضل عند الأسبوع 12"],
+  ["durable control at week 24", "سيطرة مستدامة عند الأسبوع 24"],
+  ["Median burden index", "مؤشر الحجم الوسيط"], ["live model output", "مخرجات النموذج المباشرة"],
+  ["Probability each arm ranks top-3", "احتمال احتلال كل مجموعة المراكز الثلاثة الأولى"],
+  ["Simulated 6-month complete-response rate with 90% interval", "معدل الاستجابة الكاملة المحاكاة لـ6 أشهر بفاصل 90%"],
+  ["Illustrative hypothesis model", "نموذج فرضي توضيحي"], ["no human efficacy data exists for any stack", "لا توجد بيانات فعالية بشرية لأي حزمة"],
+  ["Move the filter to enforce how strict you want to be", "حرّك المرشح لتحديد صرامتك"],
+  ["Illustrative schedule skeleton", "هيكل جدول زمني توضيحي"],
+  ["always run through the treating oncology team", "يجب دائمًا إخضاعه لفريق الأورام المعالج"],
+  ["Scans typically every 6–9 weeks on systemic therapy", "التصوير عادة كل 6–9 أسابيع أثناء العلاج الجهازي"],
+  ["exercise and nutrition start in week 1", "التمرين والتغذية يبدأان من الأسبوع 1"],
+  ["Protein: 1.5 g/kg/day split across 3 meals", "البروتين: 1.5 غم/كغ يوميًا موزعًا على 3 وجبات"],
+  ["resistance 3×/week", "مقاومة 3 مرات أسبوعيًا"], ["Vitamin D3: 4000 IU with a fatty meal", "فيتامين د3: 4000 وحدة مع وجبة دهنية"],
+  ["sarcopenia raises cisplatin renal toxicity risk", "هزال العضلات يرفع خطر سمية الكلى للسيسبلاتين"],
+  ["vitamin D deficiency raises NMIBC recurrence risk", "نقص فيتامين د يرفع خطر ارتداد NMIBC"],
+  ["This is not wellness advice — it is dose engineering", "هذا ليس نصيحة عافية — بل هندسة للجرعات"],
+  ["Filter by working group or search a role", "صفِّ حسب مجموعة العمل أو ابحث عن دور"],
+  ["Click a working group to highlight its hand-offs", "اضغط على مجموعة عمل لإبراز تسليماتها"],
+  ["built on published anchors", "مبني على مرتكزات منشورة"], ["for educational purposes", "لأغراض تعليمية"],
+  ["Partial response", "استجابة جزئية"], ["Stable disease", "مرض مستقر"], ["Progression", "تَقَدُّم المرض"],
+  ["Positive response", "استجابة إيجابية"], ["17 of 18", "17 من 18"],
+];
 ];
 let langMode = "en";
 try { langMode = localStorage.getItem("siteLang") || "en"; } catch (e) {}
 const arOriginals = new WeakMap();
+const arNorm = (s) => s
+  .replace(/[\u2013\u2014\u2212]/g, "-")
+  .replace(/[\u2018\u2019]/g, "'")
+  .replace(/[\u201c\u201d]/g, '"')
+  .replace(/\s+/g, " ")
+  .trim();
+const AR_NORM_MAP = (() => {
+  const m = {};
+  Object.keys(AR_MAP).forEach((k) => { m[arNorm(k)] = AR_MAP[k]; });
+  return m;
+})();
 
 function translateTextNode(node) {
   const en = arOriginals.get(node) !== undefined ? arOriginals.get(node) : node.nodeValue;
@@ -2516,7 +2549,8 @@ function translateTextNode(node) {
   }
   let out = en;
   const trimmed = out.trim();
-  if (AR_MAP[trimmed]) out = out.replace(trimmed, AR_MAP[trimmed]);
+  const hit = AR_NORM_MAP[arNorm(trimmed)];
+  if (hit) out = out.replace(trimmed, hit);
   else AR_SUB.forEach(([a, b]) => { out = out.split(a).join(b); });
   if (node.nodeValue !== out) node.nodeValue = out;
 }
